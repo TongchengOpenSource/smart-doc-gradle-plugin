@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        maven {url 'http://localhost:8081/nexus/content/groups/public/'}
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+
+        mavenCentral()
+    }
+}
+group 'com.smart.patterns'
+version '1.0'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations.compile {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    exclude group: 'org.springframework.boot', module: 'logback-classic'
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.github.shalousun:smart-doc:1.8.1'
+}
+//upload jar to nexus
+def nexusUrl = "http://localhost:8081/nexus/content/repositories/releases/"
+if (version.endsWith("-SNAPSHOT")) {
+    nexusUrl = "http://localhost:8081/nexus/content/repositories/snapshots/"
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: nexusUrl) {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.version = "$project.version"
+            pom.artifactId = "$project.name"
+            pom.groupId = "$project.group"
+        }
+    }
+}
