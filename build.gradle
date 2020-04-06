@@ -6,13 +6,13 @@ buildscript {
 }
 
 plugins {
-    id "com.gradle.plugin-publish" version "0.10.0"
+    id "com.gradle.plugin-publish" version "0.11.0"
     id "java-gradle-plugin"
     id "java"
 }
 
 group 'com.github.shalousun'
-version '1.0.4'
+version '1.0.15'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
