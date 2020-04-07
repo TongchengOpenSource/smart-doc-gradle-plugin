@@ -15,32 +15,15 @@ smart-doc-gradle-plugin will also make smart-doc's ability to generate API docum
 ## Getting started
 ### Add plugin
 ```
-<plugin>
-    <groupId>com.github.shalousun</groupId>
-    <artifactId>smart-doc-maven-plugin</artifactId>
-    <version>1.0.2</version>
-    <configuration>
-        <!--Specify the configuration file used to generate the document-->
-        <configFile>./src/main/resources/smart-doc.json</configFile>
-        <!--smart-doc implements automatic analysis of the dependency tree to load the source code of third-party dependencies. If some framework dependency libraries are not loaded, an error is reported, then use excludes to exclude-->
-        <excludes>
-            <!-The format is: groupId: artifactId; refer to the following->
-            <exclude>com.google.guava:guava</exclude>
-        </excludes>
-    </configuration>
-    <executions>
-        <execution>
-            <!--Comment out phase if you don't need to start smart-doc when compiling-->
-            <phase>compile</phase>
-            <goals>
-                <goal>html</goal>
-            </goals>
-        </execution>
-    </executions>
-</plugin>
+buildscript {
+    dependencies {
+        classpath 'com.github.shalousun:smart-doc-gradle-plugin:lastest'
+    }
+}
+apply plugin: 'smart-doc'
 ```
 ### Create a json config 
-Create a json configuration file in your project. The smart-doc-maven-plugin plugin will use this configuration information.
+Create a json configuration file in your project. The smart-doc-gradle-plugin plugin will use this configuration information.
 For example, create `/src/main/resources/smart-doc.json` in the project. 
 The configuration contents are as follows.
 
@@ -52,7 +35,7 @@ The configuration contents are as follows.
    "outPath": "/src/main/resources" //Set the api document output path.
 }
 ```
-Only three configuration items are required to use the smart-doc-maven-plugin to generate API documentation. In fact, only outPath must be configured.
+Only three configuration items are required to use the smart-doc-gradle-plugin to generate API documentation. In fact, only outPath must be configured.
 
 **Detailed configuration content:**
 
@@ -113,35 +96,22 @@ When you need to use smart-doc to generate more API document information, you ca
 **Note:** The above json configuration is completely converted into json using the smart-doc's ApiConfig. 
 So the project configuration can also refer to the introduction of smart-doc.
 ### Generated document
-#### Use Maven command
+#### Use Gradle command
 ```
 // Generate html
-mvn -Dfile.encoding = UTF-8 smart-doc: html
+gradle smartDocRestHtml
 // Generate markdown
-mvn -Dfile.encoding = UTF-8 smart-doc: markdown
+gradle smartDocRestMarkdown
 // Generate adoc
-mvn -Dfile.encoding = UTF-8 smart-doc: adoc
+gradle smartDocRestAdoc
 // Generate postman collection
-mvn -Dfile.encoding = UTF-8 smart-doc: postman
-```
-**Note:** Under the window system, if you use the maven command line to perform document generation, 
-non-English characters may be garbled, so you need to specify `-Dfile.encoding = UTF-8` during execution.
-
-View maven's coding
-```
-# mvn -version
-Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T19:57:37+08:00)
-Maven home: D:\ProgramFiles\maven\bin\..
-Java version: 1.8.0_191, vendor: Oracle Corporation
-Java home: D:\ProgramFiles\Java\jdk1.8.0_191\jre
-Default locale: zh_CN, platform encoding: GBK
-OS name: "windows 10", version: "10.0", arch: "amd64", family: "dos"
+gradle smartDocPostman
 ```
 #### Use IntelliJ IDEA
-On Use IntelliJ IDE, if you have added smart-doc-maven-plugin to the project, 
+On Use IntelliJ IDE, if you have added smart-doc-gradle-plugin to the project, 
 you can directly find the plugin smart-doc plugin and click to generate API documentation.
 
-![smart-doc-maven-plugin](https://raw.githubusercontent.com/shalousun/smart-doc-maven-plugin/master/images/idea.png)
+![smart-doc-gradle-plugin](https://raw.githubusercontent.com/shalousun/smart-doc-maven-plugin/master/images/idea.png)
 
 ### Generated document example
 #### Interface header rendering
@@ -168,6 +138,6 @@ These are only part of the companies using smart-doc, for reference only. If you
 <img src="https://raw.githubusercontent.com/shalousun/smart-doc/dev/images/known-users/zhongkezhilian.png" title="zhongkezhilian" width="272px" height="83px"/>
 <img src="https://raw.githubusercontent.com/shalousun/smart-doc/dev/images/known-users/puqie_gaitubao_100x100.jpg" title="puqie" width="83px" height="83px"/>
 ## License
-smart-doc-maven=plugin is under the Apache 2.0 license.  See the [LICENSE](https://raw.githubusercontent.com/shalousun/smart-doc-maven-plugin/master/LICENSE) file for details.
+smart-doc-gradle-plugin is under the Apache 2.0 license.  See the [LICENSE](https://raw.githubusercontent.com/shalousun/smart-doc-maven-plugin/master/LICENSE) file for details.
 ## Contact
 Email： 836575280@qq.com
