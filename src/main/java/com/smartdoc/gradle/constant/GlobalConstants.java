@@ -40,4 +40,6 @@ public interface GlobalConstants {
     String REST_MARKDOWN_TASK = "smartDocRestMarkdown";
 
     String POSTMAN_TASK = "smartDocPostman";
+
+    String EXTENSION_NAME = "smartdoc";
 }

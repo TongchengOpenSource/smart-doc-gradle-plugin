@@ -22,6 +22,18 @@ buildscript {
 }
 apply plugin: 'smart-doc'
 ```
+### Plugin options
+
+| Option | Default value | Description |
+| ------ | ------------- | ----------- |
+|configFile|src/main/resources/default.json||
+
+Example setting of options:
+```
+smartdoc {
+    configFile = file("src/main/resources/default.json")
+}
+```
 ### Create a json config 
 Create a json configuration file in your project. The smart-doc-gradle-plugin plugin will use this configuration information.
 For example, create `/src/main/resources/smart-doc.json` in the project. 

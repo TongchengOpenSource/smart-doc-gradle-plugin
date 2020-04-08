@@ -20,25 +20,26 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.smartdoc.gradle.task;
+package com.smartdoc.gradle.plugin;
 
-import com.power.doc.builder.HtmlApiDocBuilder;
-import com.power.doc.model.ApiConfig;
-import com.thoughtworks.qdox.JavaProjectBuilder;
-import org.gradle.api.logging.Logger;
+import java.io.File;
 
 /**
- * @author yu 2020/4/5.
+ * @author yu 2020/4/8.
  */
-public class RestHtmlTask extends DocBaseTask {
+public class SmartDocPluginExtension {
 
-    @Override
-    public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder,Logger logger) {
-        try {
-            logger.quiet("this is html task");
-            HtmlApiDocBuilder.buildApiDoc(apiConfig,javaProjectBuilder);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    /**
+     * get config file
+     */
+    private File configFile;
+
+
+    public File getConfigFile() {
+        return configFile;
+    }
+
+    public void setConfigFile(File configFile) {
+        this.configFile = configFile;
     }
 }
