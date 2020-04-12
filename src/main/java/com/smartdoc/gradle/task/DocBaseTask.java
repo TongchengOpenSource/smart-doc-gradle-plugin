@@ -31,7 +31,12 @@ import com.smartdoc.gradle.util.GradleUtil;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.Configuration;
+import org.gradle.api.artifacts.ModuleVersionIdentifier;
+import org.gradle.api.artifacts.dsl.ArtifactHandler;
+import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.component.Artifact;
+import org.gradle.api.file.FileCollection;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.tasks.TaskAction;
 
@@ -95,7 +100,7 @@ public abstract class DocBaseTask extends DefaultTask {
         javaDocBuilder.addSourceTree(new File("src/main/java"));
         //sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
 //        javaDocBuilder.addClassLoader(ClassLoaderUtil.getRuntimeClassLoader(project));
-        loadSourcesDependencies(javaDocBuilder);
+        loadSourcesDependencies(javaDocBuilder,project);
         return javaDocBuilder;
     }
 
@@ -104,7 +109,19 @@ public abstract class DocBaseTask extends DefaultTask {
      *
      * @param javaDocBuilder
      */
-    private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder) {
+    private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder,Project project) {
+        DependencyHandler dependencyHandler = project.getDependencies();
+        Configuration compileConfiguration = project.getConfigurations().getByName("compile");
+        compileConfiguration.getResolvedConfiguration().getResolvedArtifacts().forEach(resolvedArtifact -> {
+            ModuleVersionIdentifier id = resolvedArtifact.getModuleVersion().getId();
+            System.out.println(id.getGroup()+":"+id.getName()+":"+id.getVersion()+":sources");
+        });
+        FileCollection fileCollection = compileConfiguration.getAllArtifacts().getFiles();
+        fileCollection.getFiles().forEach(file -> {
+            System.out.println("打印依赖："+file.getName());
+        });
+        ArtifactHandler artifactHandler = project.getArtifacts();
+
 
     }
 
