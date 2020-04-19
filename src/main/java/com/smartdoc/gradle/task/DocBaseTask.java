@@ -26,24 +26,30 @@ import com.google.gson.Gson;
 import com.power.common.constants.Charset;
 import com.power.doc.model.ApiConfig;
 import com.smartdoc.gradle.constant.GlobalConstants;
-import com.smartdoc.gradle.plugin.SmartDocPluginExtension;
+import com.smartdoc.gradle.extension.SmartDocPluginExtension;
+import com.smartdoc.gradle.model.CustomArtifact;
+import com.smartdoc.gradle.util.ArtifactFilterUtil;
 import com.smartdoc.gradle.util.GradleUtil;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
-import org.gradle.api.artifacts.ModuleVersionIdentifier;
-import org.gradle.api.artifacts.dsl.ArtifactHandler;
-import org.gradle.api.artifacts.dsl.DependencyHandler;
-import org.gradle.api.component.Artifact;
-import org.gradle.api.file.FileCollection;
+import org.gradle.api.artifacts.component.ComponentIdentifier;
+import org.gradle.api.artifacts.result.ArtifactResult;
+import org.gradle.api.artifacts.result.ComponentArtifactsResult;
+import org.gradle.api.internal.artifacts.result.DefaultResolvedArtifactResult;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.jvm.JvmLibrary;
+import org.gradle.language.base.artifact.SourcesArtifact;
 
 import java.io.File;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * @author yu 2020/4/5.
@@ -100,7 +106,7 @@ public abstract class DocBaseTask extends DefaultTask {
         javaDocBuilder.addSourceTree(new File("src/main/java"));
         //sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
 //        javaDocBuilder.addClassLoader(ClassLoaderUtil.getRuntimeClassLoader(project));
-        loadSourcesDependencies(javaDocBuilder,project);
+        loadSourcesDependencies(javaDocBuilder, project);
         return javaDocBuilder;
     }
 
@@ -109,31 +115,53 @@ public abstract class DocBaseTask extends DefaultTask {
      *
      * @param javaDocBuilder
      */
-    private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder,Project project) {
-        DependencyHandler dependencyHandler = project.getDependencies();
+    private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project) {
         Configuration compileConfiguration = project.getConfigurations().getByName("compile");
+        List<ComponentIdentifier> binaryDependencies = new ArrayList<>();
         compileConfiguration.getResolvedConfiguration().getResolvedArtifacts().forEach(resolvedArtifact -> {
-            ModuleVersionIdentifier id = resolvedArtifact.getModuleVersion().getId();
-            System.out.println(id.getGroup()+":"+id.getName()+":"+id.getVersion()+":sources");
+            String displayName = resolvedArtifact.getId().getComponentIdentifier().getDisplayName();
+            System.out.println("name:" + displayName);
+            CustomArtifact artifact = CustomArtifact.builder(displayName);
+            if (ArtifactFilterUtil.ignoreArtifact(artifact)) {
+                return;
+            }
+            binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
         });
-        FileCollection fileCollection = compileConfiguration.getAllArtifacts().getFiles();
-        fileCollection.getFiles().forEach(file -> {
-            System.out.println("打印依赖："+file.getName());
-        });
-        ArtifactHandler artifactHandler = project.getArtifacts();
-
-
+        Set<ComponentArtifactsResult> artifactsResults = project.getDependencies().createArtifactResolutionQuery()
+                .forComponents(binaryDependencies)
+                .withArtifacts(JvmLibrary.class, SourcesArtifact.class)
+                .execute()
+                .getResolvedComponents();
+        for (ComponentArtifactsResult artifactResult : artifactsResults) {
+            for (ArtifactResult sourcesResult : artifactResult.getArtifacts(SourcesArtifact.class)) {
+                if (sourcesResult instanceof DefaultResolvedArtifactResult) {
+                    String path = ((DefaultResolvedArtifactResult) sourcesResult).getFile().getPath();
+                    System.out.println("path:" + path);
+                    this.loadSourcesDependency(javaDocBuilder, (DefaultResolvedArtifactResult) sourcesResult);
+                }
+            }
+        }
     }
 
     /**
      * reference https://github.com/sfauvel/livingdocumentation
      *
-     * @param javaDocBuilder  JavaProjectBuilder
-     * @param sourcesArtifact Artifact
+     * @param javaDocBuilder JavaProjectBuilder
+     * @param artifact       Artifact
      */
-    private void loadSourcesDependency(JavaProjectBuilder javaDocBuilder, Artifact sourcesArtifact) {
-
+    private void loadSourcesDependency(JavaProjectBuilder javaDocBuilder, DefaultResolvedArtifactResult artifact) {
+        try (JarFile jarFile = new JarFile(artifact.getFile())) {
+            System.out.println("jar:" + artifact.getFile().toURI().toURL().toString());
+            for (Enumeration<?> entries = jarFile.entries(); entries.hasMoreElements(); ) {
+                JarEntry entry = (JarEntry) entries.nextElement();
+                String name = entry.getName();
+                if (name.endsWith(".java") && !name.endsWith("/package-info.java")) {
+                    javaDocBuilder.addSource(
+                            new URL("jar:" + artifact.getFile().toURI().toURL().toString() + "!/" + name));
+                }
+            }
+        } catch (Exception e) {
+            getLogger().warn("Unable to load jar source " + artifact + " : " + e.getMessage());
+        }
     }
-
-
 }

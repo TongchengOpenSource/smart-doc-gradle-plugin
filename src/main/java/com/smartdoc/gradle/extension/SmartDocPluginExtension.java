@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.smartdoc.gradle.plugin;
+package com.smartdoc.gradle.extension;
 
 import java.io.File;
 
@@ -33,7 +33,6 @@ public class SmartDocPluginExtension {
      * get config file
      */
     private File configFile;
-
 
     public File getConfigFile() {
         return configFile;

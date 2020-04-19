@@ -23,6 +23,7 @@
 package com.smartdoc.gradle.plugin;
 
 import com.smartdoc.gradle.constant.GlobalConstants;
+import com.smartdoc.gradle.extension.SmartDocPluginExtension;
 import com.smartdoc.gradle.task.PostmanTask;
 import com.smartdoc.gradle.task.RestAdocTask;
 import com.smartdoc.gradle.task.RestHtmlTask;
