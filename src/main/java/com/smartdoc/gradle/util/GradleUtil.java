@@ -77,22 +77,22 @@ public class GradleUtil {
             ApiConfig apiConfig = GSON.fromJson(data, ApiConfig.class);
             List<ApiDataDictionary> apiDataDictionaries = apiConfig.getDataDictionaries();
             List<ApiErrorCodeDictionary> apiErrorCodes = apiConfig.getErrorCodeDictionaries();
-//            if (apiErrorCodes != null) {
-//                apiErrorCodes.forEach(
-//                        apiErrorCode -> {
-//                            String className = apiErrorCode.getEnumClassName();
-//                            apiErrorCode.setEnumClass(getClassByClassName(className, classLoader));
-//                        }
-//                );
-//            }
-//            if (apiDataDictionaries != null) {
-//                apiDataDictionaries.forEach(
-//                        apiDataDictionary -> {
-//                            String className = apiDataDictionary.getEnumClassName();
-//                            apiDataDictionary.setEnumClass(getClassByClassName(className, classLoader));
-//                        }
-//                );
-//            }
+            if (apiErrorCodes != null) {
+                apiErrorCodes.forEach(
+                        apiErrorCode -> {
+                            String className = apiErrorCode.getEnumClassName();
+                            apiErrorCode.setEnumClass(getClassByClassName(className, classLoader));
+                        }
+                );
+            }
+            if (apiDataDictionaries != null) {
+                apiDataDictionaries.forEach(
+                        apiDataDictionary -> {
+                            String className = apiDataDictionary.getEnumClassName();
+                            apiDataDictionary.setEnumClass(getClassByClassName(className, classLoader));
+                        }
+                );
+            }
             addSourcePaths(project, apiConfig, log);
             return apiConfig;
         } catch (FileNotFoundException e) {

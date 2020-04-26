@@ -24,11 +24,16 @@ package com.smartdoc.gradle.util;
 
 
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.Configuration;
+
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Julien Boz
@@ -43,22 +48,15 @@ public class ClassLoaderUtil {
      */
     public static ClassLoader getRuntimeClassLoader(Project project)  {
         try {
-            List<String> runtimeClasspathElements = new ArrayList<>();
-            List<String> compileClasspathElements = new ArrayList<>();
-            URL[] runtimeUrls = new URL[runtimeClasspathElements.size() + compileClasspathElements.size()];
-            for (int i = 0; i < runtimeClasspathElements.size(); i++) {
-                String element = runtimeClasspathElements.get(i);
-                runtimeUrls[i] = new File(element).toURI().toURL();
+            Configuration compileConfiguration = project.getConfigurations().getByName("compile");
+            Set<File> fileSet = compileConfiguration.getFiles();
+            List<URL> urls = new ArrayList<>();
+            for(File file:fileSet){
+                urls.add(file.toURI().toURL());
             }
-
-            int j = runtimeClasspathElements.size();
-
-            for (int i = 0; i < compileClasspathElements.size(); i++) {
-                String element = compileClasspathElements.get(i);
-                runtimeUrls[i + j] = new File(element).toURI().toURL();
-            }
+            URL[] runtimeUrls = urls.toArray(new URL[0]);
             return new URLClassLoader(runtimeUrls, Thread.currentThread().getContextClassLoader());
-        } catch (Exception e) {
+        } catch (MalformedURLException e) {
             throw new RuntimeException("Unable to load project runtime !", e);
         }
     }
