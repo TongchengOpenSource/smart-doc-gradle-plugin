@@ -22,7 +22,6 @@
  */
 package com.smartdoc.gradle.task;
 
-import com.google.gson.Gson;
 import com.power.common.constants.Charset;
 import com.power.doc.model.ApiConfig;
 import com.smartdoc.gradle.constant.GlobalConstants;
@@ -39,6 +38,7 @@ import org.gradle.api.artifacts.result.ArtifactResult;
 import org.gradle.api.artifacts.result.ComponentArtifactsResult;
 import org.gradle.api.internal.artifacts.result.DefaultResolvedArtifactResult;
 import org.gradle.api.logging.Logger;
+import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.jvm.JvmLibrary;
 import org.gradle.language.base.artifact.SourcesArtifact;
@@ -63,9 +63,7 @@ public abstract class DocBaseTask extends DefaultTask {
     @TaskAction
     public void action() {
         Logger logger = getLogger();
-        logger.quiet("this is baseTask");
         Project project = getProject();
-
         logger.quiet("Smart-doc Starting Create API Documentation.");
         javaProjectBuilder = buildJavaProjectBuilder(project);
         javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
@@ -75,8 +73,6 @@ public abstract class DocBaseTask extends DefaultTask {
             file = new File(GlobalConstants.DEFAULT_CONFIG);
         }
         ApiConfig apiConfig = GradleUtil.buildConfig(file, project, logger);
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(apiConfig));
         if (apiConfig == null) {
             logger.quiet(GlobalConstants.ERROR_MSG);
             return;
@@ -116,11 +112,10 @@ public abstract class DocBaseTask extends DefaultTask {
      * @param javaDocBuilder
      */
     private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project) {
-        Configuration compileConfiguration = project.getConfigurations().getByName("compile");
+        Configuration compileConfiguration = project.getConfigurations().getByName(JavaPlugin.COMPILE_JAVA_TASK_NAME);
         List<ComponentIdentifier> binaryDependencies = new ArrayList<>();
         compileConfiguration.getResolvedConfiguration().getResolvedArtifacts().forEach(resolvedArtifact -> {
             String displayName = resolvedArtifact.getId().getComponentIdentifier().getDisplayName();
-            System.out.println("name:" + displayName);
             CustomArtifact artifact = CustomArtifact.builder(displayName);
             if (ArtifactFilterUtil.ignoreArtifact(artifact)) {
                 return;
@@ -135,8 +130,6 @@ public abstract class DocBaseTask extends DefaultTask {
         for (ComponentArtifactsResult artifactResult : artifactsResults) {
             for (ArtifactResult sourcesResult : artifactResult.getArtifacts(SourcesArtifact.class)) {
                 if (sourcesResult instanceof DefaultResolvedArtifactResult) {
-                    String path = ((DefaultResolvedArtifactResult) sourcesResult).getFile().getPath();
-                    System.out.println("path:" + path);
                     this.loadSourcesDependency(javaDocBuilder, (DefaultResolvedArtifactResult) sourcesResult);
                 }
             }
@@ -151,7 +144,6 @@ public abstract class DocBaseTask extends DefaultTask {
      */
     private void loadSourcesDependency(JavaProjectBuilder javaDocBuilder, DefaultResolvedArtifactResult artifact) {
         try (JarFile jarFile = new JarFile(artifact.getFile())) {
-            System.out.println("jar:" + artifact.getFile().toURI().toURL().toString());
             for (Enumeration<?> entries = jarFile.entries(); entries.hasMoreElements(); ) {
                 JarEntry entry = (JarEntry) entries.nextElement();
                 String name = entry.getName();

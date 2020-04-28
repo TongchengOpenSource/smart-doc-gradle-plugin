@@ -30,6 +30,8 @@ import com.smartdoc.gradle.task.RestHtmlTask;
 import com.smartdoc.gradle.task.RestMarkdownTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.Task;
+import org.gradle.api.plugins.JavaPlugin;
 
 /**
  * @author yu 2020/2/16.
@@ -39,21 +41,26 @@ public class SmartDocPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
 
+        Task javaCompileTask = project.getTasks().getByName(JavaPlugin.COMPILE_JAVA_TASK_NAME);
         //create html
         RestHtmlTask restHtmlTask = project.getTasks().create(GlobalConstants.REST_HTML_TASK, RestHtmlTask.class);
         restHtmlTask.setGroup(GlobalConstants.TASK_GROUP);
+        restHtmlTask.dependsOn(javaCompileTask);
 
         // create adoc
         RestAdocTask restAdocTask = project.getTasks().create(GlobalConstants.REST_ADOC_TASK, RestAdocTask.class);
         restAdocTask.setGroup(GlobalConstants.TASK_GROUP);
+        restAdocTask.dependsOn(javaCompileTask);
 
         // create markdown
         RestMarkdownTask restMarkdownTask = project.getTasks().create(GlobalConstants.REST_MARKDOWN_TASK, RestMarkdownTask.class);
         restMarkdownTask.setGroup(GlobalConstants.TASK_GROUP);
+        restMarkdownTask.dependsOn(javaCompileTask);
 
         // create postman collection
         PostmanTask postmanTask = project.getTasks().create(GlobalConstants.POSTMAN_TASK, PostmanTask.class);
         postmanTask.setGroup(GlobalConstants.TASK_GROUP);
+        postmanTask.dependsOn(javaCompileTask);
 
         // extend project-model to get our settings/configuration via nice configuration
         project.getExtensions().create(GlobalConstants.EXTENSION_NAME, SmartDocPluginExtension.class);

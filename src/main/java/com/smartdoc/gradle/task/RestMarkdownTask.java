@@ -1,5 +1,6 @@
 package com.smartdoc.gradle.task;
 
+import com.power.doc.builder.ApiDocBuilder;
 import com.power.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
@@ -10,10 +11,11 @@ import org.gradle.api.logging.Logger;
 public class RestMarkdownTask extends DocBaseTask {
 
     @Override
-    public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder,Logger logger) {
+    public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
             logger.quiet("This is markdown task");
-        }catch (Exception e){
+            ApiDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
