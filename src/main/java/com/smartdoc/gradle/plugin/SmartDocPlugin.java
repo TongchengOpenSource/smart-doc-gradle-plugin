@@ -31,6 +31,7 @@ import com.smartdoc.gradle.task.RestMarkdownTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
+import org.gradle.api.plugins.JavaPlugin;
 
 /**
  * @author yu 2020/2/16.
@@ -40,7 +41,7 @@ public class SmartDocPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
 
-        Task javaCompileTask = project.getTasks().getByName("compileJava");
+        Task javaCompileTask = project.getTasks().getByName(JavaPlugin.COMPILE_JAVA_TASK_NAME);
         //create html
         RestHtmlTask restHtmlTask = project.getTasks().create(GlobalConstants.REST_HTML_TASK, RestHtmlTask.class);
         restHtmlTask.setGroup(GlobalConstants.TASK_GROUP);

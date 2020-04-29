@@ -26,6 +26,7 @@ package com.smartdoc.gradle.util;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.file.FileCollection;
+import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.plugins.JavaPluginConvention;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
@@ -51,7 +52,7 @@ public class ClassLoaderUtil {
      */
     public static ClassLoader getRuntimeClassLoader(Project project) {
         try {
-            Configuration compileConfiguration = project.getConfigurations().getByName("compileClasspath");
+            Configuration compileConfiguration = project.getConfigurations().getByName(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME);
             Set<File> fileSet = compileConfiguration.getFiles();
             List<URL> urls = new ArrayList<>();
             for (File file : fileSet) {

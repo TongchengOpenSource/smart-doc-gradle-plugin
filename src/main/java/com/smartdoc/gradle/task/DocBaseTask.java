@@ -63,7 +63,6 @@ public abstract class DocBaseTask extends DefaultTask {
     public void action() {
         Logger logger = getLogger();
         Project project = getProject();
-
         logger.quiet("Smart-doc Starting Create API Documentation.");
         javaProjectBuilder = buildJavaProjectBuilder(project);
         javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
@@ -117,7 +116,7 @@ public abstract class DocBaseTask extends DefaultTask {
         compileConfiguration.getResolvedConfiguration().getResolvedArtifacts().forEach(resolvedArtifact -> {
             String displayName = resolvedArtifact.getId().getComponentIdentifier().getDisplayName();
             CustomArtifact artifact = CustomArtifact.builder(displayName);
-            if (ArtifactFilterUtil.ignoreArtifact(artifact)) {
+            if (ArtifactFilterUtil.ignoreArtifact(artifact) || ArtifactFilterUtil.ignoreSpringBootArtifactById(artifact)) {
                 return;
             }
             binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
@@ -130,7 +129,6 @@ public abstract class DocBaseTask extends DefaultTask {
         for (ComponentArtifactsResult artifactResult : artifactsResults) {
             for (ArtifactResult sourcesResult : artifactResult.getArtifacts(SourcesArtifact.class)) {
                 if (sourcesResult instanceof DefaultResolvedArtifactResult) {
-                    String path = ((DefaultResolvedArtifactResult) sourcesResult).getFile().getPath();
                     this.loadSourcesDependency(javaDocBuilder, (DefaultResolvedArtifactResult) sourcesResult);
                 }
             }
