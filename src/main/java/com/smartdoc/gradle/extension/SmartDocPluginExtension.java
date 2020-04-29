@@ -23,6 +23,8 @@
 package com.smartdoc.gradle.extension;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author yu 2020/4/8.
@@ -34,11 +36,27 @@ public class SmartDocPluginExtension {
      */
     private File configFile;
 
+    /**
+     * exclude artifact
+     */
+    private final Set<String> exclude = new HashSet<>();
+
     public File getConfigFile() {
         return configFile;
     }
 
     public void setConfigFile(File configFile) {
         this.configFile = configFile;
+    }
+
+    SmartDocPluginExtension exclude(String... excludes) {
+        for (String exclude : excludes) {
+            this.exclude.add(exclude);
+        }
+        return this;
+    }
+
+    public Set<String> getExclude() {
+        return exclude;
     }
 }

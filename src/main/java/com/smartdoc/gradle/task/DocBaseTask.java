@@ -64,9 +64,10 @@ public abstract class DocBaseTask extends DefaultTask {
         Logger logger = getLogger();
         Project project = getProject();
         logger.quiet("Smart-doc Starting Create API Documentation.");
-        javaProjectBuilder = buildJavaProjectBuilder(project);
-        javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         SmartDocPluginExtension pluginExtension = project.getExtensions().getByType(SmartDocPluginExtension.class);
+        Set<String> excludes = pluginExtension.getExclude();
+        javaProjectBuilder = buildJavaProjectBuilder(project, excludes);
+        javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         File file = pluginExtension.getConfigFile();
         if (Objects.isNull(file)) {
             file = new File(GlobalConstants.DEFAULT_CONFIG);
@@ -78,7 +79,7 @@ public abstract class DocBaseTask extends DefaultTask {
         }
         Path path = Paths.get(apiConfig.getOutPath());
         if (!path.isAbsolute()) {
-            apiConfig.setOutPath(project.getPath() + "/" + apiConfig.getOutPath());
+            apiConfig.setOutPath(project.getProjectDir().getPath() + "/" + apiConfig.getOutPath());
             logger.quiet("API Documentation output to " + apiConfig.getOutPath());
         } else {
             logger.quiet("API Documentation output to " + apiConfig.getOutPath());
@@ -93,7 +94,7 @@ public abstract class DocBaseTask extends DefaultTask {
      *
      * @return
      */
-    private JavaProjectBuilder buildJavaProjectBuilder(Project project) {
+    private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes) {
         JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
         javaDocBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         javaDocBuilder.setErrorHandler(e -> getLogger().warn(e.getMessage()));
@@ -101,7 +102,7 @@ public abstract class DocBaseTask extends DefaultTask {
         javaDocBuilder.addSourceTree(new File("src/main/java"));
         //sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
 //        javaDocBuilder.addClassLoader(ClassLoaderUtil.getRuntimeClassLoader(project));
-        loadSourcesDependencies(javaDocBuilder, project);
+        loadSourcesDependencies(javaDocBuilder, project, excludes);
         return javaDocBuilder;
     }
 
@@ -110,13 +111,17 @@ public abstract class DocBaseTask extends DefaultTask {
      *
      * @param javaDocBuilder
      */
-    private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project) {
+    private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project, Set<String> excludes) {
         Configuration compileConfiguration = project.getConfigurations().getByName("compile");
         List<ComponentIdentifier> binaryDependencies = new ArrayList<>();
         compileConfiguration.getResolvedConfiguration().getResolvedArtifacts().forEach(resolvedArtifact -> {
             String displayName = resolvedArtifact.getId().getComponentIdentifier().getDisplayName();
             CustomArtifact artifact = CustomArtifact.builder(displayName);
             if (ArtifactFilterUtil.ignoreArtifact(artifact) || ArtifactFilterUtil.ignoreSpringBootArtifactById(artifact)) {
+                return;
+            }
+            String artifactName = artifact.getGroup() + ":" + artifact.getArtifactId();
+            if (ArtifactFilterUtil.isMatches(excludes, artifactName)) {
                 return;
             }
             binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
