@@ -22,7 +22,6 @@
  */
 package com.smartdoc.gradle.task;
 
-import com.power.doc.builder.PostmanJsonBuilder;
 import com.power.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
@@ -35,9 +34,8 @@ public class PostmanTask extends DocBaseTask {
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            logger.quiet("This is a postman collection task");
-            PostmanJsonBuilder.buildPostmanCollection(apiConfig, javaProjectBuilder);
-        } catch (Exception e) {
+           logger.quiet("This is a postman collection task");
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

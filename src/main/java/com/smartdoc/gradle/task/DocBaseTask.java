@@ -38,7 +38,6 @@ import org.gradle.api.artifacts.result.ArtifactResult;
 import org.gradle.api.artifacts.result.ComponentArtifactsResult;
 import org.gradle.api.internal.artifacts.result.DefaultResolvedArtifactResult;
 import org.gradle.api.logging.Logger;
-import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.jvm.JvmLibrary;
 import org.gradle.language.base.artifact.SourcesArtifact;
@@ -63,7 +62,9 @@ public abstract class DocBaseTask extends DefaultTask {
     @TaskAction
     public void action() {
         Logger logger = getLogger();
+        logger.quiet("this is baseTask");
         Project project = getProject();
+
         logger.quiet("Smart-doc Starting Create API Documentation.");
         javaProjectBuilder = buildJavaProjectBuilder(project);
         javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
@@ -112,7 +113,7 @@ public abstract class DocBaseTask extends DefaultTask {
      * @param javaDocBuilder
      */
     private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project) {
-        Configuration compileConfiguration = project.getConfigurations().getByName(JavaPlugin.COMPILE_JAVA_TASK_NAME);
+        Configuration compileConfiguration = project.getConfigurations().getByName("compile");
         List<ComponentIdentifier> binaryDependencies = new ArrayList<>();
         compileConfiguration.getResolvedConfiguration().getResolvedArtifacts().forEach(resolvedArtifact -> {
             String displayName = resolvedArtifact.getId().getComponentIdentifier().getDisplayName();
@@ -130,6 +131,7 @@ public abstract class DocBaseTask extends DefaultTask {
         for (ComponentArtifactsResult artifactResult : artifactsResults) {
             for (ArtifactResult sourcesResult : artifactResult.getArtifacts(SourcesArtifact.class)) {
                 if (sourcesResult instanceof DefaultResolvedArtifactResult) {
+                    String path = ((DefaultResolvedArtifactResult) sourcesResult).getFile().getPath();
                     this.loadSourcesDependency(javaDocBuilder, (DefaultResolvedArtifactResult) sourcesResult);
                 }
             }
