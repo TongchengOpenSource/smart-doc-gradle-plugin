@@ -62,7 +62,6 @@ public abstract class DocBaseTask extends DefaultTask {
     @TaskAction
     public void action() {
         Logger logger = getLogger();
-        logger.quiet("this is baseTask");
         Project project = getProject();
 
         logger.quiet("Smart-doc Starting Create API Documentation.");

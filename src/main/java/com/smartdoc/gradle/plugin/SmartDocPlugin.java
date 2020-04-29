@@ -49,14 +49,17 @@ public class SmartDocPlugin implements Plugin<Project> {
         // create adoc
         RestAdocTask restAdocTask = project.getTasks().create(GlobalConstants.REST_ADOC_TASK, RestAdocTask.class);
         restAdocTask.setGroup(GlobalConstants.TASK_GROUP);
+        restAdocTask.dependsOn(javaCompileTask);
 
         // create markdown
         RestMarkdownTask restMarkdownTask = project.getTasks().create(GlobalConstants.REST_MARKDOWN_TASK, RestMarkdownTask.class);
         restMarkdownTask.setGroup(GlobalConstants.TASK_GROUP);
+        restMarkdownTask.dependsOn(javaCompileTask);
 
         // create postman collection
         PostmanTask postmanTask = project.getTasks().create(GlobalConstants.POSTMAN_TASK, PostmanTask.class);
         postmanTask.setGroup(GlobalConstants.TASK_GROUP);
+        postmanTask.dependsOn(javaCompileTask);
 
         // extend project-model to get our settings/configuration via nice configuration
         project.getExtensions().create(GlobalConstants.EXTENSION_NAME, SmartDocPluginExtension.class);
