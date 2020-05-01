@@ -8,11 +8,10 @@ buildscript {
 plugins {
     id "java"
     id "java-gradle-plugin"
-    id "com.gradle.plugin-publish" version "0.11.0"
 }
 
 group 'com.github.shalousun'
-version '1.0.67'
+version '0.0.1'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
@@ -35,6 +34,15 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -42,28 +50,30 @@ publishing {
             artifactId project.name
             version "${version}"
             from components.java
-            artifact sourceJar
+            artifact sourcesJar
+            artifact javadocJar
             pom {
                 name = "smart-doc-gradle-plugin"
                 description = "smart-doc gradle plugin"
-                url = "https://github.com/smart-doc-group/smart-doc-gradle-plugin"
+                url = "https://github.com/shalousun/smart-doc-gradle-plugin"
                 licenses {
                     license {
                         name = "The Apache License, Version 2.0"
                         url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution = "repo"
                     }
                 }
                 developers {
                     developer {
-                        id = "smart-doc"
                         name = "smart-doc"
                         email = "836575280@qq.com"
+                        url = "https://github.com/shalousun"
                     }
                 }
                 scm {
-                    connection = "scm:git:https://github.com/smart-doc-group/smart-doc-gradle-plugin.git"
-                    developerConnection = "scm:https://github.com/smart-doc-group/smart-doc-gradle-plugin.git"
-                    url = "https://github.com/smart-doc-group/smart-doc-gradle-plugin"
+                    url = "https://github.com/shalousun/smart-doc-gradle-plugin"
+                    connection = "scm:https://github.com/shalousun/smart-doc-maven-plugin.git"
+                    developerConnection = "scm:https://github.com/shalousunp/smart-doc-gradle-plugin.git"
                 }
             }
         }
