@@ -17,6 +17,9 @@ version '1.0.67'
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
 
 sourceCompatibility = 1.8
 
@@ -30,6 +33,54 @@ dependencies {
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version "${version}"
+            from components.java
+            artifact sourceJar
+            pom {
+                name = "smart-doc-gradle-plugin"
+                description = "smart-doc gradle plugin"
+                url = "https://github.com/smart-doc-group/smart-doc-gradle-plugin"
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "smart-doc"
+                        name = "smart-doc"
+                        email = "836575280@qq.com"
+                    }
+                }
+                scm {
+                    connection = "scm:git:https://github.com/smart-doc-group/smart-doc-gradle-plugin.git"
+                    developerConnection = "scm:https://github.com/smart-doc-group/smart-doc-gradle-plugin.git"
+                    url = "https://github.com/smart-doc-group/smart-doc-gradle-plugin"
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name 'sonatypeRepository'
+            url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username = "${NEXUS_USERNAME}"
+                password = "${NEXUS_PASSWORD}"
+            }
+        }
+    }
+}
+signing {
+    sign publishing.publications.mavenJava
 }
 //upload jar to nexus
 def nexusUrl = "http://localhost:8081/nexus/content/repositories/releases/"
