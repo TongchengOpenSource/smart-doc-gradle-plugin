@@ -1,7 +1,7 @@
-<h1 align="center"><a href="https://github.com/shalousun/smart-doc-gradle-plugin" target="_blank">Smart-Doc Gradle Plugin(敬请期待)</a></h1>
+<h1 align="center"><a href="https://github.com/shalousun/smart-doc-gradle-plugin" target="_blank">Smart-Doc Gradle Plugin</a></h1>
 
 ## Introduce
-smart-doc-gradle-plugin是smart-doc官方团队开发的`gradle`插件，该插件从smart-doc 1.8.9版本开始提供，
+smart-doc-gradle-plugin是smart-doc官方团队开发的`gradle`插件，该插件从smart-doc 1.8.6版本开始提供，
 使用smart-doc-gradle-plugin更方便用户集成到自己的项目中，集成也更加轻量，你不再需要在项目中编写单元测试来
 启动smart-doc扫描代码分析生成接口文档。可以直接运行`gradle`命令
 或者是IDE中点击smart-doc-gradle-plugin预设好的`goal`即可生成接口文档。
@@ -14,7 +14,7 @@ install build.gradle
 ```
 buildscript {
     dependencies {
-        classpath 'com.github.shalousun:smart-doc-gradle-plugin:最新版本'
+        classpath 'com.github.shalousun:smart-doc-gradle-plugin:[最新版本]'
     }
 }
 apply plugin: 'smart-doc'

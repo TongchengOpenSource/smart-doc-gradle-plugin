@@ -4,7 +4,7 @@
 
 ## Introduce
 smart-doc-gradle-plugin is a `gradle` plugin developed by the smart-doc official team. 
-This plugin is available from smart-doc 1.8.1.
+This plugin is available from smart-doc 1.8.6.
 Using smart-doc-gradle-plugin makes it easier to integrate smart-doc into your project, and integration is more lightweight. 
 You no longer need to write unit tests in your project to
 Start smart-doc to scan source code analysis and generate API documents. 
@@ -17,7 +17,7 @@ smart-doc-gradle-plugin will also make smart-doc's ability to generate API docum
 ```
 buildscript {
     dependencies {
-        classpath 'com.github.shalousun:smart-doc-gradle-plugin:lastest'
+        classpath 'com.github.shalousun:smart-doc-gradle-plugin:[latest]'
     }
 }
 apply plugin: 'smart-doc'
