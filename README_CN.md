@@ -19,6 +19,25 @@ buildscript {
 }
 apply plugin: 'smart-doc'
 ```
+### Plugin options
+
+| Option | Default value | Description |
+| ------ | ------------- | ----------- |
+|configFile|src/main/resources/default.json|插件配置文件|
+|exclude|无|排除一些无法自定下载的java lib sources,例如:exclude 'org.springframework.boot:spring-boot-starter-tomcat' |
+
+Example setting of options:
+```
+smartdoc {
+    configFile = file("src/main/resources/default.json")
+    
+    // exclude example
+    // exclude artifact
+    exclude 'org.springframework.boot:spring-boot-starter-tomcat'
+    // exclude artifact use pattern
+    exclude 'org.springframework.boot.*'
+}
+```
 ### Create a json config 
 在自己的项目中创建一个json配置文件，smart-doc-gradle-plugin插件会根据这个配置生成项目的接口文档。
 例如在项目中创建`/src/main/resources/smart-doc.json`。配置内容参考如下。
@@ -72,6 +91,10 @@ apply plugin: 'smart-doc'
       "value": "00000"//设置响应码的值
     }
   ],
+  "apiObjectReplacements": [{ // 自smart-doc 1.8.5开始你可以使用自定义类覆盖其他类做文档渲染，非必须
+      "className": "org.springframework.data.domain.Pageable",
+      "replacementClassName": "com.power.doc.model.PageRequestDto" //自定义的PageRequestDto替换Pageable做文档渲染
+  }],
   "requestHeaders": [ //设置请求头，没有需求可以不设置
     {
       "name": "token",
@@ -106,7 +129,7 @@ gradle smartDocPostman
 #### Use IDEA
 当你使用Idea时，可以通过maven Helper插件选择生成何种文档。
 
-![idea中smart-doc-maven插件使用](https://images.gitee.com/uploads/images/2019/1215/004902_b0c153d6_144669.png "idea.png")
+![idea中smart-doc-gradle插件使用](https://images.gitee.com/uploads/images/2020/0504/204904_bacf8d52_144669.png "usage.png")
 
 ### Generated document example
 [点击查看文档生成文档效果图](https://gitee.com/sunyurepository/smart-doc/wikis/文档效果图?sort_id=1652819)
@@ -114,7 +137,10 @@ gradle smartDocPostman
 ## Building
 如果你需要自己构建，那可以使用下面命令，构建需要依赖Java 1.8。
 ```
-mvn clean install -Dmaven.test.skip=true
+// 将gradle插件暗转到本地
+gradle publishToMavenLocal
+// 将gradle插件发布到自己nexus仓库，自己修改build.gradle中的仓库地址配置
+gradle uploadArchives
 ```
 ## Releases
 [发布记录](https://gitee.com/sunyurepository/smart-doc-maven-plugin/blob/master/CHANGELOG.md)

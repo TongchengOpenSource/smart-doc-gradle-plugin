@@ -27,11 +27,18 @@ apply plugin: 'smart-doc'
 | Option | Default value | Description |
 | ------ | ------------- | ----------- |
 |configFile|src/main/resources/default.json||
+|exclude||exclude artifact,usage:exclude 'org.springframework.boot:spring-boot-starter-tomcat' |
 
 Example setting of options:
 ```
 smartdoc {
     configFile = file("src/main/resources/default.json")
+    
+    // exclude example
+    // exclude artifact
+    exclude 'org.springframework.boot:spring-boot-starter-tomcat'
+    // exclude artifact use pattern
+    exclude 'org.springframework.boot.*'
 }
 ```
 ### Create a json config 
@@ -94,6 +101,10 @@ When you need to use smart-doc to generate more API document information, you ca
       "value": "00000" // Set the value of the response code
     }
   ],
+  "apiObjectReplacements": [{ // Supports replacing specified objects with custom objects to complete document rendering
+        "className": "org.springframework.data.domain.Pageable",
+        "replacementClassName": "com.power.doc.model.PageRequestDto" //Use custom PageRequestDto instead of JPA Pageable for document rendering.
+  }],
   "requestHeaders": [// Set global request headers, no need to set
     {
       "name": "token",
@@ -135,7 +146,10 @@ you can directly find the plugin smart-doc plugin and click to generate API docu
 ## Building
 you can build with the following commands. (Java 1.8 is required to build the master branch)
 ```
-mvn clean install -Dmaven.test.skip=true
+// build and publish to local
+gradle publishToMavenLocal
+// build and publish to nexus
+gradle uploadArchives
 ```
 ## Other reference
 - [Smart-doc manual](https://github.com/shalousun/smart-doc/wiki)
