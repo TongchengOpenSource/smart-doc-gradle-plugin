@@ -6,19 +6,16 @@ buildscript {
 }
 
 plugins {
+    id 'groovy'
     id "java"
     id "java-gradle-plugin"
+    id "maven-publish"
+    id "signing"
+    id "maven"
 }
 
 group 'com.github.shalousun'
 version '0.0.1'
-
-apply plugin: 'groovy'
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
-
 
 sourceCompatibility = 1.8
 
@@ -34,15 +31,25 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
 }
 
-task javadocJar(type: Jar) {
-    from javadoc
-    classifier = 'javadoc'
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+// publish to local
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -50,47 +57,12 @@ publishing {
             artifactId project.name
             version "${version}"
             from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            pom {
-                name = "smart-doc-gradle-plugin"
-                description = "smart-doc gradle plugin"
-                url = "https://github.com/shalousun/smart-doc-gradle-plugin"
-                licenses {
-                    license {
-                        name = "The Apache License, Version 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                        distribution = "repo"
-                    }
-                }
-                developers {
-                    developer {
-                        name = "smart-doc"
-                        email = "836575280@qq.com"
-                        url = "https://github.com/shalousun"
-                    }
-                }
-                scm {
-                    url = "https://github.com/shalousun/smart-doc-gradle-plugin"
-                    connection = "scm:https://github.com/shalousun/smart-doc-maven-plugin.git"
-                    developerConnection = "scm:https://github.com/shalousunp/smart-doc-gradle-plugin.git"
-                }
-            }
+            // more goes in here
         }
     }
     repositories {
-        maven {
-            name 'sonatypeRepository'
-            url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username = "${NEXUS_USERNAME}"
-                password = "${NEXUS_PASSWORD}"
-            }
-        }
+        mavenLocal()
     }
-}
-signing {
-    sign publishing.publications.mavenJava
 }
 //upload jar to nexus
 def nexusUrl = "http://localhost:8081/nexus/content/repositories/releases/"
@@ -98,15 +70,48 @@ if (version.endsWith("-SNAPSHOT")) {
     nexusUrl = "http://localhost:8081/nexus/content/repositories/snapshots/"
 }
 
+// Build, sign, and upload
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: nexusUrl) {
-                authentication(userName: "admin", password: "admin123")
+
+            // Sign POM
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            // Destination
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
             }
-            pom.version = "$project.version"
-            pom.artifactId = "$project.name"
-            pom.groupId = "$project.group"
+            // Add required metadata to POM
+            pom.project {
+                name 'smart-doc-gradle-plugin'
+                packaging 'jar'
+                description 'smart-doc gradle plugin.'
+                url 'https://github.com/smart-doc-group/smart-doc-maven-plugin'
+
+                scm {
+                    connection 'scm:git:git@github.com:smart-doc-group/smart-doc-maven-plugin.git'
+                    developerConnection 'scm:git@github.com:smart-doc-group/smart-doc-maven-plugin.git'
+                    url 'https://github.com/smart-doc-group/smart-doc-maven-plugin'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'weibeld'
+                        name 'shalousun'
+                        email 'shalousun'
+                        organization 'smart-doc-group'
+                        organizationUrl 'https://github.com/smart-doc-group'
+                    }
+                }
+            }
         }
     }
 }
