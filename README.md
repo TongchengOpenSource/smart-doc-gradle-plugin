@@ -130,11 +130,11 @@ gradle smartDocRestAdoc
 // Generate postman collection
 gradle smartDocPostman
 ```
-#### Use IntelliJ IDEA
+#### Use In IntelliJ IDEA
 On Use IntelliJ IDE, if you have added smart-doc-gradle-plugin to the project, 
 you can directly find the plugin smart-doc plugin and click to generate API documentation.
 
-![smart-doc-gradle-plugin](https://raw.githubusercontent.com/shalousun/smart-doc-maven-plugin/master/images/idea.png)
+![smart-doc-gradle-plugin](https://raw.githubusercontent.com/shalousun/smart-doc-gradle-plugin/master/images/idea.png)
 
 ### Generated document example
 #### Interface header rendering
