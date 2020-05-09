@@ -33,6 +33,7 @@ import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
+import org.gradle.api.artifacts.ResolvedArtifact;
 import org.gradle.api.artifacts.component.ComponentIdentifier;
 import org.gradle.api.artifacts.result.ArtifactResult;
 import org.gradle.api.artifacts.result.ComponentArtifactsResult;
@@ -114,18 +115,22 @@ public abstract class DocBaseTask extends DefaultTask {
     private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project, Set<String> excludes) {
         Configuration compileConfiguration = project.getConfigurations().getByName("compile");
         List<ComponentIdentifier> binaryDependencies = new ArrayList<>();
-        compileConfiguration.getResolvedConfiguration().getResolvedArtifacts().forEach(resolvedArtifact -> {
+        Set<ResolvedArtifact> resolvedArtifacts = compileConfiguration.getResolvedConfiguration().getResolvedArtifacts();
+        for (ResolvedArtifact resolvedArtifact : resolvedArtifacts) {
             String displayName = resolvedArtifact.getId().getComponentIdentifier().getDisplayName();
+            if (displayName.startsWith("project :")) {
+                continue;
+            }
             CustomArtifact artifact = CustomArtifact.builder(displayName);
             if (ArtifactFilterUtil.ignoreArtifact(artifact) || ArtifactFilterUtil.ignoreSpringBootArtifactById(artifact)) {
-                return;
+                continue;
             }
             String artifactName = artifact.getGroup() + ":" + artifact.getArtifactId();
             if (ArtifactFilterUtil.isMatches(excludes, artifactName)) {
-                return;
+                continue;
             }
             binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
-        });
+        }
         Set<ComponentArtifactsResult> artifactsResults = project.getDependencies().createArtifactResolutionQuery()
                 .forComponents(binaryDependencies)
                 .withArtifacts(JvmLibrary.class, SourcesArtifact.class)

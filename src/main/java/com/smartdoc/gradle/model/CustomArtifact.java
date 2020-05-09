@@ -47,7 +47,9 @@ public class CustomArtifact {
         String[] displayInfo = artifactDisplayName.split(":");
         artifact.setArtifactId(displayInfo[1]);
         artifact.setGroup(displayInfo[0]);
-        artifact.setVersion(displayInfo[2]);
+        if (displayInfo.length > 2) {
+            artifact.setVersion(displayInfo[2]);
+        }
         return artifact;
     }
 
