@@ -1,6 +1,6 @@
 <h1 align="center">Smart-Doc Gradle Plugin</a></h1>
 
-[中文文档](https://github.com/shalousun/smart-doc-maven-plugin/blob/master/README_CN.md)
+[中文文档](https://github.com/smart-doc-group/smart-doc-gradle-plugin/blob/master/README_CN.md)
 
 ## Introduce
 smart-doc-gradle-plugin is a `gradle` plugin developed by the smart-doc official team. 
