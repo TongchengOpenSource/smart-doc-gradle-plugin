@@ -29,7 +29,7 @@ apply plugin: 'smart-doc'
 Example setting of options:
 ```
 smartdoc {
-    configFile = file("src/main/resources/default.json")
+    configFile = file("src/main/resources/smart-doc.json")
     
     // exclude example
     // exclude artifact
@@ -38,8 +38,22 @@ smartdoc {
     exclude 'org.springframework.boot.*'
 }
 ```
+对于多模块的gradle，如果不想单个模块配置可以把smart-doc插件相关配置放到subprojects中。
+
+```
+subprojects{
+    apply plugin: 'smart-doc'
+    smartdoc {
+        //
+        configFile = file("src/main/resources/smart-doc.json")
+        // exclude artifact
+        exclude 'org.springframework.boot:xx'
+        exclude 'org.springframework.boot:ddd'
+    }
+}
+```
 ### Create a json config 
-在自己的项目中创建一个json配置文件，smart-doc-gradle-plugin插件会根据这个配置生成项目的接口文档。
+在自己的项目中创建一个json配置文件，如果是多个模块则放到需要生成文档的模块中，smart-doc-gradle-plugin插件会根据这个配置生成项目的接口文档。
 例如在项目中创建`/src/main/resources/smart-doc.json`。配置内容参考如下。
 
 **最小配置单元:**

@@ -41,8 +41,22 @@ smartdoc {
     exclude 'org.springframework.boot.*'
 }
 ```
+For multi-module gradle projects, if you do not want to configure in each module, you can put the smart-doc plugin related configuration into subprojects.
+```
+subprojects{
+    apply plugin: 'smart-doc'
+    smartdoc {
+        //
+        configFile = file("src/main/resources/smart-doc.json")
+        // exclude artifact
+        exclude 'org.springframework.boot:xx'
+        exclude 'org.springframework.boot:ddd'
+    }
+}
+```
 ### Create a json config 
-Create a json configuration file in your project. The smart-doc-gradle-plugin plugin will use this configuration information.
+Create a json configuration file in your project. If it is multiple modules, put them in the modules that need to generate documents.
+The smart-doc-gradle-plugin plugin will use this configuration information.
 For example, create `/src/main/resources/smart-doc.json` in the project. 
 The configuration contents are as follows.
 
