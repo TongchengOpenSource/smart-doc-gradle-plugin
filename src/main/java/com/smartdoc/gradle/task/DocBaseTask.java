@@ -23,6 +23,7 @@
 package com.smartdoc.gradle.task;
 
 import com.power.common.constants.Charset;
+import com.power.common.util.RegexUtil;
 import com.power.doc.model.ApiConfig;
 import com.smartdoc.gradle.constant.GlobalConstants;
 import com.smartdoc.gradle.extension.SmartDocPluginExtension;
@@ -126,7 +127,7 @@ public abstract class DocBaseTask extends DefaultTask {
                 continue;
             }
             String artifactName = artifact.getGroup() + ":" + artifact.getArtifactId();
-            if (ArtifactFilterUtil.isMatches(excludes, artifactName)) {
+            if (RegexUtil.isMatches(excludes, artifactName)) {
                 continue;
             }
             binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());

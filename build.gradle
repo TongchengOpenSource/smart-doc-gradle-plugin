@@ -15,7 +15,7 @@ plugins {
 }
 
 group 'com.github.shalousun'
-version '0.0.1'
+version '1.0.0'
 
 sourceCompatibility = 1.8
 
@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'com.github.shalousun:smart-doc:1.8.5'
+    compile 'com.github.shalousun:smart-doc:1.8.6'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
@@ -45,9 +45,9 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
-signing {
-    sign configurations.archives
-}
+//signing {
+//    sign configurations.archives
+//}
 
 // publish to local
 publishing {
@@ -61,20 +61,18 @@ publishing {
         }
     }
     repositories {
-        mavenLocal()
+        maven { url "http://localhost:8081/nexus/content/repositories/releases/"
+            credentials {
+                username 'admin'
+                password 'admin123'
+            }
+        }
     }
 }
-//upload jar to nexus
-def nexusUrl = "http://localhost:8081/nexus/content/repositories/releases/"
-if (version.endsWith("-SNAPSHOT")) {
-    nexusUrl = "http://localhost:8081/nexus/content/repositories/snapshots/"
-}
-
 // Build, sign, and upload
 uploadArchives {
     repositories {
         mavenDeployer {
-
             // Sign POM
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
@@ -88,20 +86,17 @@ uploadArchives {
                 packaging 'jar'
                 description 'smart-doc gradle plugin.'
                 url 'https://github.com/smart-doc-group/smart-doc-maven-plugin'
-
                 scm {
                     connection 'scm:git:git@github.com:smart-doc-group/smart-doc-maven-plugin.git'
                     developerConnection 'scm:git@github.com:smart-doc-group/smart-doc-maven-plugin.git'
                     url 'https://github.com/smart-doc-group/smart-doc-maven-plugin'
                 }
-
                 licenses {
                     license {
                         name 'The Apache License, Version 2.0'
                         url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
-
                 developers {
                     developer {
                         id 'weibeld'
