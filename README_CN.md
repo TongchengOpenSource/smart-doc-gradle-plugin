@@ -178,5 +178,4 @@ smart-doc-gradle-plugin is under the Apache 2.0 license.  See the [LICENSE](htt
 ## Contact
 愿意参与构建smart-doc或者是需要交流问题可以加入qq群：
 
-<img src="https://raw.githubusercontent.com/shalousun/smart-doc/dev/images/smart-doc-qq.png" title="qq群" width="200px" height="200px"/>
-
+<img src="https://gitee.com/sunyurepository/smart-doc/raw/master/images/smart-doc-qq.png" title="qq群" width="200px" height="200px"/>
