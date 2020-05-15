@@ -1,7 +1,7 @@
 /*
  * smart-doc https://github.com/shalousun/smart-doc
  *
- * Copyright (C) 2019-2020 smart-doc
+ * Copyright (C) 2018-2020 smart-doc
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -68,7 +68,8 @@ public abstract class DocBaseTask extends DefaultTask {
         logger.quiet("Smart-doc Starting Create API Documentation.");
         SmartDocPluginExtension pluginExtension = project.getExtensions().getByType(SmartDocPluginExtension.class);
         Set<String> excludes = pluginExtension.getExclude();
-        javaProjectBuilder = buildJavaProjectBuilder(project, excludes);
+        Set<String> includes = pluginExtension.getExclude();
+        javaProjectBuilder = buildJavaProjectBuilder(project, excludes, includes);
         javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         File file = pluginExtension.getConfigFile();
         if (Objects.isNull(file)) {
@@ -96,7 +97,7 @@ public abstract class DocBaseTask extends DefaultTask {
      *
      * @return
      */
-    private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes) {
+    private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes, Set<String> includes) {
         JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
         javaDocBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         javaDocBuilder.setErrorHandler(e -> getLogger().warn(e.getMessage()));
@@ -104,7 +105,7 @@ public abstract class DocBaseTask extends DefaultTask {
         javaDocBuilder.addSourceTree(new File("src/main/java"));
         //sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
 //        javaDocBuilder.addClassLoader(ClassLoaderUtil.getRuntimeClassLoader(project));
-        loadSourcesDependencies(javaDocBuilder, project, excludes);
+        loadSourcesDependencies(javaDocBuilder, project, excludes, includes);
         return javaDocBuilder;
     }
 
@@ -113,7 +114,7 @@ public abstract class DocBaseTask extends DefaultTask {
      *
      * @param javaDocBuilder
      */
-    private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project, Set<String> excludes) {
+    private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project, Set<String> excludes, Set<String> includes) {
         Configuration compileConfiguration = project.getConfigurations().getByName("compile");
         List<ComponentIdentifier> binaryDependencies = new ArrayList<>();
         Set<ResolvedArtifact> resolvedArtifacts = compileConfiguration.getResolvedConfiguration().getResolvedArtifacts();
@@ -130,7 +131,13 @@ public abstract class DocBaseTask extends DefaultTask {
             if (RegexUtil.isMatches(excludes, artifactName)) {
                 continue;
             }
-            binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
+            if (RegexUtil.isMatches(includes, artifactName)) {
+                binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
+                continue;
+            }
+            if (includes.size() < 1) {
+                binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
+            }
         }
         Set<ComponentArtifactsResult> artifactsResults = project.getDependencies().createArtifactResolutionQuery()
                 .forComponents(binaryDependencies)

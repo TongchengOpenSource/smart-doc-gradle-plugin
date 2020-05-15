@@ -1,7 +1,7 @@
 /*
  * smart-doc https://github.com/shalousun/smart-doc
  *
- * Copyright (C) 2019-2020 smart-doc
+ * Copyright (C) 2018-2020 smart-doc
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -41,6 +41,11 @@ public class SmartDocPluginExtension {
      */
     private final Set<String> exclude = new HashSet<>();
 
+    /**
+     * include artifact
+     */
+    private final Set<String> include = new HashSet<>();
+
     public File getConfigFile() {
         return configFile;
     }
@@ -58,5 +63,16 @@ public class SmartDocPluginExtension {
 
     public Set<String> getExclude() {
         return exclude;
+    }
+
+    SmartDocPluginExtension include(String... includes) {
+        for (String include : includes) {
+            this.include.add(include);
+        }
+        return this;
+    }
+
+    public Set<String> getInclude() {
+        return include;
     }
 }

@@ -28,6 +28,7 @@ apply plugin: 'smart-doc'
 | ------ | ------------- | ----------- |
 |configFile|src/main/resources/default.json||
 |exclude||exclude artifact,usage:exclude 'org.springframework.boot:spring-boot-starter-tomcat' |
+|include||Let the plugin download the specified java lib source,usage:include 'org.springframework.boot:spring-boot-starter-tomcat' |
 
 Example setting of options:
 ```
@@ -39,6 +40,9 @@ smartdoc {
     exclude 'org.springframework.boot:spring-boot-starter-tomcat'
     // exclude artifact use pattern
     exclude 'org.springframework.boot.*'
+    // You can use the include configuration to let the plugin automatically load the specified source.
+    // include example
+    include 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 ```
 For multi-module gradle projects, if you do not want to configure in each module, you can put the smart-doc plugin related configuration into subprojects.

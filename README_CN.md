@@ -25,7 +25,7 @@ apply plugin: 'smart-doc'
 | ------ | ------------- | ----------- |
 |configFile|src/main/resources/default.json|插件配置文件|
 |exclude|无|排除一些无法自定下载的java lib sources,例如:exclude 'org.springframework.boot:spring-boot-starter-tomcat' |
-
+|include|无|让插件自定下载指定的java lib sources,例如:include 'org.springframework.boot:spring-boot-starter-tomcat' |
 Example setting of options:
 ```
 smartdoc {
@@ -36,6 +36,8 @@ smartdoc {
     exclude 'org.springframework.boot:spring-boot-starter-tomcat'
     // exclude artifact use pattern
     exclude 'org.springframework.boot.*'
+    // 你可以使用include配置来让插件自动加载指定依赖的source.
+    include 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 ```
 对于多模块的gradle，如果不想单个模块配置可以把smart-doc插件相关配置放到subprojects中。
