@@ -24,10 +24,7 @@ package com.smartdoc.gradle.plugin;
 
 import com.smartdoc.gradle.constant.GlobalConstants;
 import com.smartdoc.gradle.extension.SmartDocPluginExtension;
-import com.smartdoc.gradle.task.PostmanTask;
-import com.smartdoc.gradle.task.RestAdocTask;
-import com.smartdoc.gradle.task.RestHtmlTask;
-import com.smartdoc.gradle.task.RestMarkdownTask;
+import com.smartdoc.gradle.task.*;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -61,6 +58,21 @@ public class SmartDocPlugin implements Plugin<Project> {
         PostmanTask postmanTask = project.getTasks().create(GlobalConstants.POSTMAN_TASK, PostmanTask.class);
         postmanTask.setGroup(GlobalConstants.TASK_GROUP);
         postmanTask.dependsOn(javaCompileTask);
+
+        //create rpc html
+        RpcHtmlTask rpcHtmlTask = project.getTasks().create(GlobalConstants.RPC_HTML_TASK, RpcHtmlTask.class);
+        rpcHtmlTask.setGroup(GlobalConstants.TASK_GROUP);
+        rpcHtmlTask.dependsOn(javaCompileTask);
+
+        // create rpc adoc
+        RpcAdocTask rpcAdocTask = project.getTasks().create(GlobalConstants.RPC_ADOC_TASK, RpcAdocTask.class);
+        rpcAdocTask.setGroup(GlobalConstants.TASK_GROUP);
+        rpcAdocTask.dependsOn(javaCompileTask);
+
+        // create rpc markdown
+        RpcMarkdownTask rpcMarkdownTask = project.getTasks().create(GlobalConstants.RPC_MARKDOWN_TASK, RpcMarkdownTask.class);
+        rpcMarkdownTask.setGroup(GlobalConstants.TASK_GROUP);
+        rpcMarkdownTask.dependsOn(javaCompileTask);
 
         // extend project-model to get our settings/configuration via nice configuration
         project.getExtensions().create(GlobalConstants.EXTENSION_NAME, SmartDocPluginExtension.class);

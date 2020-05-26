@@ -22,21 +22,20 @@
  */
 package com.smartdoc.gradle.task;
 
-import com.power.doc.builder.HtmlApiDocBuilder;
+import com.power.doc.builder.AdocDocBuilder;
 import com.power.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
 
 /**
- * @author yu 2020/4/5.
+ * @author yu 2020/5/26.
  */
-public class RestHtmlTask extends DocBaseTask {
+public class RpcAdocTask extends DocBaseTask {
 
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            logger.quiet("this is html task");
-            HtmlApiDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
+            AdocDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();
         }

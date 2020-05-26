@@ -55,6 +55,9 @@ subprojects{
         // exclude artifact
         exclude 'org.springframework.boot:xx'
         exclude 'org.springframework.boot:ddd'
+        // You can use the include configuration to let the plugin automatically load the specified source.
+        // include example
+        include 'org.springframework.boot:spring-boot-starter-tomcat'
     }
 }
 ```
@@ -88,6 +91,8 @@ When you need to use smart-doc to generate more API document information, you ca
   "md5EncryptedHtmlName": false, // only used if each controller generates an html file
   "projectName": "smart-doc", // Configure your own project name
   "skipTransientField": true, // Not currently implemented
+  "requestFieldToUnderline":true, //convert request field to underline
+  "responseFieldToUnderline":true,//convert response field to underline
   "dataDictionaries": [// Configure the data dictionary, no need to set
     {
       "title": "Order Status", // The name of the data dictionary
@@ -96,14 +101,12 @@ When you need to use smart-doc to generate more API document information, you ca
       "descField": "desc" // Data dictionary object description information dictionary
     }
   ],
-
   "errorCodeDictionaries": [{// error code list, no need to set
     "title": "title",
     "enumClassName": "com.power.doc.enums.ErrorCodeEnum", // Error code enumeration class
     "codeField": "code", // Code field name of the error code
     "descField": "desc" // Field name corresponding to the error code description
   }],
-
   "revisionLogs": [// Set document change records, no need to set
     {
       "version": "1.0", // Document version number
@@ -123,6 +126,12 @@ When you need to use smart-doc to generate more API document information, you ca
         "className": "org.springframework.data.domain.Pageable",
         "replacementClassName": "com.power.doc.model.PageRequestDto" //Use custom PageRequestDto instead of JPA Pageable for document rendering.
   }],
+  "rpcApiDependencies":[{ // Your Apache Dubbo api interface module dependency description.
+      "artifactId":"SpringBoot2-Dubbo-Api",
+      "groupId":"com.demo",
+      "version":"1.0.0"
+   }
+  ],
   "requestHeaders": [// Set global request headers, no need to set
     {
       "name": "token",
@@ -147,6 +156,13 @@ gradle smartDocRestMarkdown
 gradle smartDocRestAdoc
 // Generate postman collection
 gradle smartDocPostman
+
+// For Apache Dubbo Rpc
+gradle smartDocRpcHtml
+// Generate markdown
+gradle smartDocRpcMarkdown
+// Generate adoc
+gradle smartDocRpcAdoc
 ```
 #### Use In IntelliJ IDEA
 On Use IntelliJ IDE, if you have added smart-doc-gradle-plugin to the project, 

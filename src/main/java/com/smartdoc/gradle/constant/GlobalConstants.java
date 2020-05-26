@@ -41,5 +41,11 @@ public interface GlobalConstants {
 
     String POSTMAN_TASK = "smartDocPostman";
 
+    String RPC_HTML_TASK = "smartDocRpcHtml";
+
+    String RPC_ADOC_TASK = "smartDocRpcAdoc";
+
+    String RPC_MARKDOWN_TASK = "smartDocRpcMarkdown";
+
     String EXTENSION_NAME = "smartdoc";
 }

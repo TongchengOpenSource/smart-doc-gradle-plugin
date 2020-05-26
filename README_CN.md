@@ -52,6 +52,8 @@ subprojects{
         // exclude artifact
         exclude 'org.springframework.boot:xx'
         exclude 'org.springframework.boot:ddd'
+        // 你可以使用include配置来让插件自动加载指定依赖的source.
+        include 'org.springframework.boot:spring-boot-starter-tomcat'
     }
 }
 ```
@@ -77,6 +79,8 @@ subprojects{
   "md5EncryptedHtmlName": false,//只有每个controller生成一个html文件是才使用
   "projectName": "smart-doc",//配置自己的项目名称
   "skipTransientField": true,//目前未实现
+  "requestFieldToUnderline":true, //自动将驼峰入参字段在文档中转为下划线格式,//@since 1.8.7 版本开始
+  "responseFieldToUnderline":true,//自动将驼峰入参字段在文档中转为下划线格式,//@since 1.8.7 版本开始
   "dataDictionaries": [ //配置数据字典，没有需求可以不设置
     {
       "title": "订单状态", //数据字典的名称
@@ -111,6 +115,11 @@ subprojects{
   "apiObjectReplacements": [{ // 自smart-doc 1.8.5开始你可以使用自定义类覆盖其他类做文档渲染，非必须
       "className": "org.springframework.data.domain.Pageable",
       "replacementClassName": "com.power.doc.model.PageRequestDto" //自定义的PageRequestDto替换Pageable做文档渲染
+  }],
+  "rpcApiDependencies":[{ // 项目开放的dubbo api接口模块依赖，配置后输出到文档方便使用者集成
+      "artifactId":"SpringBoot2-Dubbo-Api",
+      "groupId":"com.demo",
+      "version":"1.0.0"
   }],
   "requestHeaders": [ //设置请求头，没有需求可以不设置
     {
