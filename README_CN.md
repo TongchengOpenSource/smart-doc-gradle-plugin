@@ -151,6 +151,14 @@ gradle smartDocRestMarkdown
 gradle smartDocRestAdoc
 //生成postmanjson数据
 gradle smartDocPostman
+
+// Apache Dubbo Rpc生成
+// Generate html
+gradle smartDocRpcHtml
+// Generate markdown
+gradle smartDocRpcMarkdown
+// Generate adoc
+gradle smartDocRpcAdoc
 ```
 #### Use IDEA
 当你使用Idea时，可以通过maven Helper插件选择生成何种文档。
