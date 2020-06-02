@@ -22,7 +22,7 @@
  */
 package com.smartdoc.gradle.task;
 
-import com.power.doc.builder.HtmlApiDocBuilder;
+import com.power.doc.builder.rpc.RpcHtmlBuilder;
 import com.power.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
@@ -36,7 +36,7 @@ public class RpcHtmlTask extends DocBaseTask {
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
             logger.quiet("this is html task");
-            HtmlApiDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
+            RpcHtmlBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();
         }

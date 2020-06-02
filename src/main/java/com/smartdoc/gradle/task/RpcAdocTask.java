@@ -22,7 +22,7 @@
  */
 package com.smartdoc.gradle.task;
 
-import com.power.doc.builder.AdocDocBuilder;
+import com.power.doc.builder.rpc.RpcAdocBuilder;
 import com.power.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
@@ -35,7 +35,7 @@ public class RpcAdocTask extends DocBaseTask {
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            AdocDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
+            RpcAdocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();
         }
