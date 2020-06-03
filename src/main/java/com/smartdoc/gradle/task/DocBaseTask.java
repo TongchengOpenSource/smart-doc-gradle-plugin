@@ -80,6 +80,10 @@ public abstract class DocBaseTask extends DefaultTask {
             logger.quiet(GlobalConstants.ERROR_MSG);
             return;
         }
+        Path rpcConsumerPath = Paths.get(apiConfig.getRpcConsumerConfig());
+        if (!rpcConsumerPath.isAbsolute()) {
+            apiConfig.setRpcConsumerConfig(project.getProjectDir().getPath() + "/" + apiConfig.getRpcConsumerConfig());
+        }
         Path path = Paths.get(apiConfig.getOutPath());
         if (!path.isAbsolute()) {
             apiConfig.setOutPath(project.getProjectDir().getPath() + "/" + apiConfig.getOutPath());
