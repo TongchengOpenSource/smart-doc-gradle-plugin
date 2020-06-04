@@ -163,7 +163,7 @@ gradle smartDocRpcAdoc
 #### Use IDEA
 当你使用Idea时，可以通过maven Helper插件选择生成何种文档。
 
-![idea中smart-doc-gradle插件使用](https://images.gitee.com/uploads/images/2020/0504/204904_bacf8d52_144669.png "usage.png")
+![idea中smart-doc-gradle插件使用](https://gitee.com/sunyurepository/smart-doc-gradle-plugin/raw/master/images/idea.png "usage.png")
 
 ### Generated document example
 [点击查看文档生成文档效果图](https://gitee.com/sunyurepository/smart-doc/wikis/文档效果图?sort_id=1652819)
