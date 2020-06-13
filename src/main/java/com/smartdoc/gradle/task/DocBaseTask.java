@@ -68,7 +68,7 @@ public abstract class DocBaseTask extends DefaultTask {
         logger.quiet("Smart-doc Starting Create API Documentation.");
         SmartDocPluginExtension pluginExtension = project.getExtensions().getByType(SmartDocPluginExtension.class);
         Set<String> excludes = pluginExtension.getExclude();
-        Set<String> includes = pluginExtension.getExclude();
+        Set<String> includes = pluginExtension.getInclude();
         javaProjectBuilder = buildJavaProjectBuilder(project, excludes, includes);
         javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         File file = pluginExtension.getConfigFile();
