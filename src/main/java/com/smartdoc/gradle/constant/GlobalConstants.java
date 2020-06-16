@@ -48,4 +48,6 @@ public interface GlobalConstants {
     String RPC_MARKDOWN_TASK = "smartDocRpcMarkdown";
 
     String EXTENSION_NAME = "smartdoc";
+
+    String SRC_MAIN_JAVA_PATH = "/src/main/java";
 }
