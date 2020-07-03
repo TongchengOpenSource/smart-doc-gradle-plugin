@@ -132,7 +132,9 @@ subprojects{
       "since": "-"
     }
   ],
-
+  "apiConstants": [{//从1.8.9开始配置自己的常量类，smart-doc在解析到常量时自动替换为具体的值
+      "constantsClassName": "com.power.doc.constants.RequestParamConstant"
+  }],
   "sourceCodePaths": [ //设置代码路径，默认加载src/main/java, 没有需求可以不设置
     {
       "path": "src/main/java",

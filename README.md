@@ -134,6 +134,9 @@ When you need to use smart-doc to generate more API document information, you ca
       "version":"1.0.0"
    }
   ],
+  "apiConstants": [{//Configure your own constant class, smart-doc automatically replaces with a specific value when parsing to a constant
+          "constantsClassName": "com.power.doc.constants.RequestParamConstant"
+  }],
   "requestHeaders": [// Set global request headers, no need to set
     {
       "name": "token",

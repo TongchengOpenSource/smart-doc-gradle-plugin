@@ -27,10 +27,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.power.common.util.FileUtil;
-import com.power.doc.model.ApiConfig;
-import com.power.doc.model.ApiDataDictionary;
-import com.power.doc.model.ApiErrorCodeDictionary;
-import com.power.doc.model.SourceCodePath;
+import com.power.doc.model.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -77,6 +74,7 @@ public class GradleUtil {
             ApiConfig apiConfig = GSON.fromJson(data, ApiConfig.class);
             List<ApiDataDictionary> apiDataDictionaries = apiConfig.getDataDictionaries();
             List<ApiErrorCodeDictionary> apiErrorCodes = apiConfig.getErrorCodeDictionaries();
+            List<ApiConstant> apiConstants = apiConfig.getApiConstants();
             if (apiErrorCodes != null) {
                 apiErrorCodes.forEach(
                         apiErrorCode -> {
@@ -90,6 +88,14 @@ public class GradleUtil {
                         apiDataDictionary -> {
                             String className = apiDataDictionary.getEnumClassName();
                             apiDataDictionary.setEnumClass(getClassByClassName(className, classLoader));
+                        }
+                );
+            }
+            if (apiConstants != null) {
+                apiConstants.forEach(
+                        apiConstant -> {
+                            String className = apiConstant.getConstantsClassName();
+                            apiConstant.setConstantsClass(getClassByClassName(className, classLoader));
                         }
                 );
             }
