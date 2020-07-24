@@ -24,6 +24,7 @@ package com.smartdoc.gradle.task;
 
 import com.power.common.constants.Charset;
 import com.power.common.util.RegexUtil;
+import com.power.common.util.StringUtil;
 import com.power.doc.model.ApiConfig;
 import com.smartdoc.gradle.constant.GlobalConstants;
 import com.smartdoc.gradle.extension.SmartDocPluginExtension;
@@ -35,6 +36,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ResolvedArtifact;
+import org.gradle.api.artifacts.ResolvedModuleVersion;
 import org.gradle.api.artifacts.component.ComponentIdentifier;
 import org.gradle.api.artifacts.result.ArtifactResult;
 import org.gradle.api.artifacts.result.ComponentArtifactsResult;
@@ -124,13 +126,20 @@ public abstract class DocBaseTask extends DefaultTask {
     private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project, Set<String> excludes, Set<String> includes) {
         Configuration compileConfiguration = project.getConfigurations().getByName("compile");
         List<ComponentIdentifier> binaryDependencies = new ArrayList<>();
+        TreeMap<String, Project> allModules = this.getAllModule(project.getRootProject());
         Set<ResolvedArtifact> resolvedArtifacts = compileConfiguration.getResolvedConfiguration().getResolvedArtifacts();
         for (ResolvedArtifact resolvedArtifact : resolvedArtifacts) {
             String displayName = resolvedArtifact.getId().getComponentIdentifier().getDisplayName();
-            if (displayName.startsWith("project :")) {
-                continue;
+            CustomArtifact moduleArtifact = null;
+            boolean selfModule = displayName.startsWith("project :");
+            if (selfModule) {
+                ResolvedModuleVersion version = resolvedArtifact.getModuleVersion();
+                moduleArtifact = CustomArtifact.builder().setGroup(version.getId().getGroup())
+                        .setArtifactId(version.getId().getName())
+                        .setVersion(version.getId().getVersion());
+
             }
-            CustomArtifact artifact = CustomArtifact.builder(displayName);
+            CustomArtifact artifact = selfModule ? moduleArtifact : CustomArtifact.builder(displayName);
             if (ArtifactFilterUtil.ignoreArtifact(artifact) || ArtifactFilterUtil.ignoreSpringBootArtifactById(artifact)) {
                 continue;
             }
@@ -139,10 +148,14 @@ public abstract class DocBaseTask extends DefaultTask {
                 continue;
             }
             if (RegexUtil.isMatches(includes, artifactName)) {
+                if (selfModule) {
+                    addModuleSourceTree(javaDocBuilder, allModules, displayName);
+                    continue;
+                }
                 binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
                 continue;
             }
-            if (includes.size() < 1) {
+            if (includes.size() < 1 && !selfModule) {
                 binaryDependencies.add(resolvedArtifact.getId().getComponentIdentifier());
             }
         }
@@ -179,5 +192,29 @@ public abstract class DocBaseTask extends DefaultTask {
         } catch (Exception e) {
             getLogger().warn("Unable to load jar source " + artifact + " : " + e.getMessage());
         }
+    }
+
+    private void addModuleSourceTree(JavaProjectBuilder javaDocBuilder, TreeMap<String, Project> allModules, String displayName) {
+        String moduleName = StringUtil.removePrefix(displayName, "project ");
+        Project module = allModules.getOrDefault(moduleName, null);
+        if (module != null) {
+            String modelSrc = String.join(File.separator, module.getProjectDir().getAbsolutePath(), GlobalConstants.SRC_MAIN_JAVA_PATH);
+            javaDocBuilder.addSourceTree(new File(modelSrc));
+        }
+    }
+
+    private TreeMap<String, Project> getAllModule(Project rootProject) {
+        TreeMap<String, Project> result = new TreeMap<>();
+        if (Objects.isNull(rootProject)) {
+            return result;
+        }
+        if (rootProject.getDepth() != 0) {
+            result.put(rootProject.getPath(), rootProject);
+        }
+        if (rootProject.getChildProjects().isEmpty()) {
+            return result;
+        }
+        rootProject.getChildProjects().forEach((k, v) -> result.putAll(this.getAllModule(v)));
+        return result;
     }
 }
