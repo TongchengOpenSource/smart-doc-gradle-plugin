@@ -35,7 +35,6 @@ public class RestMarkdownTask extends DocBaseTask {
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            logger.quiet("This is markdown task");
             ApiDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();

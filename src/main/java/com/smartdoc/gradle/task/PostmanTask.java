@@ -35,7 +35,6 @@ public class PostmanTask extends DocBaseTask {
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            logger.quiet("This is a postman collection task");
             PostmanJsonBuilder.buildPostmanCollection(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();

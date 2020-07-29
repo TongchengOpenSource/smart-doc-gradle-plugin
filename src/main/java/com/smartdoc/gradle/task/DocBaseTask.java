@@ -88,15 +88,11 @@ public abstract class DocBaseTask extends DefaultTask {
                 apiConfig.setRpcConsumerConfig(project.getProjectDir().getPath() + "/" + apiConfig.getRpcConsumerConfig());
             }
         }
-
         Path path = Paths.get(apiConfig.getOutPath());
         if (!path.isAbsolute()) {
             apiConfig.setOutPath(project.getProjectDir().getPath() + "/" + apiConfig.getOutPath());
-            logger.quiet("API Documentation output to " + apiConfig.getOutPath());
-        } else {
-            logger.quiet("API Documentation output to " + apiConfig.getOutPath());
         }
-
+        logger.quiet("API Documentation output to " + apiConfig.getOutPath());
         this.executeAction(apiConfig, javaProjectBuilder, logger);
     }
 

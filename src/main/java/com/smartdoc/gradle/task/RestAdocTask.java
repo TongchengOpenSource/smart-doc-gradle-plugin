@@ -35,7 +35,6 @@ public class RestAdocTask extends DocBaseTask {
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            logger.quiet("This is a adoc task");
             AdocDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();
