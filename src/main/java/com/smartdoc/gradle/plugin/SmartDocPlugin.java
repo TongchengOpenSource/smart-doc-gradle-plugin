@@ -59,6 +59,11 @@ public class SmartDocPlugin implements Plugin<Project> {
         postmanTask.setGroup(GlobalConstants.TASK_GROUP);
         postmanTask.dependsOn(javaCompileTask);
 
+        // create open api
+        OpenApiTask openApiTask = project.getTasks().create(GlobalConstants.OPEN_API_TASK, OpenApiTask.class);
+        openApiTask.setGroup(GlobalConstants.TASK_GROUP);
+        openApiTask.dependsOn(javaCompileTask);
+
         //create rpc html
         RpcHtmlTask rpcHtmlTask = project.getTasks().create(GlobalConstants.RPC_HTML_TASK, RpcHtmlTask.class);
         rpcHtmlTask.setGroup(GlobalConstants.TASK_GROUP);
