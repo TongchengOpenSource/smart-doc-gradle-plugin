@@ -164,6 +164,8 @@ gradle smartDocRestMarkdown
 gradle smartDocRestAdoc
 // Generate postman collection
 gradle smartDocPostman
+// Generate Open Api 3.0+
+gradle smartDocOpenApi
 
 // For Apache Dubbo Rpc
 gradle smartDocRpcHtml

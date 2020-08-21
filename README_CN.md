@@ -158,6 +158,8 @@ gradle smartDocRestMarkdown
 gradle smartDocRestAdoc
 //生成postmanjson数据
 gradle smartDocPostman
+//生成Open Api 3.0 +规范的json文档
+gradle smartDocOpenApi
 
 // Apache Dubbo Rpc生成
 // Generate html
