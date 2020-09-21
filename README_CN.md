@@ -74,7 +74,7 @@ subprojects{
    "outPath": "D://md2" //指定文档的输出路径 相对路径时请写 ./ 不要写 / eg:./src/main/resources/static/doc
 }
 ```
-仅仅需要上面一行配置就能启动smart-doc-maven-plugin插件，根据自己项目情况更多详细的配置参考下面。
+仅仅需要上面一行配置就能启动smart-doc-gradle-plugin插件，根据自己项目情况更多详细的配置参考下面。
 
 **详细配置说明:**
 ```
