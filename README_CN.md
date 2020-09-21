@@ -9,7 +9,9 @@
 smart-doc-gradle-plugin是smart-doc官方团队开发的`gradle`插件，该插件从smart-doc 1.8.6版本开始提供，
 使用smart-doc-gradle-plugin更方便用户集成到自己的项目中，集成也更加轻量，你不再需要在项目中编写单元测试来
 启动smart-doc扫描代码分析生成接口文档。可以直接运行`gradle`命令
-或者是IDE中点击smart-doc-gradle-plugin预设好的`goal`即可生成接口文档。
+或者是IDE中点击smart-doc-gradle-plugin预设好的`task`即可生成接口文档。
+smart-doc-gradle-plugin底层完全依赖于官方开源的smart-doc解析库，
+因此整个使用过程中遇到问题或者是想查看完整解决方案请前往码云smart-doc的仓库查看wiki文档。
 
 [关于smart-doc](https://gitee.com/smart-doc-team/smart-doc)
 
@@ -72,6 +74,8 @@ subprojects{
    "outPath": "D://md2" //指定文档的输出路径 相对路径时请写 ./ 不要写 / eg:./src/main/resources/static/doc
 }
 ```
+仅仅需要上面一行配置就能启动smart-doc-maven-plugin插件，根据自己项目情况更多详细的配置参考下面。
+
 **详细配置说明:**
 ```
 {
@@ -144,8 +148,8 @@ subprojects{
       "since": "-"
     }
   ],
-  "apiConstants": [{//从1.8.9开始配置自己的常量类，smart-doc在解析到常量时自动替换为具体的值
-      "constantsClassName": "com.power.doc.constants.RequestParamConstant"
+  "apiConstants": [{//从1.8.9开始配置自己的常量类，smart-doc在解析到常量时自动替换为具体的值。非必须，根据自己需求来设置
+      "constantsClassName": "com.power.doc.constants.RequestParamConstant"//项目自己定义的常量
   }],
   "sourceCodePaths": [ //设置代码路径，默认加载src/main/java, 没有需求可以不设置
     {
