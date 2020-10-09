@@ -102,6 +102,7 @@ When you need to use smart-doc to generate more API document information, you ca
   "inlineEnum":true,// Set to true to display enumeration details in the parameter table
   "recursionLimit":7,// Set the number of recursive executions to avoid stack overflow, the default is 7
   "allInOneDocFileName":"index.html",//Customize the output document name
+  "displayActualType":false,//display actual type of generic
   "requestExample":"true",//Whether to display the request example in the document, the default value is true.
   "responseExample":"true",//Whether to display the response example in the document, the default is true.
   "ignoreRequestParams":[ //The request parameter object will be discarded when generating the document.@since 1.9.2
