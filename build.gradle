@@ -12,6 +12,7 @@ plugins {
     id "maven-publish"
     id "signing"
     id "maven"
+    id "com.gradle.plugin-publish" version "0.12.0"
 }
 
 group 'com.github.shalousun'
@@ -48,6 +49,28 @@ artifacts {
 
 signing {
     sign configurations.archives
+}
+
+gradlePlugin {
+    plugins {
+        greetingsPlugin {
+            id = 'com.github.shalousun.smart-doc'
+            implementationClass = 'com.smartdoc.gradle.plugin.SmartDocPlugin'
+        }
+    }
+}
+// publish to https://plugins.gradle.org/
+pluginBundle {
+    website = 'https://github.com/smart-doc-group/smart-doc-gradle-plugin'
+    vcsUrl = 'https://github.com/smart-doc-group/smart-doc-gradle-plugin'
+    description = 'smart-doc gradle plugin'
+    tags = ['smart-doc']
+    plugins {
+        greetingsPlugin {
+            // id is captured from java-gradle-plugin configuration
+            displayName = 'smart-doc gradle plugin'
+        }
+    }
 }
 
 // publish to local
