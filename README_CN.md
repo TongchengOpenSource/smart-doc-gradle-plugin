@@ -20,6 +20,10 @@ smart-doc-gradle-plugin底层完全依赖于官方开源的smart-doc解析库，
 install build.gradle
 ```
 buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
     dependencies {
         classpath 'com.github.shalousun:smart-doc-gradle-plugin:[最新版本]'
     }
