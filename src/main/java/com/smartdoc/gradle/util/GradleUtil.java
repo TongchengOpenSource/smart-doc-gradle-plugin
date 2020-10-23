@@ -28,17 +28,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.power.common.util.FileUtil;
 import com.power.doc.model.*;
-import org.apache.commons.lang3.StringUtils;
+import org.gradle.api.Project;
+import org.gradle.api.logging.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
-import org.gradle.api.Project;
-import org.gradle.api.logging.Logger;
+import java.util.*;
 
 /**
  * @author yu 2020/2/16.
@@ -62,12 +58,12 @@ public class GradleUtil {
     /**
      * Build ApiConfig
      *
-     * @param configFile  config file
-     * @param project     Project object
-     * @param log         gradle plugin log
+     * @param configFile config file
+     * @param project    Project object
+     * @param log        gradle plugin log
      * @return com.power.doc.model.ApiConfig
      */
-    public static ApiConfig buildConfig(File configFile, Project project, Logger log)  {
+    public static ApiConfig buildConfig(File configFile, Project project, Logger log) {
         try {
             ClassLoader classLoader = ClassLoaderUtil.getRuntimeClassLoader(project);
             String data = FileUtil.getFileContent(new FileInputStream(configFile));
@@ -125,22 +121,6 @@ public class GradleUtil {
     }
 
     private static void addSourcePaths(Project project, ApiConfig apiConfig, Logger log) {
-        Set<Project> sourceRoots = project.getAllprojects();
-        sourceRoots.forEach(s -> {
-            log.info("path",s.getPath());
-            apiConfig.setSourceCodePaths(SourceCodePath.path().setPath(s.getPath()));
-        });
-        if (Objects.nonNull(project.getParent())) {
-            Project mavenProject = project.getParent();
-            if (null != mavenProject) {
-                log.info("--- parent project name is [" + mavenProject.getName() + "]");
-                File file = mavenProject.getProjectDir();
-                if (!Objects.isNull(file)) {
-                    log.info("--- parent project basedir is " + file.getPath());
-                    apiConfig.setSourceCodePaths(SourceCodePath.path().setPath(file.getPath()));
-//                    log.info("--- smart-doc-maven-plugin loaded resource from " + file.getPath());
-                }
-            }
-        }
+        // do nothing
     }
 }

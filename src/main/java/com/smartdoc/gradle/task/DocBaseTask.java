@@ -24,7 +24,6 @@ package com.smartdoc.gradle.task;
 
 import com.power.common.constants.Charset;
 import com.power.common.util.RegexUtil;
-import com.power.common.util.StringUtil;
 import com.power.doc.model.ApiConfig;
 import com.smartdoc.gradle.constant.GlobalConstants;
 import com.smartdoc.gradle.extension.SmartDocPluginExtension;
@@ -133,6 +132,9 @@ public abstract class DocBaseTask extends DefaultTask {
                 moduleArtifact = CustomArtifact.builder().setGroup(version.getId().getGroup())
                         .setArtifactId(version.getId().getName())
                         .setVersion(version.getId().getVersion());
+                // add local source
+                String artifactName = moduleArtifact.getGroup() + ":" + moduleArtifact.getArtifactId();
+                addModuleSourceTree(javaDocBuilder, allModules, artifactName);
 
             }
             CustomArtifact artifact = selfModule ? moduleArtifact : CustomArtifact.builder(displayName);
@@ -190,11 +192,11 @@ public abstract class DocBaseTask extends DefaultTask {
         }
     }
 
-    private void addModuleSourceTree(JavaProjectBuilder javaDocBuilder, TreeMap<String, Project> allModules, String displayName) {
-        String moduleName = StringUtil.removePrefix(displayName, "project ");
-        Project module = allModules.getOrDefault(moduleName, null);
+    private void addModuleSourceTree(JavaProjectBuilder javaDocBuilder, TreeMap<String, Project> allModules, String artifactName) {
+        Project module = allModules.getOrDefault(artifactName, null);
         if (module != null) {
             String modelSrc = String.join(File.separator, module.getProjectDir().getAbsolutePath(), GlobalConstants.SRC_MAIN_JAVA_PATH);
+            getLogger().quiet("The loaded local code path is "+modelSrc);
             javaDocBuilder.addSourceTree(new File(modelSrc));
         }
     }
@@ -205,7 +207,7 @@ public abstract class DocBaseTask extends DefaultTask {
             return result;
         }
         if (rootProject.getDepth() != 0) {
-            result.put(rootProject.getPath(), rootProject);
+            result.put(rootProject.getGroup() + ":" + rootProject.getName(), rootProject);
         }
         if (rootProject.getChildProjects().isEmpty()) {
             return result;

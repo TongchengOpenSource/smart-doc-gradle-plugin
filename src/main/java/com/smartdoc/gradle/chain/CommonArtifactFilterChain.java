@@ -59,6 +59,13 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "guava":
             case "spring-tx":
             case "javassist":
+            case "qdox":
+            case "smart-doc-gradle-plugin":
+            case "javafaker":
+            case "antlr4-runtime":
+            case "gson":
+            case "annotations":
+            case "spring-aop":
                 return true;
             default:
                 return this.ignore(filterChain, artifact);
