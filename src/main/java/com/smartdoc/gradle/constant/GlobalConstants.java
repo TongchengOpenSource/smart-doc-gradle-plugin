@@ -52,4 +52,5 @@ public interface GlobalConstants {
     String EXTENSION_NAME = "smartdoc";
 
     String SRC_MAIN_JAVA_PATH = "src/main/java";
+
 }
