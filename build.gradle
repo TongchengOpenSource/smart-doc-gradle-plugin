@@ -37,12 +37,12 @@ tasks.withType(JavaCompile) {
 }
 
 task javadocJar(type: Jar) {
-    classifier = 'javadoc'
+    archiveClassifier= "javadoc"
     from javadoc
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
@@ -101,7 +101,9 @@ uploadArchives {
     repositories {
         mavenDeployer {
             // Sign POM
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            beforeDeployment {
+                MavenDeployment deployment -> signing.signPom(deployment)
+            }
 
             // Destination
             repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
