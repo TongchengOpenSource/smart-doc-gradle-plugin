@@ -19,13 +19,26 @@ smart-doc-gradle-plugin will also make smart-doc's ability to generate API docum
 
 ## Getting started
 ### Add plugin
+Using the plugins DSL:
+```
+plugins {
+  id "com.github.shalousun.smart-doc" version "[latest]"
+}
+```
+Using legacy plugin application:
 ```
 buildscript {
-    dependencies {
-        classpath 'com.github.shalousun:smart-doc-gradle-plugin:[latest]'
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
     }
+  }
+  dependencies {
+    classpath "com.github.shalousun:smart-doc-gradle-plugin:[latest]"
+  }
 }
-apply plugin: 'smart-doc'
+
+apply plugin: "com.github.shalousun.smart-doc"
 ```
 ### Plugin options
 

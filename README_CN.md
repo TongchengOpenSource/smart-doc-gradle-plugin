@@ -17,18 +17,25 @@ smart-doc-gradle-plugin底层完全依赖于官方开源的smart-doc解析库，
 
 ## Getting started
 ### Add plugin
-install build.gradle
+Using the plugins DSL:
+```
+plugins {
+  id "com.github.shalousun.smart-doc" version "[最新版本]"
+}
+```
+Using legacy plugin application:
 ```
 buildscript {
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url = uri("https://plugins.gradle.org/m2/") }
         mavenCentral()
     }
     dependencies {
         classpath 'com.github.shalousun:smart-doc-gradle-plugin:[最新版本]'
     }
 }
-apply plugin: 'smart-doc'
+apply(plugin = "com.github.shalousun.smart-doc")
 ```
 ### Plugin options
 
