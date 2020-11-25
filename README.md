@@ -66,7 +66,7 @@ smartdoc {
 For multi-module gradle projects, if you do not want to configure in each module, you can put the smart-doc plugin related configuration into subprojects.
 ```
 subprojects{
-    apply plugin: 'smart-doc'
+    apply plugin: 'com.github.shalousun.smart-doc'
     smartdoc {
         //
         configFile = file("src/main/resources/smart-doc.json")

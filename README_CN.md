@@ -63,7 +63,7 @@ smartdoc {
 
 ```
 subprojects{
-    apply plugin: 'smart-doc'
+    apply plugin: 'com.github.shalousun.smart-doc'
     smartdoc {
         //
         configFile = file("src/main/resources/smart-doc.json")
