@@ -24,6 +24,7 @@ package com.smartdoc.gradle.task;
 
 import com.power.common.constants.Charset;
 import com.power.common.util.RegexUtil;
+import com.power.doc.constants.DocGlobalConstants;
 import com.power.doc.model.ApiConfig;
 import com.smartdoc.gradle.constant.GlobalConstants;
 import com.smartdoc.gradle.extension.SmartDocPluginExtension;
@@ -59,6 +60,8 @@ import java.util.jar.JarFile;
 public abstract class DocBaseTask extends DefaultTask {
 
     protected JavaProjectBuilder javaProjectBuilder;
+
+    private static String MSG = "The loaded local code path is ";
 
     public abstract void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger);
 
@@ -106,7 +109,10 @@ public abstract class DocBaseTask extends DefaultTask {
         javaDocBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         javaDocBuilder.setErrorHandler(e -> getLogger().warn(e.getMessage()));
         //addSourceTree
-        javaDocBuilder.addSourceTree(new File("src/main/java"));
+        String projectDir = project.getProjectDir().getPath();
+        String projectCodePath = String.join(DocGlobalConstants.FILE_SEPARATOR, projectDir, DocGlobalConstants.PROJECT_CODE_PATH);
+        getLogger().quiet(MSG + projectCodePath);
+        javaDocBuilder.addSourceTree(new File(projectCodePath));
         //sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
 //        javaDocBuilder.addClassLoader(ClassLoaderUtil.getRuntimeClassLoader(project));
         loadSourcesDependencies(javaDocBuilder, project, excludes, includes);
@@ -196,7 +202,7 @@ public abstract class DocBaseTask extends DefaultTask {
         Project module = allModules.getOrDefault(artifactName, null);
         if (module != null) {
             String modelSrc = String.join(File.separator, module.getProjectDir().getAbsolutePath(), GlobalConstants.SRC_MAIN_JAVA_PATH);
-            getLogger().quiet("The loaded local code path is "+modelSrc);
+            getLogger().quiet(MSG + modelSrc);
             javaDocBuilder.addSourceTree(new File(modelSrc));
         }
     }
