@@ -66,6 +66,7 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "gson":
             case "annotations":
             case "spring-aop":
+            case "springdoc-openapi-ui":
                 return true;
             default:
                 return this.ignore(filterChain, artifact);

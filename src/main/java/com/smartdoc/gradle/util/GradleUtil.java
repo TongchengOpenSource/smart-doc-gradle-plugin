@@ -27,6 +27,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.power.common.util.FileUtil;
+import com.power.common.util.StringUtil;
 import com.power.doc.model.*;
 import org.gradle.api.Project;
 import org.gradle.api.logging.Logger;
@@ -71,7 +72,8 @@ public class GradleUtil {
             List<ApiDataDictionary> apiDataDictionaries = apiConfig.getDataDictionaries();
             List<ApiErrorCodeDictionary> apiErrorCodes = apiConfig.getErrorCodeDictionaries();
             List<ApiConstant> apiConstants = apiConfig.getApiConstants();
-            if (apiErrorCodes != null) {
+            ResponseBodyAdvice responseBodyAdvice = apiConfig.getResponseBodyAdvice();
+            if (Objects.nonNull(apiErrorCodes)) {
                 apiErrorCodes.forEach(
                         apiErrorCode -> {
                             String className = apiErrorCode.getEnumClassName();
@@ -79,7 +81,7 @@ public class GradleUtil {
                         }
                 );
             }
-            if (apiDataDictionaries != null) {
+            if (Objects.nonNull(apiDataDictionaries)) {
                 apiDataDictionaries.forEach(
                         apiDataDictionary -> {
                             String className = apiDataDictionary.getEnumClassName();
@@ -87,13 +89,16 @@ public class GradleUtil {
                         }
                 );
             }
-            if (apiConstants != null) {
+            if (Objects.nonNull(apiConstants)) {
                 apiConstants.forEach(
                         apiConstant -> {
                             String className = apiConstant.getConstantsClassName();
                             apiConstant.setConstantsClass(getClassByClassName(className, classLoader));
                         }
                 );
+            }
+            if (Objects.nonNull(responseBodyAdvice) && StringUtil.isNotEmpty(responseBodyAdvice.getClassName())) {
+                responseBodyAdvice.setWrapperClass(getClassByClassName(responseBodyAdvice.getClassName(), classLoader));
             }
             addSourcePaths(project, apiConfig, log);
             return apiConfig;
