@@ -52,6 +52,7 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "mysql-connector-java":
             case "classmate":
             case "commons-lang3":
+            case "commons-text":
             case "spring-web":
             case "spring-webmvc":
             case "hibernate-validator":
@@ -66,7 +67,6 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "gson":
             case "annotations":
             case "spring-aop":
-            case "springdoc-openapi-ui":
                 return true;
             default:
                 return this.ignore(filterChain, artifact);
