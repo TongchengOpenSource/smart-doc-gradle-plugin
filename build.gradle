@@ -19,18 +19,19 @@ plugins {
 }
 
 group 'com.github.shalousun'
-version '1.2.4'
+version '1.2.5'
 
 sourceCompatibility = 1.8
 
 repositories {
+    maven {url 'http://localhost:8081/nexus/content/groups/public/'}
     maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     mavenCentral()
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.13.1'
-    compile 'com.github.shalousun:smart-doc:1.9.9.1'
+    compile 'com.github.shalousun:smart-doc:1.9.9.2'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
