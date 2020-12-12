@@ -19,7 +19,7 @@ plugins {
 }
 
 group 'com.github.shalousun'
-version '2.0.0'
+version '2.0.0-release'
 
 sourceCompatibility = 1.8
 
