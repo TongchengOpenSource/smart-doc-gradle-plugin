@@ -188,6 +188,8 @@ gradle smartDocRestAdoc
 gradle smartDocPostman
 // Generate Open Api 3.0+
 gradle smartDocOpenApi
+// Generate document and send to Torna
+gradle tornaRest
 
 // For Apache Dubbo Rpc
 gradle smartDocRpcHtml

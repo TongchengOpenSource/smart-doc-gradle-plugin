@@ -50,5 +50,7 @@ public class TaskConstants {
         taskMap.put(GlobalConstants.RPC_ADOC_TASK, RpcAdocTask.class);
         // create rpc markdown
         taskMap.put(GlobalConstants.RPC_MARKDOWN_TASK, RpcMarkdownTask.class);
+        // create torna rest
+        taskMap.put(GlobalConstants.TORNA_REST_TASK,TornaRestTask.class);
     }
 }

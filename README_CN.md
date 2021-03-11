@@ -182,6 +182,8 @@ gradle smartDocRestAdoc
 gradle smartDocPostman
 //生成Open Api 3.0 +规范的json文档
 gradle smartDocOpenApi
+//生成rest接口文档并推送到Torna平台
+gradle tornaRest
 
 // Apache Dubbo Rpc生成
 // Generate html
