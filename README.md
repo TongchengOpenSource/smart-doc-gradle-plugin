@@ -16,7 +16,10 @@ Start smart-doc to scan source code analysis and generate API documents.
 You can run the `gradle` command directly or click on the preset` goal` of the smart-doc-maven-plugin in the IDE to generate API documentation. 
 smart-doc-gradle-plugin will also make smart-doc's ability to generate API documentation more powerful.
 [About smart-doc](https://github.com/shalousun/smart-doc)
+## Best Practice
+smart-doc + [Torna](http://torna.cn) form an industry-leading document generation and management solution, using smart-doc to complete Java source code analysis and extract annotations to generate API documents without intrusion, and automatically push the documents to the Torna enterprise-level interface document management platform.
 
+![smart-doc+torna](https://raw.githubusercontent.com/shalousun/smart-doc/master/images/smart-doc-torna.png)
 ## Getting started
 ### Add plugin
 Using the plugins DSL:
@@ -121,6 +124,10 @@ When you need to use smart-doc to generate more API document information, you ca
   "requestExample":"true",//Whether to display the request example in the document, the default value is true.
   "responseExample":"true",//Whether to display the response example in the document, the default is true.
   "displayActualType":false,//display actual type of generic,
+  "appKey": "xxx",// torna appKey, @since 2.0.9
+  "appToken": "xxx", //torna appToken,@since 2.0.9
+  "secret": "xx",//torna secret，@since 2.0.9
+  "openUrl": "torna server/api/",//torna server url,@since 2.0.9
   "ignoreRequestParams":[ //The request parameter object will be discarded when generating the document.@since 1.9.2
        "org.springframework.ui.ModelMap"
   ],

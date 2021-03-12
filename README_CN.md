@@ -14,7 +14,10 @@ smart-doc-gradle-plugin底层完全依赖于官方开源的smart-doc解析库，
 因此整个使用过程中遇到问题或者是想查看完整解决方案请前往码云smart-doc的仓库查看wiki文档。
 
 [关于smart-doc](https://gitee.com/smart-doc-team/smart-doc)
+## Best Practice
+smart-doc + [Torna](http://torna.cn) 组成行业领先的文档生成和管理解决方案，使用smart-doc无侵入完成Java源代码分析和提取注释生成API文档，自动将文档推送到Torna企业级接口文档管理平台。
 
+![smart-doc+torna](https://gitee.com/smart-doc-team/smart-doc/raw/master/images/smart-doc-torna.png)
 ## Getting started
 ### Add plugin
 Using the plugins DSL:
@@ -112,6 +115,12 @@ subprojects{
   "requestExample":"true",//是否将请求示例展示在文档中，默认true，@since smart-doc 1.9.0
   "responseExample":"true",//是否将响应示例展示在文档中，默认为true，@since  smart-doc 1.9.0
   "displayActualType":false,//配置true会在注释栏自动显示泛型的真实类型短类名，@since 1.9.6
+  "appKey": "xxx",// torna平台对接appKey,, @since 2.0.9
+  "appToken": "xxx", //torna平台appToken,@since 2.0.9
+  "secret": "xx",//torna平台secret，@since 2.0.9
+  "openUrl": "torna server/api/",//torna平台地址，填写自己的私有化部署地址@since 2.0.9
+  "debugEnvName":"测试环境", //torna测试环境
+  "debugEnvUrl":"http://127.0.0.1",//torna
   "ignoreRequestParams":[ //忽略请求参数对象，把不想生成文档的参数对象屏蔽掉，@since smart-doc 1.9.2
       "org.springframework.ui.ModelMap"
   ],
