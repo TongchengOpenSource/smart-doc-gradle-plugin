@@ -72,7 +72,7 @@ public class GradleUtil {
             List<ApiDataDictionary> apiDataDictionaries = apiConfig.getDataDictionaries();
             List<ApiErrorCodeDictionary> apiErrorCodes = apiConfig.getErrorCodeDictionaries();
             List<ApiConstant> apiConstants = apiConfig.getApiConstants();
-            ResponseBodyAdvice responseBodyAdvice = apiConfig.getResponseBodyAdvice();
+            BodyAdvice responseBodyAdvice = apiConfig.getResponseBodyAdvice();
             if (Objects.nonNull(apiErrorCodes)) {
                 apiErrorCodes.forEach(
                         apiErrorCode -> {

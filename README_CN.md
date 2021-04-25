@@ -183,6 +183,9 @@ subprojects{
   "responseBodyAdvice":{ //自smart-doc 1.9.8起，ResponseBodyAdvice统一返回设置，可用ignoreResponseBodyAdvice tag来忽略
        "className":"com.power.common.model.CommonResult" //通用响应体
   },
+  "requestBodyAdvice":{ ////自smart-doc 2.1.4 起，支持设置RequestBodyAdvice统一请求包装类
+       "className":"com.power.common.model.CommonResult"
+  },
   "sourceCodePaths": [{//设置代码路径，默认加载src/main/java, 没有需求可以不设置
       "path": "src/main/java",
       "desc": "测试"
