@@ -73,6 +73,7 @@ public class GradleUtil {
             List<ApiErrorCodeDictionary> apiErrorCodes = apiConfig.getErrorCodeDictionaries();
             List<ApiConstant> apiConstants = apiConfig.getApiConstants();
             BodyAdvice responseBodyAdvice = apiConfig.getResponseBodyAdvice();
+            BodyAdvice requestBodyAdvice = apiConfig.getRequestBodyAdvice();
             if (Objects.nonNull(apiErrorCodes)) {
                 apiErrorCodes.forEach(
                         apiErrorCode -> {
@@ -99,6 +100,9 @@ public class GradleUtil {
             }
             if (Objects.nonNull(responseBodyAdvice) && StringUtil.isNotEmpty(responseBodyAdvice.getClassName())) {
                 responseBodyAdvice.setWrapperClass(getClassByClassName(responseBodyAdvice.getClassName(), classLoader));
+            }
+            if (Objects.nonNull(requestBodyAdvice) && StringUtil.isNotEmpty(requestBodyAdvice.getClassName())) {
+                requestBodyAdvice.setWrapperClass(getClassByClassName(requestBodyAdvice.getClassName(), classLoader));
             }
             addSourcePaths(project, apiConfig, log);
             return apiConfig;
