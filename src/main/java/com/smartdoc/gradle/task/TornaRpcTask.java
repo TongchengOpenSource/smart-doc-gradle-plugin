@@ -20,41 +20,23 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.smartdoc.gradle.constant;
+package com.smartdoc.gradle.task;
+
+import com.power.doc.builder.rpc.RpcTornaBuilder;
+import com.power.doc.model.ApiConfig;
+import com.thoughtworks.qdox.JavaProjectBuilder;
+import org.gradle.api.logging.Logger;
 
 /**
- * @author yu 2019/12/13.
+ * @author yu 2021/5/5.
  */
-public interface GlobalConstants {
-
-    String ERROR_MSG = "Failed to build ApiConfig, check if the configuration file is correct.";
-
-    String DEFAULT_CONFIG = "./src/main/resources/default.json";
-
-    String TASK_GROUP = "Documentation";
-
-    String REST_HTML_TASK = "smartDocRestHtml";
-
-    String REST_ADOC_TASK = "smartDocRestAdoc";
-
-    String REST_MARKDOWN_TASK = "smartDocRestMarkdown";
-
-    String POSTMAN_TASK = "smartDocPostman";
-
-    String OPEN_API_TASK = "smartDocOpenApi";
-
-    String RPC_HTML_TASK = "smartDocRpcHtml";
-
-    String RPC_ADOC_TASK = "smartDocRpcAdoc";
-
-    String RPC_MARKDOWN_TASK = "smartDocRpcMarkdown";
-
-    String TORNA_REST_TASK = "tornaRest";
-
-    String TORNA_RPC_TASK = "tornaRpc";
-
-    String EXTENSION_NAME = "smartdoc";
-
-    String SRC_MAIN_JAVA_PATH = "src/main/java";
-
+public class TornaRpcTask extends DocBaseTask {
+    @Override
+    public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
+        try {
+            RpcTornaBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
