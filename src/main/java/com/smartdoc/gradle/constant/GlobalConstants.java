@@ -53,6 +53,8 @@ public interface GlobalConstants {
 
     String TORNA_RPC_TASK = "tornaRpc";
 
+    String YAPI_REST_TASK = "yapiRest";
+
     String EXTENSION_NAME = "smartdoc";
 
     String SRC_MAIN_JAVA_PATH = "src/main/java";

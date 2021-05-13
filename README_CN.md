@@ -125,6 +125,8 @@ subprojects{
   "debugEnvName":"测试环境", //torna测试环境
   "debugEnvUrl":"http://127.0.0.1",//torna
   "tornaDebug":false,//启用会推送日志
+  "yapiServerUrl": "https://yapi.mock.com", // yapi服务地址
+  "yapiToken": "xxx", // yapi项目token
   "ignoreRequestParams":[ //忽略请求参数对象，把不想生成文档的参数对象屏蔽掉，@since smart-doc 1.9.2
       "org.springframework.ui.ModelMap"
   ],

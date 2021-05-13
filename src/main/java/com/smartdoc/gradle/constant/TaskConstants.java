@@ -54,5 +54,8 @@ public class TaskConstants {
         taskMap.put(GlobalConstants.TORNA_REST_TASK,TornaRestTask.class);
         // create torna rpc
         taskMap.put(GlobalConstants.TORNA_RPC_TASK,TornaRpcTask.class);
+        // create yapi rest
+        taskMap.put(GlobalConstants.YAPI_REST_TASK,YapiRestTask.class);
+
     }
 }
