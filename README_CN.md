@@ -64,7 +64,7 @@ smartdoc {
     include 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 ```
-对于多模块的gradle，如果不想单个模块配置可以把smart-doc插件相关配置放到subprojects中。
+对于多模块的gradle，把smart-doc插件相关配置放到根目录build.gradle的subprojects中。
 
 ```
 subprojects{
@@ -80,6 +80,11 @@ subprojects{
     }
 }
 ```
+多模块smart-doc的实战demo参考
+```
+https://gitee.com/devin-alan/smart-doc-gradle-plugin-demo
+```
+> 多模块和单模块项目是有区别，多模块不从根目录使用命令构建可能会导致模块间源代码加载失败，生成文档出现各种问题。
 ### Create a json config 
 在自己的项目中创建一个json配置文件，如果是多个模块则放到需要生成文档的模块中，smart-doc-gradle-plugin插件会根据这个配置生成项目的接口文档。
 例如在项目中创建`/src/main/resources/smart-doc.json`。配置内容参考如下。
