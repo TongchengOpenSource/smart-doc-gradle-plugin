@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -15,7 +16,7 @@ plugins {
     id "maven-publish"
     id "signing"
     id "maven"
-    id "com.gradle.plugin-publish" version "0.12.0"
+   id "com.gradle.plugin-publish" version "0.12.0"
 }
 
 group 'com.github.shalousun'
@@ -38,12 +39,12 @@ tasks.withType(JavaCompile) {
 }
 
 task javadocJar(type: Jar) {
-    classifier= "javadoc"
+    archiveClassifier= "javadoc"
     from javadoc
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
@@ -52,7 +53,7 @@ artifacts {
 }
 
 signing {
-    sign configurations.archives
+//    sign configurations.archives
 }
 
 gradlePlugin {
