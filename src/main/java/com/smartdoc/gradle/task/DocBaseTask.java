@@ -42,6 +42,7 @@ import org.gradle.api.artifacts.result.ArtifactResult;
 import org.gradle.api.artifacts.result.ComponentArtifactsResult;
 import org.gradle.api.internal.artifacts.result.DefaultResolvedArtifactResult;
 import org.gradle.api.logging.Logger;
+import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.jvm.JvmLibrary;
 import org.gradle.language.base.artifact.SourcesArtifact;
@@ -125,7 +126,7 @@ public abstract class DocBaseTask extends DefaultTask {
      * @param javaDocBuilder
      */
     private void loadSourcesDependencies(JavaProjectBuilder javaDocBuilder, Project project, Set<String> excludes, Set<String> includes) {
-        Configuration compileConfiguration = project.getConfigurations().getByName("compile");
+        Configuration compileConfiguration = project.getConfigurations().getByName(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME);
         List<ComponentIdentifier> binaryDependencies = new ArrayList<>();
         TreeMap<String, Project> allModules = this.getAllModule(project.getRootProject());
         Set<ResolvedArtifact> resolvedArtifacts = compileConfiguration.getResolvedConfiguration().getResolvedArtifacts();
