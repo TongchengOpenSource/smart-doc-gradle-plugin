@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven {
             url "https://plugins.gradle.org/m2/"
@@ -15,8 +15,7 @@ plugins {
     id "java-gradle-plugin"
     id "maven-publish"
     id "signing"
-    id "maven"
-   id "com.gradle.plugin-publish" version "0.12.0"
+    id "com.gradle.plugin-publish" version "0.12.0"
 }
 
 group 'com.github.shalousun'
@@ -25,21 +24,24 @@ version '2.2.2'
 sourceCompatibility = 1.8
 
 repositories {
-    maven {url 'http://localhost:8081/nexus/content/groups/public/'}
-    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    maven {
+        allowInsecureProtocol = true
+        url 'http://localhost:8081/nexus/content/groups/public/'
+    }
+    maven { url 'https://maven.aliyun.com/repository/public' }
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.13.1'
-    compile 'com.github.shalousun:smart-doc:2.2.2'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    implementation group: 'com.github.shalousun', name: 'smart-doc', version: '2.2.2'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
 task javadocJar(type: Jar) {
-    archiveClassifier= "javadoc"
+    archiveClassifier = "javadoc"
     from javadoc
 }
 
@@ -53,7 +55,7 @@ artifacts {
 }
 
 signing {
-    sign configurations.archives
+    sign publishing.publications.mavenJava
 }
 
 gradlePlugin {
@@ -78,7 +80,7 @@ pluginBundle {
     }
 }
 
-// publish to local
+// publish to local, see https://docs.gradle.org/current/userguide/publishing_maven.html
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -90,53 +92,11 @@ publishing {
         }
     }
     repositories {
-        maven { url "http://localhost:8081/nexus/content/repositories/releases/"
+        maven {
+            url "http://localhost:8081/nexus/content/repositories/releases/"
             credentials {
                 username 'admin'
                 password 'admin123'
-            }
-        }
-    }
-}
-// Build, sign, and upload
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            // Sign POM
-            beforeDeployment {
-                MavenDeployment deployment -> signing.signPom(deployment)
-            }
-
-            // Destination
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-            // Add required metadata to POM
-            pom.project {
-                name 'smart-doc-gradle-plugin'
-                packaging 'jar'
-                description 'smart-doc gradle plugin.'
-                url 'https://github.com/smart-doc-group/smart-doc-gradle-plugin'
-                scm {
-                    connection 'scm:git:git@github.com:smart-doc-group/smart-doc-gradle-plugin.git'
-                    developerConnection 'scm:git@github.com:smart-doc-group/smart-doc-gradle-plugin.git'
-                    url 'https://github.com/smart-doc-group/smart-doc-gradle-plugin'
-                }
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'shalousun'
-                        name 'shalousun'
-                        email '836575280@qq.com'
-                        organization 'smart-doc-group'
-                        organizationUrl 'https://github.com/smart-doc-group'
-                    }
-                }
             }
         }
     }
