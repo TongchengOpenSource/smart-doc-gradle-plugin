@@ -114,11 +114,11 @@ public class GradleUtil {
     }
 
     /**
-     * 根据 com.xxx.AClass获取类Class
+     * Get Class by name
      *
-     * @param className   类名
+     * @param className   class name
      * @param classLoader urls
-     * @return className
+     * @return Class
      */
     public static Class getClassByClassName(String className, ClassLoader classLoader) {
         try {
