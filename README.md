@@ -130,6 +130,7 @@ When you need to use smart-doc to generate more API document information, you ca
   "appToken": "xxx", //torna appToken,@since 2.0.9
   "secret": "xx",//torna secret，@since 2.0.9
   "openUrl": "torna server/api/",//torna server url,@since 2.0.9
+  "replace":true, //torna replace doc @since 2.2.4
   "ignoreRequestParams":[ //The request parameter object will be discarded when generating the document.@since 1.9.2
        "org.springframework.ui.ModelMap"
   ],
@@ -191,8 +192,8 @@ When you need to use smart-doc to generate more API document information, you ca
        "required": false,
        "since": "-"
   }],
-   "requestParams": [ //Public request parameters (a scenario where public request parameters are processed through interceptors) ，@since 2.2.3,no need to set
-    {
+  "requestParams": [ //Public request parameters (a scenario where public request parameters are processed through interceptors) ，@since 2.2.3,no need to set
+  {
       "name": "configPathParam",
       "type": "string",
       "desc": "desc",
@@ -202,7 +203,7 @@ When you need to use smart-doc to generate more API document information, you ca
       "since": "-",
       "pathPatterns": "*",
       "excludePathPatterns":"/app/page/**"
-    },{
+   },{
       "name": "configQueryParam",
       "type": "string",
       "desc": "desc",
@@ -212,6 +213,12 @@ When you need to use smart-doc to generate more API document information, you ca
       "since": "-",
       "pathPatterns": "*",
       "excludePathPatterns":"/app/page/**"
+    }
+  ],
+  "groups": [ // Group different controllers, @since 2.2.5
+   {
+      "name": "test group",
+      "apis": "com.power.doc.controller.app.*"
     }
   ]
 }

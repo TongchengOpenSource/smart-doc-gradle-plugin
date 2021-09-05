@@ -130,6 +130,7 @@ https://gitee.com/devin-alan/smart-doc-gradle-plugin-demo
   "debugEnvName":"测试环境", //torna测试环境
   "debugEnvUrl":"http://127.0.0.1",//torna
   "tornaDebug":false,//启用会推送日志
+  "replace":true, //推送torna时自动更新，默认是true,@since 2.2.4
   "ignoreRequestParams":[ //忽略请求参数对象，把不想生成文档的参数对象屏蔽掉，@since smart-doc 1.9.2
       "org.springframework.ui.ModelMap"
   ],
@@ -214,10 +215,12 @@ https://gitee.com/devin-alan/smart-doc-gradle-plugin-demo
   "requestBodyAdvice":{ ////自smart-doc 2.1.4 起，支持设置RequestBodyAdvice统一请求包装类
        "className":"com.power.common.model.CommonResult"
   },
-  "sourceCodePaths": [{//设置代码路径，默认加载src/main/java, 没有需求可以不设置
-      "path": "src/main/java",
-      "desc": "测试"
-  }]
+  "groups": [ // @since 2.2.5, 对不同的controller进行分组
+    {
+      "name": "测试分组",
+      "apis": "com.power.doc.controller.app.*"
+    }
+  ]
 }
 ```
 **注意：** 上面的json配置完全使用smart-doc的`ApiConfig`转化成json而来。因此项目配置也可以参考smart-doc的介绍。
