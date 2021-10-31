@@ -1,6 +1,6 @@
 <h1 align="center"><a href="https://github.com/shalousun/smart-doc-gradle-plugin" target="_blank">Smart-Doc Gradle Plugin</a></h1>
 
-![maven](https://img.shields.io/maven-central/v/com.github.shalousun/smart-doc-gradle-plugin)
+![gradle](https://img.shields.io/gradle-plugin-portal/v/com.github.shalousun.smart-doc)
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 ![closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/shalousun/smart-doc-gradle-plugin)
 ![java version](https://img.shields.io/badge/JAVA-1.8+-green.svg)
