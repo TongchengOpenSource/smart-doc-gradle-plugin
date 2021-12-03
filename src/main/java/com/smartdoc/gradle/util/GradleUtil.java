@@ -104,6 +104,10 @@ public class GradleUtil {
             if (Objects.nonNull(requestBodyAdvice) && StringUtil.isNotEmpty(requestBodyAdvice.getClassName())) {
                 requestBodyAdvice.setWrapperClass(getClassByClassName(requestBodyAdvice.getClassName(), classLoader));
             }
+
+            if (StringUtil.isEmpty(apiConfig.getProjectName())) {
+                apiConfig.setProjectName(project.getName());
+            }
             addSourcePaths(project, apiConfig, log);
             return apiConfig;
         } catch (FileNotFoundException e) {

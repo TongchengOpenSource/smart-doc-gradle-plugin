@@ -93,6 +93,7 @@ publishing {
     }
     repositories {
         maven {
+            allowInsecureProtocol(true)
             url "http://localhost:8081/nexus/content/repositories/releases/"
             credentials {
                 username 'admin'
