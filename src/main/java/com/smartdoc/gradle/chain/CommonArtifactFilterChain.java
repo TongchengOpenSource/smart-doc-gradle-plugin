@@ -41,7 +41,10 @@ public class CommonArtifactFilterChain implements FilterChain {
     public boolean ignoreArtifactById(CustomArtifact artifact) {
         String artifactId = artifact.getArtifactId();
         switch (artifactId) {
+            case "aspectjweaver":
+            case "fastjson":
             case "bcprov-jdk15on":
+            case "bcpkix-jdk15on":
             case "lombok":
             case "jsqlparser":
             case "disruptor":
@@ -62,14 +65,18 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "guava":
             case "spring-tx":
             case "javassist":
-            case "qdox":
-            case "smart-doc-gradle-plugin":
             case "javafaker":
-            case "antlr4-runtime":
+            case "qdox":
             case "gson":
-            case "annotations":
-            case "spring-aop":
             case "netty-all":
+            case "javacv-platform":
+            case "antlr4-runtime":
+            case "jetty":
+            case "velocity":
+            case "beetl":
+            case "xml-apis":
+            case "mchange-commons-java":
+            case "hadoop-common":
                 return true;
             default:
                 return this.ignore(filterChain, artifact);
