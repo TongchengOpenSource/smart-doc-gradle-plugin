@@ -54,7 +54,7 @@ public class SmartDocPluginExtension {
         this.configFile = configFile;
     }
 
-    SmartDocPluginExtension exclude(String... excludes) {
+   public SmartDocPluginExtension exclude(String... excludes) {
         for (String exclude : excludes) {
             this.exclude.add(exclude);
         }
@@ -65,7 +65,7 @@ public class SmartDocPluginExtension {
         return exclude;
     }
 
-    SmartDocPluginExtension include(String... includes) {
+   public SmartDocPluginExtension include(String... includes) {
         for (String include : includes) {
             this.include.add(include);
         }
