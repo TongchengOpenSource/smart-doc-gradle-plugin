@@ -61,6 +61,7 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "spring-web":
             case "spring-webmvc":
             case "hibernate-validator":
+            case "hibernate-core":
             case "xstream":
             case "guava":
             case "spring-tx":
@@ -77,6 +78,9 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "xml-apis":
             case "mchange-commons-java":
             case "hadoop-common":
+            case "txw2":
+            case "jakarta.xml.bind-api":
+            case "smart-doc-gradle-plugin":
                 return true;
             default:
                 return this.ignore(filterChain, artifact);
