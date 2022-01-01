@@ -194,7 +194,7 @@ public abstract class DocBaseTask extends DefaultTask {
                             new URL("jar:" + artifact.getFile().toURI().toURL().toString() + "!/" + name));
                 }
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
             getLogger().warn("Unable to load jar source " + artifact + " : " + e.getMessage());
         }
     }
