@@ -81,6 +81,8 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "txw2":
             case "jakarta.xml.bind-api":
             case "smart-doc-gradle-plugin":
+            case "druid":
+            case "mssql-jdbc":
                 return true;
             default:
                 return this.ignore(filterChain, artifact);
