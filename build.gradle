@@ -19,7 +19,7 @@ plugins {
 }
 
 group 'com.github.shalousun'
-version '2.3.8'
+version '2.3.9-release'
 
 sourceCompatibility = 1.8
 
@@ -34,7 +34,7 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-    implementation group: 'com.github.shalousun', name: 'smart-doc', version: '2.3.8'
+    implementation group: 'com.github.shalousun', name: 'smart-doc', version: '2.3.9'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
