@@ -25,13 +25,18 @@ package com.smartdoc.gradle.task;
 import com.power.common.constants.Charset;
 import com.power.common.util.RegexUtil;
 import com.power.doc.constants.DocGlobalConstants;
+import com.power.doc.helper.JavaProjectBuilderHelper;
 import com.power.doc.model.ApiConfig;
+
 import com.smartdoc.gradle.constant.GlobalConstants;
 import com.smartdoc.gradle.extension.SmartDocPluginExtension;
 import com.smartdoc.gradle.model.CustomArtifact;
 import com.smartdoc.gradle.util.ArtifactFilterUtil;
 import com.smartdoc.gradle.util.GradleUtil;
 import com.thoughtworks.qdox.JavaProjectBuilder;
+import com.thoughtworks.qdox.library.ErrorHandler;
+import com.thoughtworks.qdox.library.SortedClassLibraryBuilder;
+import com.thoughtworks.qdox.parser.ParseException;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
@@ -106,7 +111,14 @@ public abstract class DocBaseTask extends DefaultTask {
      * @return
      */
     private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes, Set<String> includes) {
-        JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
+//        JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
+        SortedClassLibraryBuilder classLibraryBuilder=new SortedClassLibraryBuilder();
+        classLibraryBuilder.setErrorHander(new ErrorHandler() {
+            @Override
+            public void handle(ParseException e) { getLogger().error("解析错误",e);
+            }
+        });
+        JavaProjectBuilder javaDocBuilder =  JavaProjectBuilderHelper.create(classLibraryBuilder);
         javaDocBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         javaDocBuilder.setErrorHandler(e -> getLogger().warn(e.getMessage()));
         //addSourceTree
