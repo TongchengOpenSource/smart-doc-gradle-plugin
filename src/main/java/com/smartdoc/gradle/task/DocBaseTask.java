@@ -113,11 +113,7 @@ public abstract class DocBaseTask extends DefaultTask {
     private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes, Set<String> includes) {
 //        JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
         SortedClassLibraryBuilder classLibraryBuilder=new SortedClassLibraryBuilder();
-        classLibraryBuilder.setErrorHander(new ErrorHandler() {
-            @Override
-            public void handle(ParseException e) { getLogger().error("解析错误",e);
-            }
-        });
+        classLibraryBuilder.setErrorHander(e -> getLogger().error("Parse error",e));
         JavaProjectBuilder javaDocBuilder =  JavaProjectBuilderHelper.create(classLibraryBuilder);
         javaDocBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         javaDocBuilder.setErrorHandler(e -> getLogger().warn(e.getMessage()));
