@@ -69,6 +69,7 @@ public class GradleUtil {
             ClassLoader classLoader = ClassLoaderUtil.getRuntimeClassLoader(project);
             String data = FileUtil.getFileContent(new FileInputStream(configFile));
             ApiConfig apiConfig = GSON.fromJson(data, ApiConfig.class);
+            apiConfig.setClassLoader(classLoader);
             List<ApiDataDictionary> apiDataDictionaries = apiConfig.getDataDictionaries();
             List<ApiErrorCodeDictionary> apiErrorCodes = apiConfig.getErrorCodeDictionaries();
             List<ApiConstant> apiConstants = apiConfig.getApiConstants();
