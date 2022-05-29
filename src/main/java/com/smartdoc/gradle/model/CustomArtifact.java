@@ -29,16 +29,34 @@ import java.util.Objects;
  */
 public class CustomArtifact {
 
+    /**
+     * Artifact ID
+     */
     private String artifactId;
 
-    public String group;
+    /**
+     * Artifact Group
+     */
+    private String group;
 
+    /**
+     * Artifact Version
+     */
     private String version;
 
+    /**
+     * Build CustomArtifact
+     * @return CustomArtifact
+     */
     public static CustomArtifact builder() {
         return new CustomArtifact();
     }
 
+    /**
+     * Build CustomArtifact with ArtifactDisplayName
+     * @param artifactDisplayName Artifact Display Name
+     * @return CustomArtifact
+     */
     public static CustomArtifact builder(String artifactDisplayName) {
         CustomArtifact artifact = builder();
         if (Objects.isNull(artifactDisplayName)) {

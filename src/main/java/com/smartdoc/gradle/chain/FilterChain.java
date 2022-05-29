@@ -30,10 +30,25 @@ import java.util.Objects;
  */
 public interface FilterChain {
 
+    /**
+     * Set next filter chain
+     * @param nextInChain Filter chain
+     */
     void setNext(FilterChain nextInChain);
 
+    /**
+     * Ignore Artifact via ID
+     * @param artifact Artifact
+     * @return boolean
+     */
     boolean ignoreArtifactById(CustomArtifact artifact);
 
+    /**
+     * FilterChain
+     * @param nextInChain FilterChain
+     * @param artifact CustomArtifact
+     * @return boolean
+     */
     default boolean ignore(FilterChain nextInChain, CustomArtifact artifact) {
         if (Objects.nonNull(nextInChain)) {
             return nextInChain.ignoreArtifactById(artifact);

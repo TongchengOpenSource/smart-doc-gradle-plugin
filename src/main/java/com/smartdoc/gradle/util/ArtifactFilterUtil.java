@@ -51,6 +51,11 @@ public class ArtifactFilterUtil {
         return startsWithFilterChain.ignoreArtifactById(artifact);
     }
 
+    /**
+     * Ignore Spring Boot Artifact
+     * @param artifact Artifact
+     * @return boolean
+     */
     public static boolean ignoreSpringBootArtifactById(CustomArtifact artifact) {
         FilterChain springBootArtifactFilterChain = new SpringBootArtifactFilterChain();
         return springBootArtifactFilterChain.ignoreArtifactById(artifact);

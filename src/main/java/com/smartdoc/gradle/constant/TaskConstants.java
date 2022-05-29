@@ -31,6 +31,10 @@ import java.util.Map;
  * @author yu 2020/11/23.
  */
 public class TaskConstants {
+
+    /**
+     * Map of Gradle Task
+     */
     public static Map<String, Class> taskMap = new HashMap<>();
 
     static {
