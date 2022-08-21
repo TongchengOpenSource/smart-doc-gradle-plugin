@@ -27,34 +27,80 @@ package com.smartdoc.gradle.constant;
  */
 public interface GlobalConstants {
 
+    /**
+     * error message
+     */
     String ERROR_MSG = "Failed to build ApiConfig, check if the configuration file is correct.";
 
+    /**
+     * default config file
+     */
     String DEFAULT_CONFIG = "./src/main/resources/default.json";
 
+    /**
+     * Task group
+     */
     String TASK_GROUP = "Documentation";
 
+    /**
+     * Generate Rest html document
+     */
     String REST_HTML_TASK = "smartDocRestHtml";
 
+    /**
+     * Generate Rest Adoc document
+     */
     String REST_ADOC_TASK = "smartDocRestAdoc";
 
+    /**
+     * Generate Rest markdown document
+     */
     String REST_MARKDOWN_TASK = "smartDocRestMarkdown";
 
+    /**
+     * Generate Postman document
+     */
     String POSTMAN_TASK = "smartDocPostman";
 
+    /**
+     * Generate OpenAPI document
+     */
     String OPEN_API_TASK = "smartDocOpenApi";
 
+    /**
+     * Generate Rpc html document
+     */
     String RPC_HTML_TASK = "smartDocRpcHtml";
 
+    /**
+     * Generate Rpc adoc document
+     */
     String RPC_ADOC_TASK = "smartDocRpcAdoc";
 
+    /**
+     * Generate Rpc markdown document
+     */
     String RPC_MARKDOWN_TASK = "smartDocRpcMarkdown";
 
+    /**
+     * Generate rest document push to torna
+     */
     String TORNA_REST_TASK = "tornaRest";
 
+    /**
+     * Generate rpc document push to torna
+     */
     String TORNA_RPC_TASK = "tornaRpc";
 
+
+    /**
+     * Plugin extension name
+     */
     String EXTENSION_NAME = "smartdoc";
 
+    /**
+     * default java source dir
+     */
     String SRC_MAIN_JAVA_PATH = "src/main/java";
 
 }
