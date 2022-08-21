@@ -27,16 +27,13 @@ import com.power.common.util.RegexUtil;
 import com.power.doc.constants.DocGlobalConstants;
 import com.power.doc.helper.JavaProjectBuilderHelper;
 import com.power.doc.model.ApiConfig;
-
 import com.smartdoc.gradle.constant.GlobalConstants;
 import com.smartdoc.gradle.extension.SmartDocPluginExtension;
 import com.smartdoc.gradle.model.CustomArtifact;
 import com.smartdoc.gradle.util.ArtifactFilterUtil;
 import com.smartdoc.gradle.util.GradleUtil;
 import com.thoughtworks.qdox.JavaProjectBuilder;
-import com.thoughtworks.qdox.library.ErrorHandler;
 import com.thoughtworks.qdox.library.SortedClassLibraryBuilder;
-import com.thoughtworks.qdox.parser.ParseException;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
@@ -65,10 +62,20 @@ import java.util.jar.JarFile;
  */
 public abstract class DocBaseTask extends DefaultTask {
 
+    /**
+     * QDOX JavaProjectBuilder
+     */
     protected JavaProjectBuilder javaProjectBuilder;
 
     private static String MSG = "The loaded local code path is ";
 
+    /**
+     * Abstract execute action
+     *
+     * @param apiConfig          ApiConfig
+     * @param javaProjectBuilder JavaProjectBuilder
+     * @param logger             Logger
+     */
     public abstract void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger);
 
     @TaskAction
@@ -112,9 +119,9 @@ public abstract class DocBaseTask extends DefaultTask {
      */
     private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes, Set<String> includes) {
 //        JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
-        SortedClassLibraryBuilder classLibraryBuilder=new SortedClassLibraryBuilder();
-        classLibraryBuilder.setErrorHander(e -> getLogger().error("Parse error",e));
-        JavaProjectBuilder javaDocBuilder =  JavaProjectBuilderHelper.create(classLibraryBuilder);
+        SortedClassLibraryBuilder classLibraryBuilder = new SortedClassLibraryBuilder();
+        classLibraryBuilder.setErrorHander(e -> getLogger().error("Parse error", e));
+        JavaProjectBuilder javaDocBuilder = JavaProjectBuilderHelper.create(classLibraryBuilder);
         javaDocBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         javaDocBuilder.setErrorHandler(e -> getLogger().warn(e.getMessage()));
         //addSourceTree

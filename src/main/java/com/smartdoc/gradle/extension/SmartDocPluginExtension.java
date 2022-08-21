@@ -46,6 +46,11 @@ public class SmartDocPluginExtension {
      */
     private final Set<String> include = new HashSet<>();
 
+
+    /**
+     * Smart doc config file, like smart-doc.json
+     * @return
+     */
     public File getConfigFile() {
         return configFile;
     }
@@ -54,6 +59,11 @@ public class SmartDocPluginExtension {
         this.configFile = configFile;
     }
 
+    /**
+     * Excludes artifacts
+     * @param excludes Array of artifact
+     * @return SmartDocPluginExtension
+     */
     public SmartDocPluginExtension exclude(String... excludes) {
         for (String exclude : excludes) {
             this.exclude.add(exclude);
@@ -65,6 +75,11 @@ public class SmartDocPluginExtension {
         return exclude;
     }
 
+    /**
+     * Includes artifacts
+     * @param includes Array of artifact
+     * @return SmartDocPluginExtension
+     */
     public SmartDocPluginExtension include(String... includes) {
         for (String include : includes) {
             this.include.add(include);
