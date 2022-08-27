@@ -78,6 +78,9 @@ public abstract class DocBaseTask extends DefaultTask {
      */
     public abstract void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger);
 
+    /**
+     * Task action
+     */
     @TaskAction
     public void action() {
         Logger logger = getLogger();

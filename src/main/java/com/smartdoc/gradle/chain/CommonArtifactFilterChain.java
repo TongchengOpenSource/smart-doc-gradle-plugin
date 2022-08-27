@@ -43,6 +43,7 @@ public class CommonArtifactFilterChain implements FilterChain {
         switch (artifactId) {
             case "aspectjweaver":
             case "fastjson":
+            case "fastjson2":
             case "bcprov-jdk15on":
             case "bcpkix-jdk15on":
             case "lombok":
