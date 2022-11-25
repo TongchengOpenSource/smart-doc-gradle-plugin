@@ -51,6 +51,7 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "disruptor":
             case "snakeyaml":
             case "spring-boot-autoconfigure":
+            case "forest-spring-boot-starter":
             case "HikariCP":
             case "mysql-connector-java":
             case "classmate":
@@ -64,7 +65,6 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "hibernate-validator":
             case "hibernate-core":
             case "xstream":
-            case "guava":
             case "spring-tx":
             case "javassist":
             case "javafaker":

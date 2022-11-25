@@ -66,6 +66,7 @@ public class StartsWithFilterChain implements FilterChain {
         PREFIX_SET.add("spring-oxm");
         PREFIX_SET.add("spring-data-redis");
         PREFIX_SET.add("json");
+        PREFIX_SET.add("guava");
     }
 
     @Override

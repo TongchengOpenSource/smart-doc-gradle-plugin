@@ -145,7 +145,7 @@ you can build with the following commands. (Java 1.8 is required to build the ma
 // build and publish to local
 gradle publishToMavenLocal
 // build and publish to nexus
-gradle uploadArchives
+gradle publish
 ```
 ## Other reference
 - [Smart-doc manual](https://smart-doc-group.github.io/#/)

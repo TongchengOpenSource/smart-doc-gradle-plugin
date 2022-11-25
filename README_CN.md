@@ -141,7 +141,7 @@ gradle smartDocRpcAdoc
 // 将gradle插件暗转到本地
 gradle publishToMavenLocal
 // 将gradle插件发布到自己nexus仓库，自己修改build.gradle中的仓库地址配置
-gradle uploadArchives
+gradle publish
 ```
 ## Releases
 [发布记录](https://gitee.com/smart-doc-team/smart-doc-maven-plugin/blob/master/CHANGELOG.md)
