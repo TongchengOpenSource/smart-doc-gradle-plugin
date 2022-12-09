@@ -92,6 +92,10 @@ public interface GlobalConstants {
      */
     String TORNA_RPC_TASK = "tornaRpc";
 
+    /**
+     * Generate rest document push to yapi
+     */
+    String YAPI_REST_TASK = "yapi-rest";
 
     /**
      * Plugin extension name
