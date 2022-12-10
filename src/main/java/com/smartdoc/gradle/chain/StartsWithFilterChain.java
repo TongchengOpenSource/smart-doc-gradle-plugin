@@ -48,9 +48,9 @@ public class StartsWithFilterChain implements FilterChain {
         PREFIX_SET.add("sharding");
         PREFIX_SET.add("mybatis-spring-boot-starter");
         PREFIX_SET.add("flexmark");
+        PREFIX_SET.add("netty");
         PREFIX_SET.add("hibernate-core");
         PREFIX_SET.add("springdoc-openapi");
-        PREFIX_SET.add("netty");
         PREFIX_SET.add("poi");
         PREFIX_SET.add("commons-io");
         PREFIX_SET.add("commons-lang");
@@ -58,6 +58,7 @@ public class StartsWithFilterChain implements FilterChain {
         PREFIX_SET.add("jaxb");
         PREFIX_SET.add("byte-buddy");
         PREFIX_SET.add("rxjava");
+        PREFIX_SET.add("kotlin");
         PREFIX_SET.add("checker-qual");
         PREFIX_SET.add("nacos");
         PREFIX_SET.add("junit");
@@ -66,6 +67,8 @@ public class StartsWithFilterChain implements FilterChain {
         PREFIX_SET.add("spring-oxm");
         PREFIX_SET.add("spring-data-redis");
         PREFIX_SET.add("json");
+        PREFIX_SET.add("springfox");
+        PREFIX_SET.add("elasticsearch");
         PREFIX_SET.add("guava");
     }
 

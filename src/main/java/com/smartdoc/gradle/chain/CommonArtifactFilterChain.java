@@ -54,6 +54,7 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "forest-spring-boot-starter":
             case "HikariCP":
             case "mysql-connector-java":
+            case "mysql-connector-j":
             case "classmate":
             case "commons-codec":
             case "commons-lang3":
@@ -62,8 +63,8 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "commons-beanutils-core":
             case "spring-web":
             case "spring-webmvc":
+            case "spring-r2dbc":
             case "hibernate-validator":
-            case "hibernate-core":
             case "xstream":
             case "spring-tx":
             case "javassist":
@@ -79,11 +80,9 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "xml-apis":
             case "mchange-commons-java":
             case "hadoop-common":
-            case "txw2":
-            case "jakarta.xml.bind-api":
-            case "smart-doc-gradle-plugin":
             case "druid":
             case "mssql-jdbc":
+            case "easyexcel":
                 return true;
             default:
                 return this.ignore(filterChain, artifact);
