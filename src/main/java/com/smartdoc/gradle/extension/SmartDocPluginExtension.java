@@ -23,6 +23,7 @@
 package com.smartdoc.gradle.extension;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,7 +50,7 @@ public class SmartDocPluginExtension {
 
     /**
      * Smart doc config file, like smart-doc.json
-     * @return
+     * @return Config File
      */
     public File getConfigFile() {
         return configFile;
@@ -71,6 +72,10 @@ public class SmartDocPluginExtension {
         return this;
     }
 
+    /**
+     * Get sets of exclude
+     * @return Set
+     */
     public Set<String> getExclude() {
         return exclude;
     }
@@ -81,9 +86,7 @@ public class SmartDocPluginExtension {
      * @return SmartDocPluginExtension
      */
     public SmartDocPluginExtension include(String... includes) {
-        for (String include : includes) {
-            this.include.add(include);
-        }
+        this.include.addAll(Arrays.asList(includes));
         return this;
     }
 
