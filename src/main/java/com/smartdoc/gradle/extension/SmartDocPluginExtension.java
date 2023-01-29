@@ -66,9 +66,7 @@ public class SmartDocPluginExtension {
      * @return SmartDocPluginExtension
      */
     public SmartDocPluginExtension exclude(String... excludes) {
-        for (String exclude : excludes) {
-            this.exclude.add(exclude);
-        }
+        this.exclude.addAll(Arrays.asList(excludes));
         return this;
     }
 
