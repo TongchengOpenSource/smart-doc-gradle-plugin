@@ -23,8 +23,8 @@
 package com.smartdoc.gradle.task;
 
 import com.power.common.constants.Charset;
+import com.power.common.util.CollectionUtil;
 import com.power.common.util.RegexUtil;
-import com.power.doc.constants.DocGlobalConstants;
 import com.power.doc.helper.JavaProjectBuilderHelper;
 import com.power.doc.model.ApiConfig;
 import com.smartdoc.gradle.constant.GlobalConstants;
@@ -32,6 +32,8 @@ import com.smartdoc.gradle.extension.SmartDocPluginExtension;
 import com.smartdoc.gradle.model.CustomArtifact;
 import com.smartdoc.gradle.util.ArtifactFilterUtil;
 import com.smartdoc.gradle.util.GradleUtil;
+import com.smartdoc.gradle.util.I18nMsgUtil;
+import com.smartdoc.gradle.util.SourceSetUtil;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.library.SortedClassLibraryBuilder;
 import org.gradle.api.DefaultTask;
@@ -53,7 +55,12 @@ import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -67,7 +74,7 @@ public abstract class DocBaseTask extends DefaultTask {
      */
     protected JavaProjectBuilder javaProjectBuilder;
 
-    private static String MSG = "The loaded local code path is ";
+    private static final String MSG = I18nMsgUtil.get("code_loading_msg");
 
     /**
      * Abstract execute action
@@ -85,7 +92,7 @@ public abstract class DocBaseTask extends DefaultTask {
     public void action() {
         Logger logger = getLogger();
         Project project = getProject();
-        logger.quiet("Smart-doc Starting Create API Documentation.");
+        logger.quiet(I18nMsgUtil.get("launch_the_welcome_message"));
         SmartDocPluginExtension pluginExtension = project.getExtensions().getByType(SmartDocPluginExtension.class);
         Set<String> excludes = pluginExtension.getExclude();
         Set<String> includes = pluginExtension.getInclude();
@@ -110,7 +117,7 @@ public abstract class DocBaseTask extends DefaultTask {
         if (!path.isAbsolute()) {
             apiConfig.setOutPath(project.getProjectDir().getPath() + "/" + apiConfig.getOutPath());
         }
-        logger.quiet("API Documentation output to " + apiConfig.getOutPath());
+        logger.quiet(I18nMsgUtil.get("document_output_prompts") + apiConfig.getOutPath());
         this.executeAction(apiConfig, javaProjectBuilder, logger);
     }
 
@@ -128,10 +135,17 @@ public abstract class DocBaseTask extends DefaultTask {
         javaDocBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         javaDocBuilder.setErrorHandler(e -> getLogger().warn(e.getMessage()));
         //addSourceTree
-        String projectDir = project.getProjectDir().getPath();
-        String projectCodePath = String.join(DocGlobalConstants.FILE_SEPARATOR, projectDir, DocGlobalConstants.PROJECT_CODE_PATH);
-        getLogger().quiet(MSG + projectCodePath);
-        javaDocBuilder.addSourceTree(new File(projectCodePath));
+        Set<File> set = SourceSetUtil.getMainJava(project);
+        if (CollectionUtil.isNotEmpty(set)) {
+            for (File file : set) {
+                javaDocBuilder.addSourceTree(file);
+            }
+        }
+        SourceSetUtil.getDefaultMainJava(project)
+            .ifPresent(src -> {
+                getLogger().quiet(MSG + src);
+                javaDocBuilder.addSourceTree(src);
+            });
         //sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
 //        javaDocBuilder.addClassLoader(ClassLoaderUtil.getRuntimeClassLoader(project));
         loadSourcesDependencies(javaDocBuilder, project, excludes, includes);
