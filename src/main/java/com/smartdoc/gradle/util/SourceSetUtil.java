@@ -37,8 +37,7 @@ import java.util.Set;
 /**
  * GradleSourceSetUtil
  *
- * @author 冰凝
- * @date 2023-03-13 23:10
+ * @author 冰凝 2023-03-13 23:10
  */
 public interface SourceSetUtil {
 
@@ -46,7 +45,7 @@ public interface SourceSetUtil {
     String MAIN = "main";
 
     /**
-     * <h3>inquire {@code SourceSet} configure the custom source code root directory</h3>
+     * inquire {@code SourceSet} configure the custom source code root directory
      *
      * @implNote limited support:
      * not supported {@code SourceSet} inclusions and exclusions are configured in {@link SourceDirectorySet#getExcludes()} {@link SourceDirectorySet#getIncludes()}
@@ -77,7 +76,7 @@ public interface SourceSetUtil {
     }
 
     /**
-     * try using the default project structure: <PROJECT FOLDER>src/main/java
+     * try using the default project structure: src/main/java
      */
     static Optional<File> getDefaultMainJava(Project project) {
         String projectDir = project.getProjectDir().getPath();

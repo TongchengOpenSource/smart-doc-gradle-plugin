@@ -19,21 +19,17 @@ plugins {
 }
 
 group 'com.github.shalousun'
-version '2.6.6'
+version '2.6.7'
 
 sourceCompatibility = 1.8
 
 repositories {
-    maven {
-        allowInsecureProtocol = true
-        url 'http://localhost:8081/nexus/content/groups/public/'
-    }
     maven { url 'https://maven.aliyun.com/repository/public' }
     mavenCentral()
 }
 
 dependencies {
-    implementation group: 'com.github.shalousun', name: 'smart-doc', version: '2.6.6'
+    implementation group: 'com.github.shalousun', name: 'smart-doc', version: '2.6.7'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
@@ -44,6 +40,17 @@ task javadocJar(type: Jar) {
     from javadoc
 }
 
+javadoc {
+    configure(options) {
+        tags(
+                'todo:X"',
+                'apiNote:a:"API Note:"',
+                'implSpec:a:"Implementation Requirements:"',
+                'implNote:a:"Implementation Note:"',
+        )
+    }
+}
+
 task sourcesJar(type: Jar) {
     archiveClassifier = 'sources'
     from sourceSets.main.allSource
@@ -51,10 +58,6 @@ task sourcesJar(type: Jar) {
 
 artifacts {
     archives javadocJar, sourcesJar
-}
-
-signing {
-    sign configurations.archives
 }
 
 gradlePlugin {

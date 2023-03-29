@@ -28,18 +28,13 @@ import java.util.ResourceBundle;
  * I18nMessagesUtil
  *
  * @author 冰凝
- * @date 2023-03-14 00:11
+ * 2023-03-14 00:11
  */
 public interface I18nMsgUtil {
     ResourceBundle LOG_MESSAGE = ResourceBundle.getBundle("LogPromptMessages");
 
     /**
      * Abbreviations, instead of full writing: 👇
-     * {@snippet lang = java:
-     * I18nMsgUtil.LOG_MESSAGE.getString("<KEY>")
-     * // shorthand
-     * I18nMsgUtil.get("<KEY>")
-     *}
      */
     @SuppressWarnings("JavadocDeclaration")
     static String get(String key) {
