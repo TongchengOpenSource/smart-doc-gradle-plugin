@@ -37,7 +37,7 @@ public class CustomArtifact {
     /**
      * Artifact Group
      */
-    private String group;
+    private String groupId;
 
     /**
      * Artifact Version
@@ -80,12 +80,12 @@ public class CustomArtifact {
         return this;
     }
 
-    public String getGroup() {
-        return group;
+    public String getGroupId() {
+        return groupId;
     }
 
     public CustomArtifact setGroup(String group) {
-        this.group = group;
+        this.groupId = group;
         return this;
     }
 

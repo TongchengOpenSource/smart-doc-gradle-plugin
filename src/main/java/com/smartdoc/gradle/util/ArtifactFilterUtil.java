@@ -25,9 +25,6 @@ package com.smartdoc.gradle.util;
 import com.smartdoc.gradle.chain.*;
 import com.smartdoc.gradle.model.CustomArtifact;
 
-import java.util.Set;
-import java.util.regex.Pattern;
-
 
 /**
  * Artifact filter util
@@ -43,12 +40,17 @@ public class ArtifactFilterUtil {
      * @return boolean
      */
     public static boolean ignoreArtifact(CustomArtifact artifact) {
+        FilterChain groupFilterChain = new GroupIdFilterChain();
         FilterChain startsWithFilterChain = new StartsWithFilterChain();
         FilterChain containsFilterChain = new ContainsFilterChain();
         FilterChain commonArtifactFilterChain = new CommonArtifactFilterChain();
+        FilterChain springBootArtifactFilterChain = new SpringBootArtifactFilterChain();
+
+        groupFilterChain.setNext(startsWithFilterChain);
         startsWithFilterChain.setNext(containsFilterChain);
         containsFilterChain.setNext(commonArtifactFilterChain);
-        return startsWithFilterChain.ignoreArtifactById(artifact);
+        commonArtifactFilterChain.setNext(springBootArtifactFilterChain);
+        return groupFilterChain.ignoreArtifactById(artifact);
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * smart-doc https://github.com/shalousun/smart-doc
+ * smart-doc https://github.com/smart-doc-group/smart-doc
  *
  * Copyright (C) 2018-2023 smart-doc
  *
@@ -22,7 +22,6 @@
  */
 package com.smartdoc.gradle.chain;
 
-
 import com.smartdoc.gradle.model.CustomArtifact;
 
 /**
@@ -41,12 +40,6 @@ public class CommonArtifactFilterChain implements FilterChain {
     public boolean ignoreArtifactById(CustomArtifact artifact) {
         String artifactId = artifact.getArtifactId();
         switch (artifactId) {
-            case "aspectjweaver":
-            case "fastjson":
-            case "fastjson2":
-            case "bcprov-jdk15on":
-            case "bcpkix-jdk15on":
-            case "lombok":
             case "jsqlparser":
             case "disruptor":
             case "snakeyaml":
@@ -57,13 +50,15 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "mysql-connector-j":
             case "classmate":
             case "commons-codec":
-            case "commons-lang3":
-            case "commons-text":
             case "commons-beanutils":
             case "commons-beanutils-core":
             case "spring-web":
             case "spring-webmvc":
             case "spring-r2dbc":
+            case "spring-orm":
+            case "spring-data-jpa":
+            case "spring-context-support":
+            case "spring-aspects":
             case "hibernate-validator":
             case "xstream":
             case "spring-tx":
@@ -71,18 +66,27 @@ public class CommonArtifactFilterChain implements FilterChain {
             case "javafaker":
             case "qdox":
             case "gson":
-            case "netty-all":
-            case "javacv-platform":
             case "antlr4-runtime":
-            case "jetty":
             case "velocity":
             case "beetl":
             case "xml-apis":
             case "mchange-commons-java":
-            case "hadoop-common":
             case "druid":
             case "mssql-jdbc":
             case "easyexcel":
+            case "zookeeper":
+            case "okio":
+            case "okhttp":
+            case "joda-time":
+            case "protobuf-java":
+            case "jenkins-client":
+            case "jose4j":
+            case "gson-fire":
+            case "joda-convert":
+            case "kafka-clients":
+            case "kubernetes-client":
+            case "client-java-proto":
+            case "dynamic-datasource-spring-boot-starter":
                 return true;
             default:
                 return this.ignore(filterChain, artifact);

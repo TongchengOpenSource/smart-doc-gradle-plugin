@@ -1,5 +1,5 @@
 /*
- * smart-doc https://github.com/shalousun/smart-doc
+ * smart-doc https://github.com/smart-doc-group/smart-doc
  *
  * Copyright (C) 2018-2023 smart-doc
  *
@@ -34,15 +34,17 @@ public class ContainsFilterChain implements FilterChain {
 
     private final static Set<String> CONTAINS_SET = new HashSet<>();
 
-    private FilterChain filterChain;
-
     static {
         CONTAINS_SET.add("log4j");
         CONTAINS_SET.add("logback");
         CONTAINS_SET.add("slf4j");
         CONTAINS_SET.add("swagger");
         CONTAINS_SET.add("dom4j");
+        CONTAINS_SET.add("jsr");
+        CONTAINS_SET.add("jtds");
     }
+
+    private FilterChain filterChain;
 
     @Override
     public void setNext(FilterChain nextInChain) {

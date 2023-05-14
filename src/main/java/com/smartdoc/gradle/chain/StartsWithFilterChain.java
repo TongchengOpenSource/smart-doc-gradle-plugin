@@ -1,5 +1,5 @@
 /*
- * smart-doc https://github.com/shalousun/smart-doc
+ * smart-doc https://github.com/smart-doc-group/smart-doc
  *
  * Copyright (C) 2018-2023 smart-doc
  *
@@ -33,8 +33,6 @@ import java.util.Set;
 public class StartsWithFilterChain implements FilterChain {
 
     private final static Set<String> PREFIX_SET = new HashSet<>();
-
-    private FilterChain filterChain;
 
     static {
         PREFIX_SET.add("maven");
@@ -70,7 +68,15 @@ public class StartsWithFilterChain implements FilterChain {
         PREFIX_SET.add("springfox");
         PREFIX_SET.add("elasticsearch");
         PREFIX_SET.add("guava");
+        PREFIX_SET.add("fastjson");
+        PREFIX_SET.add("bcprov");
+        PREFIX_SET.add("aws-java-sdk");
+        PREFIX_SET.add("hadoop");
+        PREFIX_SET.add("xml");
+        PREFIX_SET.add("sundr-codegen");
     }
+
+    private FilterChain filterChain;
 
     @Override
     public void setNext(FilterChain nextInChain) {
