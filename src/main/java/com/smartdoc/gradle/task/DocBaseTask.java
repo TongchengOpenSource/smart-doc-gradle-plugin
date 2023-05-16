@@ -125,7 +125,7 @@ public abstract class DocBaseTask extends DefaultTask {
     /**
      * Classloading
      *
-     * @return
+     * @return  JavaProjectBuilder
      */
     private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes, Set<String> includes) {
 //        JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
@@ -146,7 +146,7 @@ public abstract class DocBaseTask extends DefaultTask {
                 getLogger().quiet(MSG + src);
                 javaDocBuilder.addSourceTree(src);
             });
-        //sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
+//        sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
 //        javaDocBuilder.addClassLoader(ClassLoaderUtil.getRuntimeClassLoader(project));
         loadSourcesDependencies(javaDocBuilder, project, excludes, includes);
         return javaDocBuilder;
@@ -172,7 +172,7 @@ public abstract class DocBaseTask extends DefaultTask {
                         .setArtifactId(version.getId().getName())
                         .setVersion(version.getId().getVersion());
                 // add local source
-                String artifactName = moduleArtifact.getGroup() + ":" + moduleArtifact.getArtifactId();
+                String artifactName = moduleArtifact.getGroupId() + ":" + moduleArtifact.getArtifactId();
                 addModuleSourceTree(javaDocBuilder, allModules, artifactName);
 
             }
@@ -180,7 +180,7 @@ public abstract class DocBaseTask extends DefaultTask {
             if (ArtifactFilterUtil.ignoreArtifact(artifact) || ArtifactFilterUtil.ignoreSpringBootArtifactById(artifact)) {
                 continue;
             }
-            String artifactName = artifact.getGroup() + ":" + artifact.getArtifactId();
+            String artifactName = artifact.getGroupId() + ":" + artifact.getArtifactId();
             if (RegexUtil.isMatches(excludes, artifactName)) {
                 continue;
             }
