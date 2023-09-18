@@ -128,7 +128,6 @@ public abstract class DocBaseTask extends DefaultTask {
      * @return  JavaProjectBuilder
      */
     private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes, Set<String> includes) {
-//        JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
         SortedClassLibraryBuilder classLibraryBuilder = new SortedClassLibraryBuilder();
         classLibraryBuilder.setErrorHander(e -> getLogger().error("Parse error", e));
         JavaProjectBuilder javaDocBuilder = JavaProjectBuilderHelper.create(classLibraryBuilder);
@@ -146,8 +145,6 @@ public abstract class DocBaseTask extends DefaultTask {
                 getLogger().quiet(MSG + src);
                 javaDocBuilder.addSourceTree(src);
             });
-//        sources.stream().map(File::new).forEach(javaDocBuilder::addSourceTree);
-//        javaDocBuilder.addClassLoader(ClassLoaderUtil.getRuntimeClassLoader(project));
         loadSourcesDependencies(javaDocBuilder, project, excludes, includes);
         return javaDocBuilder;
     }
@@ -211,7 +208,7 @@ public abstract class DocBaseTask extends DefaultTask {
     }
 
     /**
-     * reference https://github.com/sfauvel/livingdocumentation
+     * reference https://github.com/jboz/living-documentation
      *
      * @param javaDocBuilder JavaProjectBuilder
      * @param artifact       Artifact
@@ -223,7 +220,7 @@ public abstract class DocBaseTask extends DefaultTask {
                 String name = entry.getName();
                 if (name.endsWith(".java") && !name.endsWith("/package-info.java")) {
                     javaDocBuilder.addSource(
-                            new URL("jar:" + artifact.getFile().toURI().toURL().toString() + "!/" + name));
+                            new URL("jar:" + artifact.getFile().toURI().toURL() + "!/" + name));
                 }
             }
         } catch (Throwable e) {
