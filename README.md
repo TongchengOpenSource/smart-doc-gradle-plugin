@@ -45,11 +45,11 @@ apply plugin: "com.github.shalousun.smart-doc"
 ```
 ### Plugin options
 
-| Option | Default value | Description |
-| ------ | ------------- | ----------- |
-|configFile|src/main/resources/default.json||
-|exclude||exclude artifact,usage:exclude 'org.springframework.boot:spring-boot-starter-tomcat' |
-|include||Let the plugin download the specified java lib source,usage:include 'org.springframework.boot:spring-boot-starter-tomcat' |
+| Option     | Default value                   | Description                                                                                                               |
+|------------|---------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| configFile | src/main/resources/default.json |                                                                                                                           |
+| exclude    |                                 | exclude artifact,usage:exclude 'org.springframework.boot:spring-boot-starter-tomcat'                                      |
+| include    |                                 | Let the plugin download the specified java lib source,usage:include 'org.springframework.boot:spring-boot-starter-tomcat' |
 
 Example setting of options:
 ```
@@ -168,4 +168,4 @@ These are only part of the companies using smart-doc, for reference only. If you
 ## License
 smart-doc-gradle-plugin is under the Apache 2.0 license.  See the [LICENSE](https://raw.githubusercontent.com/shalousun/smart-doc-maven-plugin/master/LICENSE) file for details.
 ## Contact
-Email： 836575280@qq.com
+Email： opensource@ly.com
