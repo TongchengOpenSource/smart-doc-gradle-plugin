@@ -18,7 +18,7 @@ plugins {
     id "com.gradle.plugin-publish" version "0.12.0"
 }
 
-group 'com.github.shalousun'
+group 'com.ly.smart-doc'
 version '2.7.7'
 
 sourceCompatibility = 1.8
@@ -63,15 +63,15 @@ artifacts {
 gradlePlugin {
     plugins {
         greetingsPlugin {
-            id = 'com.github.shalousun.smart-doc'
-            implementationClass = 'com.smartdoc.gradle.plugin.SmartDocPlugin'
+            id = 'com.ly.smart-doc'
+            implementationClass = 'com.ly.doc.gradle.plugin.SmartDocPlugin'
         }
     }
 }
 // publish to https://plugins.gradle.org/
 pluginBundle {
-    website = 'https://github.com/smart-doc-group/smart-doc-gradle-plugin'
-    vcsUrl = 'https://github.com/smart-doc-group/smart-doc-gradle-plugin'
+    website = 'https://github.com/TongchengOpenSource/smart-doc-gradle-plugin'
+    vcsUrl = 'https://github.com/TongchengOpenSource/smart-doc-gradle-plugin'
     description = 'smart-doc gradle plugin'
     tags = ['smart-doc']
     plugins {
