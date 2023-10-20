@@ -19,7 +19,7 @@ smart-doc-gradle-plugin will also make smart-doc's ability to generate API docum
 ## Best Practice
 smart-doc + [Torna](http://torna.cn) form an industry-leading document generation and management solution, using smart-doc to complete Java source code analysis and extract annotations to generate API documents without intrusion, and automatically push the documents to the Torna enterprise-level interface document management platform.
 
-![smart-doc+torna](https://raw.githubusercontent.com/smart-doc-groupp/smart-doc/master/images/smart-doc-torna-en.png)
+![smart-doc+torna](https://raw.githubusercontent.com/smart-doc-group/smart-doc/master/images/smart-doc-torna-en.png)
 ## Getting started
 ### Add plugin
 Using the plugins DSL:
