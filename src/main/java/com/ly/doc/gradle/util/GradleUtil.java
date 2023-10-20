@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.power.common.util.FileUtil;
 import com.power.common.util.StringUtil;
-import com.power.doc.model.*;
+import com.ly.doc.model.*;
 import org.gradle.api.Project;
 import org.gradle.api.logging.Logger;
 

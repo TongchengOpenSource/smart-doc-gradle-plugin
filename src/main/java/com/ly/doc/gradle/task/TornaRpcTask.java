@@ -22,8 +22,8 @@
  */
 package com.ly.doc.gradle.task;
 
-import com.power.doc.builder.rpc.RpcTornaBuilder;
-import com.power.doc.model.ApiConfig;
+import com.ly.doc.builder.rpc.RpcTornaBuilder;
+import com.ly.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
 

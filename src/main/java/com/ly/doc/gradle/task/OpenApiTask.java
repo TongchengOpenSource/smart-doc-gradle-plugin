@@ -23,8 +23,8 @@
 package com.ly.doc.gradle.task;
 
 
-import com.power.doc.builder.openapi.OpenApiBuilder;
-import com.power.doc.model.ApiConfig;
+import com.ly.doc.builder.openapi.OpenApiBuilder;
+import com.ly.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
 

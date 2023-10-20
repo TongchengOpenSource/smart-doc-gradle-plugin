@@ -23,7 +23,7 @@
 package com.ly.doc.gradle.util;
 
 import com.power.common.util.CollectionUtil;
-import com.power.doc.constants.DocGlobalConstants;
+import com.ly.doc.constants.DocGlobalConstants;
 import org.gradle.api.Project;
 import org.gradle.api.file.SourceDirectorySet;
 import org.gradle.api.internal.tasks.DefaultSourceSetContainer;

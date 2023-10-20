@@ -1,6 +1,6 @@
 <h1 align="center"><a href="https://github.com/shalousun/smart-doc-gradle-plugin" target="_blank">Smart-Doc Gradle Plugin</a></h1>
 
-![gradle](https://img.shields.io/gradle-plugin-portal/v/com.github.shalousun.smart-doc)
+![gradle](https://img.shields.io/gradle-plugin-portal/v/com.ly.smart-doc)
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 ![closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/shalousun/smart-doc-gradle-plugin)
 ![java version](https://img.shields.io/badge/JAVA-1.8+-green.svg)
@@ -25,7 +25,7 @@ smart-doc + [Torna](http://torna.cn) 组成行业领先的文档生成和管理�
 Using the plugins DSL:
 ```
 plugins {
-  id "com.github.shalousun.smart-doc" version "[最新版本]"
+  id "com.ly.smart-doc" version "[最新版本]"
 }
 ```
 Using legacy plugin application:
@@ -37,10 +37,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.shalousun:smart-doc-gradle-plugin:[最新版本]'
+        classpath 'com.ly.smart-doc:smart-doc-gradle-plugin:[最新版本]'
     }
 }
-apply(plugin = "com.github.shalousun.smart-doc")
+apply(plugin = "com.ly.smart-doc")
 ```
 ### Plugin options
 
@@ -68,7 +68,7 @@ smartdoc {
 
 ```
 subprojects{
-    apply plugin: 'com.github.shalousun.smart-doc'
+    apply plugin: 'com.ly.smart-doc'
     smartdoc {
         //
         configFile = file("src/main/resources/smart-doc.json")
@@ -153,7 +153,7 @@ smart-doc-gradle-plugin is under the Apache 2.0 license.  See the [LICENSE](htt
 
 **注意：** smart-doc源代码文件全部带有版权注释，使用关键代码二次开源请保留原始版权，否则后果自负！
 ## Who is using
-> 排名不分先后，更多接入公司，欢迎在[https://gitee.com/smart-doc-team/smart-doc/issues/I1594T](https://gitee.com/smart-doc-team/smart-doc/issues/I1594T)登记（仅供开源用户参考）
+> 排名不分先后，更多接入公司，欢迎在[用户登记](https://github.com/TongchengOpenSource/smart-doc/issues/12)登记（仅供开源用户参考）
 
 ![iFLYTEK](https://gitee.com/smart-doc-team/smart-doc/raw/master/images/known-users/iflytek.png)
 &nbsp;&nbsp;<img src="https://gitee.com/smart-doc-team/smart-doc/raw/master/images/known-users/oneplus.png" title="一加" width="83px" height="83px"/>

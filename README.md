@@ -1,6 +1,6 @@
 <h1 align="center">Smart-Doc Gradle Plugin</h1>
 
-![gradle](https://img.shields.io/gradle-plugin-portal/v/com.github.shalousun.smart-doc)
+![gradle](https://img.shields.io/gradle-plugin-portal/v/com.ly.smart-doc)
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 ![number of issues closed](https://img.shields.io/github/issues-closed-raw/shalousun/smart-doc-gradle-plugin)
 ![closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/shalousun/smart-doc-gradle-plugin)
@@ -25,7 +25,7 @@ smart-doc + [Torna](http://torna.cn) form an industry-leading document generatio
 Using the plugins DSL:
 ```
 plugins {
-  id "com.github.shalousun.smart-doc" version "[latest]"
+  id "com.ly.smart-doc" version "[latest]"
 }
 ```
 Using legacy plugin application:
@@ -37,11 +37,11 @@ buildscript {
     }
   }
   dependencies {
-    classpath "com.github.shalousun:smart-doc-gradle-plugin:[latest]"
+    classpath "com.ly.smart-doc:smart-doc-gradle-plugin:[latest]"
   }
 }
 
-apply plugin: "com.github.shalousun.smart-doc"
+apply plugin: "com.ly.smart-doc"
 ```
 ### Plugin options
 
@@ -151,7 +151,7 @@ gradle publish
 - [Smart-doc manual](https://smart-doc-group.github.io/#/)
 
 ## Who is using
-These are only part of the companies using smart-doc, for reference only. If you are using smart-doc, please [add your company here](https://github.com/shalousun/smart-doc/issues/12) to tell us your scenario to make smart-doc better.
+These are only part of the companies using smart-doc, for reference only. If you are using smart-doc, please [add your company here](https://github.com/TongchengOpenSource/smart-doc/issues/12) to tell us your scenario to make smart-doc better.
 
 ![IFLYTEK](https://raw.githubusercontent.com/shalousun/smart-doc/master/images/known-users/iflytek.png)
 &nbsp;&nbsp;<img src="https://raw.githubusercontent.com/smart-doc-group/smart-doc/master/images/known-users/oneplus.png" title="OnePlus" width="83px" height="83px"/>
