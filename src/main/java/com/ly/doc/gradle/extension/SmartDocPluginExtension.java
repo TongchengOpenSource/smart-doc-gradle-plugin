@@ -47,6 +47,10 @@ public class SmartDocPluginExtension {
      */
     private final Set<String> include = new HashSet<>();
 
+    /**
+     * Whether build documents incrementally or not
+     */
+    private boolean increment = false;
 
     /**
      * Smart doc config file, like smart-doc.json
@@ -90,5 +94,13 @@ public class SmartDocPluginExtension {
 
     public Set<String> getInclude() {
         return include;
+    }
+
+    public boolean isIncrement() {
+        return increment;
+    }
+
+    public void setIncrement(boolean increment) {
+        this.increment = increment;
     }
 }

@@ -102,7 +102,8 @@ public abstract class DocBaseTask extends DefaultTask {
         if (Objects.isNull(file)) {
             file = new File(GlobalConstants.DEFAULT_CONFIG);
         }
-        ApiConfig apiConfig = GradleUtil.buildConfig(file, project, logger);
+        boolean increment = pluginExtension.isIncrement();
+        ApiConfig apiConfig = GradleUtil.buildConfig(file, project, increment, logger);
         if (apiConfig == null) {
             logger.quiet(GlobalConstants.ERROR_MSG);
             return;
