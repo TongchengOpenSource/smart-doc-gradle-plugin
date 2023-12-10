@@ -44,6 +44,8 @@ public class TaskConstants {
         taskMap.put(GlobalConstants.REST_ADOC_TASK, RestAdocTask.class);
         // create markdown
         taskMap.put(GlobalConstants.REST_MARKDOWN_TASK, RestMarkdownTask.class);
+        // create jmeter
+        taskMap.put(GlobalConstants.JMETER_TASK, JMeterTask.class);
         // create postman collection
         taskMap.put(GlobalConstants.POSTMAN_TASK, PostmanTask.class);
         // create open api
