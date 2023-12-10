@@ -58,6 +58,11 @@ public interface GlobalConstants {
     String REST_MARKDOWN_TASK = "smartDocRestMarkdown";
 
     /**
+     * Generate JMeter test document
+     */
+    String JMETER_TASK = "smartDocJmeter";
+
+    /**
      * Generate Postman document
      */
     String POSTMAN_TASK = "smartDocPostman";
