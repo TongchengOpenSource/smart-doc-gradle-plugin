@@ -96,6 +96,10 @@ public interface GlobalConstants {
      * Generate rpc document push to torna
      */
     String TORNA_RPC_TASK = "tornaRpc";
+    /**
+     * Generate rest document push to word
+     */
+    String WORD_REST_TASK = "wordRest";
 
 
     /**
