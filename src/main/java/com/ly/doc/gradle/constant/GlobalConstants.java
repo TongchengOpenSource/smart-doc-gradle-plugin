@@ -99,7 +99,7 @@ public interface GlobalConstants {
     /**
      * Generate rest document push to word
      */
-    String WORD_REST_TASK = "wordRest";
+    String WORD_TASK = "word";
 
 
     /**

@@ -61,6 +61,6 @@ public class TaskConstants {
         // create torna rpc
         taskMap.put(GlobalConstants.TORNA_RPC_TASK,TornaRpcTask.class);
         // create word rest
-        taskMap.put(GlobalConstants.WORD_REST_TASK,WordRestTask.class);
+        taskMap.put(GlobalConstants.WORD_TASK, WordTask.class);
     }
 }
