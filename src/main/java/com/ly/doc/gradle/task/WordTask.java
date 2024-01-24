@@ -30,7 +30,7 @@ import org.gradle.api.logging.Logger;
 /**
  * @author yu 2021/3/11.
  */
-public class WordRestTask extends DocBaseTask {
+public class WordTask extends DocBaseTask {
 
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
