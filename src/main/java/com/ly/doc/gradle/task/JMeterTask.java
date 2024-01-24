@@ -29,11 +29,11 @@ import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
 
 /**
-* @author: Lansg
-* @date: 2023/12/10 12:54
-* @description: Support for JMeter
-*/
-public class JMeterTask extends DocBaseTask{
+ * Support for JMeter
+ *
+ * @author Lansg 2023/12/10 12:54
+ */
+public class JMeterTask extends DocBaseTask {
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {

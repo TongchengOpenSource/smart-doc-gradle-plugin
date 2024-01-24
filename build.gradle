@@ -19,7 +19,7 @@ plugins {
 }
 
 group 'com.ly.smart-doc'
-version '3.0.0'
+version '3.0.1'
 
 sourceCompatibility = 1.8
 
@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'com.ly.smart-doc', name: 'smart-doc', version: '3.0.0'
+    implementation group: 'com.ly.smart-doc', name: 'smart-doc', version: '3.0.1'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"

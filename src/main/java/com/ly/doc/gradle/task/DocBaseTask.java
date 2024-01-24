@@ -34,6 +34,7 @@ import com.ly.doc.gradle.util.ArtifactFilterUtil;
 import com.ly.doc.gradle.util.GradleUtil;
 import com.ly.doc.gradle.util.I18nMsgUtil;
 import com.ly.doc.gradle.util.SourceSetUtil;
+import com.power.common.util.StringUtil;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.library.SortedClassLibraryBuilder;
 import org.gradle.api.DefaultTask;
@@ -107,6 +108,9 @@ public abstract class DocBaseTask extends DefaultTask {
         if (apiConfig == null) {
             logger.quiet(GlobalConstants.ERROR_MSG);
             return;
+        }
+        if (StringUtil.isEmpty(apiConfig.getCodePath())) {
+            apiConfig.setCodePath(GlobalConstants.SRC_MAIN_JAVA_PATH);
         }
         if (Objects.nonNull(apiConfig.getRpcConsumerConfig())) {
             Path rpcConsumerPath = Paths.get(apiConfig.getRpcConsumerConfig());
