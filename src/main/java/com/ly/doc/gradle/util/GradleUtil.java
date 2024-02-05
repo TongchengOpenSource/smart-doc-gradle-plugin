@@ -64,7 +64,7 @@ public class GradleUtil {
      * @param log        gradle plugin log
      * @return com.power.doc.model.ApiConfig
      */
-    public static ApiConfig buildConfig(File configFile, Project project, boolean increment, Logger log) {
+    public static ApiConfig buildConfig(File configFile, Project project, Boolean increment, Logger log) {
         try {
             ClassLoader classLoader = ClassLoaderUtil.getRuntimeClassLoader(project);
             String data = FileUtil.getFileContent(new FileInputStream(configFile));
@@ -110,8 +110,11 @@ public class GradleUtil {
                 apiConfig.setProjectName(project.getName());
             }
             addSourcePaths(project, apiConfig, log);
+            if (Objects.nonNull(increment)) {
+                // overwrite by plugin
+                apiConfig.setIncrement(increment);
+            }
 
-            apiConfig.setIncrement(increment);
             apiConfig.setBaseDir(project.getProjectDir().getAbsolutePath());
 
             return apiConfig;

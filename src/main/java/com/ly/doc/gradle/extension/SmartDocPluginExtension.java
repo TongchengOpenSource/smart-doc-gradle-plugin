@@ -50,7 +50,7 @@ public class SmartDocPluginExtension {
     /**
      * Whether build documents incrementally or not
      */
-    private boolean increment = false;
+    private Boolean increment = false;
 
     /**
      * Smart doc config file, like smart-doc.json
@@ -96,11 +96,11 @@ public class SmartDocPluginExtension {
         return include;
     }
 
-    public boolean isIncrement() {
+    public Boolean getIncrement() {
         return increment;
     }
 
-    public void setIncrement(boolean increment) {
+    public void setIncrement(Boolean increment) {
         this.increment = increment;
     }
 }
