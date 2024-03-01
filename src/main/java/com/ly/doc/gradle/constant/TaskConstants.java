@@ -62,5 +62,7 @@ public class TaskConstants {
         taskMap.put(GlobalConstants.TORNA_RPC_TASK,TornaRpcTask.class);
         // create word rest
         taskMap.put(GlobalConstants.WORD_TASK, WordTask.class);
+        // create Swagger
+        taskMap.put(GlobalConstants.Swagger_TASK, SwaggerTask.class);
     }
 }

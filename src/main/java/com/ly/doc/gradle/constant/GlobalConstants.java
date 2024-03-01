@@ -101,6 +101,11 @@ public interface GlobalConstants {
      */
     String WORD_TASK = "word";
 
+    /**
+     * Generate Swagger document
+     */
+    String Swagger_TASK = "swagger";
+
 
     /**
      * Plugin extension name
