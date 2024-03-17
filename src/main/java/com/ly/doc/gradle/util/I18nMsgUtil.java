@@ -1,7 +1,7 @@
 /*
  * smart-doc
  *
- * Copyright (C) 2018-2023 smart-doc
+ * Copyright (C) 2018-2024 smart-doc
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -35,6 +35,9 @@ public interface I18nMsgUtil {
 
     /**
      * Abbreviations, instead of full writing: 👇
+     *
+     * @param key key
+     * @return value
      */
     @SuppressWarnings("JavadocDeclaration")
     static String get(String key) {

@@ -1,7 +1,7 @@
 /*
  * smart-doc
  *
- * Copyright (C) 2018-2023 smart-doc
+ * Copyright (C) 2018-2024 smart-doc
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -35,10 +35,10 @@ public class TaskConstants {
     /**
      * Map of Gradle Task
      */
-    public static Map<String, Class> taskMap = new HashMap<>();
+    public static Map<String, Class<?>> taskMap = new HashMap<>();
 
     static {
-        //create html
+        // create html
         taskMap.put(GlobalConstants.REST_HTML_TASK, RestHtmlTask.class);
         // create adoc
         taskMap.put(GlobalConstants.REST_ADOC_TASK, RestAdocTask.class);
@@ -50,19 +50,21 @@ public class TaskConstants {
         taskMap.put(GlobalConstants.POSTMAN_TASK, PostmanTask.class);
         // create open api
         taskMap.put(GlobalConstants.OPEN_API_TASK, OpenApiTask.class);
-        //create rpc html
+        // create rpc html
         taskMap.put(GlobalConstants.RPC_HTML_TASK, RpcHtmlTask.class);
         // create rpc adoc
         taskMap.put(GlobalConstants.RPC_ADOC_TASK, RpcAdocTask.class);
-        // create rpc markdown
+        // create rpc Markdown
         taskMap.put(GlobalConstants.RPC_MARKDOWN_TASK, RpcMarkdownTask.class);
         // create torna rest
-        taskMap.put(GlobalConstants.TORNA_REST_TASK,TornaRestTask.class);
+        taskMap.put(GlobalConstants.TORNA_REST_TASK, TornaRestTask.class);
         // create torna rpc
-        taskMap.put(GlobalConstants.TORNA_RPC_TASK,TornaRpcTask.class);
+        taskMap.put(GlobalConstants.TORNA_RPC_TASK, TornaRpcTask.class);
         // create word rest
         taskMap.put(GlobalConstants.WORD_TASK, WordTask.class);
         // create Swagger
-        taskMap.put(GlobalConstants.Swagger_TASK, SwaggerTask.class);
+        taskMap.put(GlobalConstants.SWAGGER_TASK, SwaggerTask.class);
+        // create websocket markdown
+        taskMap.put(GlobalConstants.WEBSOCKET_MARKDOWN, WebSocketMarkdownTask.class);
     }
 }
