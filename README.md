@@ -106,25 +106,32 @@ please refer to the [official documentation](https://smart-doc-group.github.io/#
 ### Generated document
 #### Use Gradle command
 ```
-// Generate html
+// Generate documentation into HTML
 gradle smartDocRestHtml
 // Generate markdown
 gradle smartDocRestMarkdown
 // Generate adoc
 gradle smartDocRestAdoc
-// Generate postman collection
+// Generate Postman JSON data
 gradle smartDocPostman
-// Generate Open Api 3.0+
+// Generate Open API 3.0 + specification JSON documentation, since smart-doc-gradle-plugin 1.1.4
 gradle smartDocOpenApi
-// Generate document and send to Torna
+// Generate REST API documentation and push to Torna platform, @since 2.0.9
 gradle tornaRest
+// Generate JMeter performance test scripts, since 3.0.0
+gradle smartDocJmeter
+// Generate documentation output to Word, since 3.0.0
+gradle word
 
-// For Apache Dubbo Rpc
+// Apache Dubbo RPC generation
+// Generate html
 gradle smartDocRpcHtml
 // Generate markdown
 gradle smartDocRpcMarkdown
 // Generate adoc
 gradle smartDocRpcAdoc
+// Push RPC interfaces to torna
+gradle tornaRpc
 ```
 #### Use In IntelliJ IDEA
 On Use IntelliJ IDE, if you have added smart-doc-gradle-plugin to the project, 
@@ -139,13 +146,24 @@ you can directly find the plugin smart-doc plugin and click to generate API docu
 ![request-params](https://images.gitee.com/uploads/images/2019/1231/223710_88933f55_144669.png "request.png")
 #### Response parameter example renderings
 ![response-fields](https://images.gitee.com/uploads/images/2019/1231/223817_32bea6dc_144669.png "response.png")
-## Building
+## Building and publish
 you can build with the following commands. (Java 1.8 is required to build the master branch)
-```
-// build and publish to local
+
+### Publish to Maven local
+Install the gradle plugin to the local Maven repository, which is located at ~/.m2/repository. If your local Maven repository path is not ~/.m2/repository, it is recommended to set a global M2_HOME (Maven installation path) system variable first. Gradle will then automatically search for it.
+
+```groovy
 gradle publishToMavenLocal
-// build and publish to nexus
+```
+### Publish to Nexus
+Publish the gradle plugin to your own Nexus repository by modifying the repository address configuration in build.gradle.
+```groovy
 gradle publish
+```
+### Publish to Gradle Plugin Portal
+publish to https://plugins.gradle.org/
+```groovy
+gradlew publishPlugins
 ```
 ## Other reference
 - [Smart-doc manual](https://smart-doc-group.github.io/#/)

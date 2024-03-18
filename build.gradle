@@ -15,7 +15,7 @@ plugins {
     id "java-gradle-plugin"
     id "maven-publish"
     id "signing"
-    id "com.gradle.plugin-publish" version "0.12.0"
+    id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
 group 'com.ly.smart-doc'
@@ -24,6 +24,7 @@ version '3.0.2'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal() // This is to access the local Maven repository.
     maven { url 'https://maven.aliyun.com/repository/public' }
     mavenCentral()
 }
@@ -60,6 +61,7 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
+
 gradlePlugin {
     plugins {
         greetingsPlugin {
@@ -82,6 +84,7 @@ pluginBundle {
     }
 }
 
+
 // publish to local, see https://docs.gradle.org/current/userguide/publishing_maven.html
 publishing {
     publications {
@@ -91,9 +94,13 @@ publishing {
             version "${version}"
             from components.java
             // more goes in here
+            artifact sourcesJar {
+                classifier "sources"
+            }
         }
     }
     repositories {
+        mavenLocal() // install to '~/.m2/repository`
         maven {
             allowInsecureProtocol(true)
             url "http://localhost:8081/nexus/content/repositories/releases/"

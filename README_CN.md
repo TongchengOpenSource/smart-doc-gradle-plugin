@@ -106,7 +106,7 @@ smart-doc提供很多配置项，
 ### Generated document
 #### Use Gradle command
 ```
-//生成html
+//生成文档到html中
 gradle smartDocRestHtml
 //生成markdown
 gradle smartDocRestMarkdown
@@ -114,10 +114,15 @@ gradle smartDocRestMarkdown
 gradle smartDocRestAdoc
 //生成postmanjson数据
 gradle smartDocPostman
-//生成Open Api 3.0 +规范的json文档
+//生成Open Api 3.0 +规范的json文档,since smart-doc-gradle-plugin 1.1.4
 gradle smartDocOpenApi
-//生成rest接口文档并推送到Torna平台
+//生成rest接口文档并推送到Torna平台,@since 2.0.9
 gradle tornaRest
+//生成Jmeter性能压测脚本,since 3.0.0
+gradle smartDocJmeter
+//生成文档输出到Word,since 3.0.0
+gradle word
+
 
 // Apache Dubbo Rpc生成
 // Generate html
@@ -126,6 +131,8 @@ gradle smartDocRpcHtml
 gradle smartDocRpcMarkdown
 // Generate adoc
 gradle smartDocRpcAdoc
+// 推送rpc接口到torna中
+gradle tornaRpc
 ```
 #### Use IDEA
 当你使用Idea时，可以通过maven Helper插件选择生成何种文档。
@@ -135,14 +142,30 @@ gradle smartDocRpcAdoc
 ### Generated document example
 [点击查看文档生成文档效果图](https://gitee.com/smart-doc-team/smart-doc/wikis/文档效果图?sort_id=1652819)
 
-## Building
-如果你需要自己构建，那可以使用下面命令，构建需要依赖Java 1.8。
-```
-// 将gradle插件暗转到本地
+## 构建和发布
+您可以使用以下命令进行构建。（构建主分支需要Java 1.8）
+
+### 发布到Maven本地仓库
+将gradle插件安装到位于~/.m2/repository的本地Maven仓库。如果您的本地Maven仓库路径不是~/.m2/repository，建议首先设置一个全局的M2_HOME（Maven安装路径）系统变量。Gradle将自动搜索它。
+
+```groovy
 gradle publishToMavenLocal
-// 将gradle插件发布到自己nexus仓库，自己修改build.gradle中的仓库地址配置
+```
+
+### 发布到Nexus
+通过修改build.gradle中的仓库地址配置，将gradle插件发布到您自己的Nexus仓库。
+
+```groovy
 gradle publish
 ```
+
+### 发布到Gradle插件仓库
+发布到https://plugins.gradle.org/
+
+```groovy
+gradlew publishPlugins
+```
+
 ## Releases
 [发布记录](https://gitee.com/smart-doc-team/smart-doc-maven-plugin/blob/master/CHANGELOG.md)
 ## Other reference
