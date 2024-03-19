@@ -22,20 +22,21 @@
  */
 package com.ly.doc.gradle.task;
 
-import com.ly.doc.builder.PostmanJsonBuilder;
+import com.ly.doc.builder.websocket.WebSocketMarkdownBuilder;
 import com.ly.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
 
 /**
- * @author yu 2020/4/5.
+ * Support for WebSocket markdown
+ *
+ * @author linwumingshi
  */
-public class PostmanTask extends DocBaseTask {
-
+public class WebSocketMarkdownTask extends DocBaseTask {
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            PostmanJsonBuilder.buildPostmanCollection(apiConfig, javaProjectBuilder);
+            WebSocketMarkdownBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();
         }

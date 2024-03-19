@@ -1,7 +1,7 @@
 /*
  * smart-doc
  *
- * Copyright (C) 2018-2023 smart-doc
+ * Copyright (C) 2018-2024 smart-doc
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -26,16 +26,17 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ly.doc.model.*;
 import com.power.common.util.FileUtil;
 import com.power.common.util.StringUtil;
-import com.ly.doc.model.*;
 import org.gradle.api.Project;
 import org.gradle.api.logging.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author yu 2020/2/16.
@@ -61,6 +62,7 @@ public class GradleUtil {
      *
      * @param configFile config file
      * @param project    Project object
+     * @param increment  increment
      * @param log        gradle plugin log
      * @return com.power.doc.model.ApiConfig
      */

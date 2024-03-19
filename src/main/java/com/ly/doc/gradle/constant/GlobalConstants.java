@@ -1,7 +1,7 @@
 /*
  * smart-doc
  *
- * Copyright (C) 2018-2023 smart-doc
+ * Copyright (C) 2018-2024 smart-doc
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -104,8 +104,12 @@ public interface GlobalConstants {
     /**
      * Generate Swagger document
      */
-    String Swagger_TASK = "swagger";
+    String SWAGGER_TASK = "swagger";
 
+    /**
+     * Generate WebSocket markdown document
+     */
+    String WEBSOCKET_MARKDOWN = "webSocketMarkdown";
 
     /**
      * Plugin extension name

@@ -1,7 +1,7 @@
 /*
  * smart-doc
  *
- * Copyright (C) 2018-2023 smart-doc
+ * Copyright (C) 2018-2024 smart-doc
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,8 +22,8 @@
  */
 package com.ly.doc.gradle.util;
 
-import com.power.common.util.CollectionUtil;
 import com.ly.doc.constants.DocGlobalConstants;
+import com.power.common.util.CollectionUtil;
 import org.gradle.api.Project;
 import org.gradle.api.file.SourceDirectorySet;
 import org.gradle.api.internal.tasks.DefaultSourceSetContainer;
@@ -47,6 +47,8 @@ public interface SourceSetUtil {
     /**
      * inquire {@code SourceSet} configure the custom source code root directory
      *
+     * @param project project
+     * @return source code root directory
      * @implNote limited support:
      * not supported {@code SourceSet} inclusions and exclusions are configured in {@link SourceDirectorySet#getExcludes()} {@link SourceDirectorySet#getIncludes()}
      * <p>
@@ -77,6 +79,9 @@ public interface SourceSetUtil {
 
     /**
      * try using the default project structure: src/main/java
+     *
+     * @param project Project
+     * @return optional default project structure
      */
     static Optional<File> getDefaultMainJava(Project project) {
         String projectDir = project.getProjectDir().getPath();
@@ -84,8 +89,8 @@ public interface SourceSetUtil {
         File src = new File(projectCodePath);
 
         return src.exists() && src.listFiles() != null
-            ? Optional.of(src)
-            : Optional.empty();
+                ? Optional.of(src)
+                : Optional.empty();
     }
 
 }
