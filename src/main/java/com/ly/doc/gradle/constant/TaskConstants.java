@@ -35,7 +35,7 @@ public class TaskConstants {
     /**
      * Map of Gradle Task
      */
-    public static Map<String, Class<?>> taskMap = new HashMap<>();
+    public static Map<String, Class<? extends DocBaseTask>> taskMap = new HashMap<>();
 
     static {
         // create html
