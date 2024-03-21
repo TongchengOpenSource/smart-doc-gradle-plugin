@@ -6,20 +6,18 @@
 ![java version](https://img.shields.io/badge/JAVA-1.8+-green.svg)
 
 ## Introduce
-smart-doc-gradle-plugin是smart-doc官方团队开发的`gradle`插件，该插件从smart-doc 1.8.6版本开始提供，
-使用smart-doc-gradle-plugin更方便用户集成到自己的项目中，集成也更加轻量，你不再需要在项目中编写单元测试来
-启动smart-doc扫描代码分析生成接口文档。可以直接运行`gradle`命令
-或者是IDE中点击smart-doc-gradle-plugin预设好的`task`即可生成接口文档。
-smart-doc-gradle-plugin底层完全依赖于官方开源的smart-doc解析库，
-因此整个使用过程中遇到问题或者是想查看完整解决方案请前往码云smart-doc的仓库查看wiki文档。
-
-[关于smart-doc](https://gitee.com/smart-doc-team/smart-doc)
+`smart-doc-gradle-plugin`是`smart-doc`官方团队开发的`gradle`插件，该插件从`smart-doc 1.8.6`版本开始提供，
+使用`smart-doc-gradle-plugin`更方便用户集成到自己的项目中，集成也更加轻量，你不再需要在项目中编写单元测试来
+启动`smart-doc`扫描代码分析生成接口文档。可以直接运行`gradle`命令
+或者是`IDE`中点击`smart-doc-gradle-plugin`预设好的`task`即可生成接口文档。
+`smart-doc-gradle-plugin`底层完全依赖于官方开源的`smart-doc`解析库.
+[关于smart-doc](https://github.com/TongchengOpenSource/smart-doc)
 ## Best Practice
-smart-doc + [Torna](http://torna.cn) 组成行业领先的文档生成和管理解决方案，使用smart-doc无侵入完成Java源代码分析和提取注释生成API文档，自动将文档推送到Torna企业级接口文档管理平台。
+`smart-doc` + [Torna](http://torna.cn) 组成行业领先的文档生成和管理解决方案，使用`smart-doc`无侵入完成`Java`源代码分析和提取注释生成`API`文档，自动将文档推送到`Torna`企业级接口文档管理平台。
 
 ![smart-doc+torna](https://gitee.com/smart-doc-team/smart-doc/raw/master/images/smart-doc-torna.png)
 
-[smart-doc+Torna文档自动化](https://gitee.com/smart-doc-team/smart-doc/wikis/smart-doc与torna对接?sort_id=3695028)
+[smart-doc+Torna文档自动化](https://smart-doc-group.github.io/#/zh-cn/integrated/torna)
 ## Getting started
 ### Add plugin
 Using the plugins DSL:
@@ -32,7 +30,7 @@ Using legacy plugin application:
 ```
 buildscript {
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url = uri("https://plugins.gradle.org/m2/") }
         mavenCentral()
     }
@@ -64,7 +62,7 @@ smartdoc {
     include 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 ```
-对于多模块的gradle，把smart-doc插件相关配置放到根目录build.gradle的subprojects中。
+对于多模块的`Gradle`，把`smart-doc`插件相关配置放到根目录`build.gradle`的`subprojects`中。
 
 ```
 subprojects{
@@ -80,13 +78,13 @@ subprojects{
     }
 }
 ```
-多模块smart-doc的实战demo参考
+多模块`smart-doc`的实战demo参考
 ```
 https://gitee.com/devin-alan/smart-doc-gradle-plugin-demo
 ```
 > 多模块和单模块项目是有区别，多模块不从根目录使用命令构建可能会导致模块间源代码加载失败，生成文档出现各种问题。
 ### Create a json config 
-在自己的项目中创建一个json配置文件，如果是多个模块则放到需要生成文档的模块中，smart-doc-gradle-plugin插件会根据这个配置生成项目的接口文档。
+在自己的项目中创建一个`json`配置文件，如果是多个模块则放到需要生成文档的模块中，`smart-doc-gradle-plugin`插件会根据这个配置生成项目的接口文档。
 例如在项目中创建`/src/main/resources/smart-doc.json`。配置内容参考如下。
 
 **最小配置单元:**
@@ -98,9 +96,9 @@ https://gitee.com/devin-alan/smart-doc-gradle-plugin-demo
 >如果你想把html文档也打包到应用中随着服务一起访问，则建议你配置路径为：src/main/resources/static/doc。
 [服务访问配置参考](https://gitee.com/smart-doc-team/smart-doc/wikis/smart-doc常见问题解决方法?sort_id=2457284)
 
-仅仅需要上面一行配置就能启动smart-doc-gradle-plugin插件。
+仅仅需要上面一行配置就能启动`smart-doc-gradle-plugin`插件。
 
-smart-doc提供很多配置项，
+`smart-doc`提供很多配置项，
 详细配置请参考[官方文档](https://smart-doc-group.github.io/#/zh-cn/diy/config?id=allconfig)
 
 ### Generated document
@@ -135,7 +133,7 @@ gradle smartDocRpcAdoc
 gradle tornaRpc
 ```
 #### Use IDEA
-当你使用Idea时，可以通过maven Helper插件选择生成何种文档。
+当你使用`IDEA`时，可以通过`maven Helper`插件选择生成何种文档。
 
 ![idea中smart-doc-gradle插件使用](https://gitee.com/smart-doc-team/smart-doc-gradle-plugin/raw/master/images/idea.png "usage.png")
 
@@ -143,17 +141,18 @@ gradle tornaRpc
 [点击查看文档生成文档效果图](https://gitee.com/smart-doc-team/smart-doc/wikis/文档效果图?sort_id=1652819)
 
 ## 构建和发布
-您可以使用以下命令进行构建。（构建主分支需要Java 1.8）
+您可以使用以下命令进行构建。（构建主分支需要`Java 1.8`,`Gradle 7.6+`）
 
 ### 发布到Maven本地仓库
-将gradle插件安装到位于~/.m2/repository的本地Maven仓库。如果您的本地Maven仓库路径不是~/.m2/repository，建议首先设置一个全局的M2_HOME（Maven安装路径）系统变量。Gradle将自动搜索它。
+将`Gradle`插件安装到位于`~/.m2/repository`的本地`Maven`仓库。如果您的本地`Maven`仓库路径不是`~/.m2/repository`，
+建议首先设置一个全局的`M2_HOME`（`Maven`安装路径）系统变量。`Gradle`将自动搜索它。
 
 ```groovy
 gradle publishToMavenLocal
 ```
 
 ### 发布到Nexus
-通过修改build.gradle中的仓库地址配置，将gradle插件发布到您自己的Nexus仓库。
+通过修改`build.gradle`中的仓库地址配置，将`Gradle`插件发布到您自己的`Nexus`仓库。
 
 ```groovy
 gradle publish
@@ -199,6 +198,6 @@ smart-doc-gradle-plugin is under the Apache 2.0 license.  See the [LICENSE](htt
 
 
 ## Contact
-愿意参与构建smart-doc或者是需要交流问题可以加入qq群：
+愿意参与构建`smart-doc`或者是需要交流问题可以加入`qq`群：
 
 <img src="https://gitee.com/smart-doc-team/smart-doc/raw/master/images/smart-doc-qq.png" title="qq群" width="200px" height="200px"/>
