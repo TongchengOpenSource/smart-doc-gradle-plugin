@@ -1,0 +1,3 @@
+
+publishToMavenLocal:
+	gradle publishToMavenLocal -PskipSigning

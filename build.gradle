@@ -41,6 +41,15 @@ task javadocJar(type: Jar) {
     from javadoc
 }
 
+task sourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
 javadoc {
     configure(options) {
         tags(
@@ -51,16 +60,6 @@ javadoc {
         )
     }
 }
-
-task sourcesJar(type: Jar) {
-    archiveClassifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar, sourcesJar
-}
-
 
 // publish to https://plugins.gradle.org/
 gradlePlugin {
@@ -85,10 +84,6 @@ publishing {
             artifactId project.name
             version "${version}"
             from components.java
-            // more goes in here
-            artifact sourcesJar {
-                classifier "sources"
-            }
         }
     }
     repositories {
@@ -101,5 +96,15 @@ publishing {
                 password 'admin123'
             }
         }
+    }
+}
+
+signing {
+    sign publishing.publications
+}
+
+if (project.hasProperty('skipSigning') || project.gradle.startParameter.taskNames.any { it.contains("publish") }) {
+    signing {
+        required { false }
     }
 }
