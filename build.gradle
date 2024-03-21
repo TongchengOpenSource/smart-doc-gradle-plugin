@@ -62,28 +62,20 @@ artifacts {
 }
 
 
-gradlePlugin {
-    plugins {
-        greetingsPlugin {
-            id = 'com.ly.smart-doc'
-            implementationClass = 'com.ly.doc.gradle.plugin.SmartDocPlugin'
-        }
-    }
-}
 // publish to https://plugins.gradle.org/
-pluginBundle {
+gradlePlugin {
     website = 'https://github.com/TongchengOpenSource/smart-doc-gradle-plugin'
     vcsUrl = 'https://github.com/TongchengOpenSource/smart-doc-gradle-plugin'
-    description = 'smart-doc gradle plugin'
-    tags = ['smart-doc']
     plugins {
-        greetingsPlugin {
-            // id is captured from java-gradle-plugin configuration
+        create("smartdocPlugin") {
+            id = 'com.ly.smart-doc'
+            implementationClass = 'com.ly.doc.gradle.plugin.SmartDocPlugin'
             displayName = 'smart-doc gradle plugin'
+            description = 'smart-doc gradle plugin'
+            tags.set(['smart-doc', 'gradle-plugin'])
         }
     }
 }
-
 
 // publish to local, see https://docs.gradle.org/current/userguide/publishing_maven.html
 publishing {
