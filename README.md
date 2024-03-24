@@ -67,6 +67,25 @@ smartdoc {
     include 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 ```
+For the configuration of `configFile`, you can also dynamically override it through the `gradle` command line. Before version `3.0.3`, you can add dynamic configuration to get the `configFile` in `build.gradle`, for example:
+```groovy
+smartdoc {
+    configFile = project.hasProperty('smartdoc.configFile') ? file(project.getProperty('smartdoc.configFile')) : file("src/main/resources/smart-doc.json")
+}
+```
+After configuring, you can directly override it through the command line:
+```shell
+gradle smartdoc -Psmartdoc.configFile=src/main/resources/smart-doc.json
+```
+From version `3.0.3` onwards, the configuration of dynamically configuring `configFile` in `build.gradle` is very simple, and the plugin has the ability to completely override it.
+```groovy
+smartdoc {
+    configFile =  file("src/main/resources/smart-doc.json")
+}
+```
+After configuration, you can directly use `-Psmartdoc.configFile` to override it.
+
+
 For multi-module gradle projects, if you do not want to configure in each module, you can put the `smart-doc` plugin related configuration into subprojects.
 ```
 subprojects{

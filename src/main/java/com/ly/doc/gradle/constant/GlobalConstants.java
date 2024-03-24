@@ -121,4 +121,6 @@ public interface GlobalConstants {
      */
     String SRC_MAIN_JAVA_PATH = "src/main/java";
 
+    String CONFIG_FILE = "smartdoc.configFile";
+
 }

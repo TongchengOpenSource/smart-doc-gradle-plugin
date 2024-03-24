@@ -62,6 +62,26 @@ smartdoc {
     include 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 ```
+对于`configFile`的配置，你也可以通过`gradle`命令行来动态覆盖。在`3.0.3`之前，
+可以在`build.gradle`中添加动态获取`configFile`的配置, 例如：
+```groovy
+smartdoc {
+    configFile = project.hasProperty('smartdoc.configFile') ? file(project.getProperty('smartdoc.configFile')) : file("src/main/resources/smart-doc.json")
+}
+```
+配置好后直接通过命令行覆盖：
+```shell
+gradle smartdoc -Psmartdoc.configFile=src/main/resources/smart-doc.json
+```
+在`3.0.3`之后，`build.gradle`中配置动态配置`configFile`很简单，插件完全具备覆盖的功能。
+```groovy
+smartdoc {
+    configFile =  file("src/main/resources/smart-doc.json")
+}
+```
+配置后直接使用`-Psmartdoc.configFile`即可覆盖
+
+
 对于多模块的`Gradle`，把`smart-doc`插件相关配置放到根目录`build.gradle`的`subprojects`中。
 
 ```

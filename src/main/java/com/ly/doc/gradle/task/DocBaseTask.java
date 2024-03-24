@@ -56,12 +56,7 @@ import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -99,7 +94,13 @@ public abstract class DocBaseTask extends DefaultTask {
         Set<String> includes = pluginExtension.getInclude();
         javaProjectBuilder = buildJavaProjectBuilder(project, excludes, includes);
         javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
-        File file = pluginExtension.getConfigFile();
+        File file;
+        // Also configurable with Gradle or System Property: ${smartdoc.configFile}
+        if (project.hasProperty(GlobalConstants.CONFIG_FILE)) {
+            file = new File((String) project.findProperty(GlobalConstants.CONFIG_FILE));
+        } else {
+            file = pluginExtension.getConfigFile();
+        }
         if (Objects.isNull(file)) {
             file = new File(GlobalConstants.DEFAULT_CONFIG);
         }
@@ -130,7 +131,7 @@ public abstract class DocBaseTask extends DefaultTask {
     /**
      * Classloading
      *
-     * @return  JavaProjectBuilder
+     * @return JavaProjectBuilder
      */
     private JavaProjectBuilder buildJavaProjectBuilder(Project project, Set<String> excludes, Set<String> includes) {
         SortedClassLibraryBuilder classLibraryBuilder = new SortedClassLibraryBuilder();
@@ -146,10 +147,10 @@ public abstract class DocBaseTask extends DefaultTask {
             }
         }
         SourceSetUtil.getDefaultMainJava(project)
-            .ifPresent(src -> {
-                getLogger().quiet(MSG + src);
-                javaDocBuilder.addSourceTree(src);
-            });
+                .ifPresent(src -> {
+                    getLogger().quiet(MSG + src);
+                    javaDocBuilder.addSourceTree(src);
+                });
         loadSourcesDependencies(javaDocBuilder, project, excludes, includes);
         return javaDocBuilder;
     }
