@@ -109,7 +109,22 @@ public interface GlobalConstants {
     /**
      * Generate WebSocket markdown document
      */
-    String WEBSOCKET_MARKDOWN = "webSocketMarkdown";
+    String WEBSOCKET_MARKDOWN_TASK = "webSocketMarkdown";
+
+    /**
+     * Generate JavaDoc html document
+     */
+    String JAVADOC_HTML_TASK = "javadocHtml";
+
+    /**
+     * Generate JavaDoc adoc document
+     */
+    String JAVADOC_ADOC_TASK = "javadocAdoc";
+
+    /**
+     * Generate JavaDoc markdown document
+     */
+    String JAVADOC_MARKDOWN_TASK = "javadocMarkdown";
 
     /**
      * Plugin extension name

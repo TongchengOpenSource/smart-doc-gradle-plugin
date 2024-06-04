@@ -65,6 +65,13 @@ public class TaskConstants {
         // create Swagger
         taskMap.put(GlobalConstants.SWAGGER_TASK, SwaggerTask.class);
         // create websocket markdown
-        taskMap.put(GlobalConstants.WEBSOCKET_MARKDOWN, WebSocketMarkdownTask.class);
+        taskMap.put(GlobalConstants.WEBSOCKET_MARKDOWN_TASK, WebSocketMarkdownTask.class);
+        // create javadoc
+        taskMap.put(GlobalConstants.JAVADOC_HTML_TASK, JavadocHtmlTask.class);
+        // create javadoc adoc
+        taskMap.put(GlobalConstants.JAVADOC_ADOC_TASK, JavadocAdocTask.class);
+        // create javadoc markdown
+        taskMap.put(GlobalConstants.JAVADOC_MARKDOWN_TASK, JavadocMarkdownTask.class);
+
     }
 }
