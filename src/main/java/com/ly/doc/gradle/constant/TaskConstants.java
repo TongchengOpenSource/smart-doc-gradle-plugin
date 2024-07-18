@@ -66,12 +66,18 @@ public class TaskConstants {
         taskMap.put(GlobalConstants.SWAGGER_TASK, SwaggerTask.class);
         // create websocket markdown
         taskMap.put(GlobalConstants.WEBSOCKET_MARKDOWN_TASK, WebSocketMarkdownTask.class);
-        // create javadoc
+        // create javadoc html
         taskMap.put(GlobalConstants.JAVADOC_HTML_TASK, JavadocHtmlTask.class);
         // create javadoc adoc
         taskMap.put(GlobalConstants.JAVADOC_ADOC_TASK, JavadocAdocTask.class);
         // create javadoc markdown
         taskMap.put(GlobalConstants.JAVADOC_MARKDOWN_TASK, JavadocMarkdownTask.class);
+        // create gRPC html
+        taskMap.put(GlobalConstants.GRPC_HTML_TASK, GrpcHtmlTask.class);
+        // create gRPC adoc
+        taskMap.put(GlobalConstants.GRPC_ADOC_TASK, GrpcAdocTask.class);
+        // create gRPC markdown
+        taskMap.put(GlobalConstants.GRPC_MARKDOWN_TASK, GrpcMarkdownTask.class);
 
     }
 }

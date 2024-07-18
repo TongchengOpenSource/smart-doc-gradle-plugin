@@ -22,22 +22,23 @@
  */
 package com.ly.doc.gradle.task;
 
-import com.ly.doc.builder.javadoc.JavadocHtmlBuilder;
+import com.ly.doc.builder.grpc.GrpcMarkdownBuilder;
 import com.ly.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
 
 /**
- * javadoc html task.
+ * grpc markdown task.
  *
- * @author shalousun
- * @since 3.0.5
+ * @author linwumingshi
+ * @since 3.0.7
  */
-public class JavadocHtmlTask extends DocBaseTask {
+public class GrpcMarkdownTask extends DocBaseTask {
+
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            JavadocHtmlBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
+            GrpcMarkdownBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();
         }

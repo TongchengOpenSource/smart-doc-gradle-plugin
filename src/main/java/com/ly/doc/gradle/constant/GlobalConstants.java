@@ -127,6 +127,21 @@ public interface GlobalConstants {
     String JAVADOC_MARKDOWN_TASK = "javadocMarkdown";
 
     /**
+     * Generate gRPC html document
+     */
+    String GRPC_HTML_TASK = "gRPCHtml";
+
+    /**
+     * Generate gRPC adoc document
+     */
+    String GRPC_ADOC_TASK = "gRPCAdoc";
+
+    /**
+     * Generate gRPC markdown document
+     */
+    String GRPC_MARKDOWN_TASK = "gRPCMarkdown";
+
+    /**
      * Plugin extension name
      */
     String EXTENSION_NAME = "smartdoc";

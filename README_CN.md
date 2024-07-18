@@ -17,7 +17,7 @@
 
 ![smart-doc+torna](https://gitee.com/smart-doc-team/smart-doc/raw/master/images/smart-doc-torna.png)
 
-[smart-doc+Torna文档自动化](https://smart-doc-group.github.io/#/zh-cn/integrated/torna)
+[smart-doc+Torna文档自动化](https://smart-doc-group.github.io/zh/guide/integrated/torna)
 ## Getting started
 ### Add plugin
 Using the plugins DSL:
@@ -119,7 +119,7 @@ https://gitee.com/devin-alan/smart-doc-gradle-plugin-demo
 仅仅需要上面一行配置就能启动`smart-doc-gradle-plugin`插件。
 
 `smart-doc`提供很多配置项，
-详细配置请参考[官方文档](https://smart-doc-group.github.io/#/zh-cn/diy/config?id=allconfig)
+详细配置请参考[官方文档](https://smart-doc-group.github.io/zh/guide/advanced/config)
 
 ### Generated document
 #### Use Gradle command
