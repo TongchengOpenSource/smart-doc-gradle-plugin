@@ -22,22 +22,22 @@
  */
 package com.ly.doc.gradle.task;
 
-import com.ly.doc.builder.websocket.WebSocketMarkdownBuilder;
+import com.ly.doc.builder.websocket.WebSocketHtmlBuilder;
 import com.ly.doc.model.ApiConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import org.gradle.api.logging.Logger;
 
 /**
- * Support for WebSocket markdown
+ * Support for WebSocket html
  *
  * @author linwumingshi
- * @since 3.0.3
+ * @since 3.0.7
  */
-public class WebSocketMarkdownTask extends DocBaseTask {
+public class WebSocketHtmlTask extends DocBaseTask {
     @Override
     public void executeAction(ApiConfig apiConfig, JavaProjectBuilder javaProjectBuilder, Logger logger) {
         try {
-            WebSocketMarkdownBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
+            WebSocketHtmlBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             e.printStackTrace();
         }
