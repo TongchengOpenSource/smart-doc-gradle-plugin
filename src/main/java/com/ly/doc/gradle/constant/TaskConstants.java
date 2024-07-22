@@ -64,6 +64,10 @@ public class TaskConstants {
         taskMap.put(GlobalConstants.WORD_TASK, WordTask.class);
         // create Swagger
         taskMap.put(GlobalConstants.SWAGGER_TASK, SwaggerTask.class);
+        // create websocket html
+        taskMap.put(GlobalConstants.WEBSOCKET_HTML_TASK, WebSocketHtmlTask.class);
+        // create websocket adoc
+        taskMap.put(GlobalConstants.WEBSOCKET_ADOC_TASK, WebSocketAdocTask.class);
         // create websocket markdown
         taskMap.put(GlobalConstants.WEBSOCKET_MARKDOWN_TASK, WebSocketMarkdownTask.class);
         // create javadoc html

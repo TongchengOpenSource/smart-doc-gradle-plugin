@@ -112,6 +112,16 @@ public interface GlobalConstants {
     String WEBSOCKET_MARKDOWN_TASK = "webSocketMarkdown";
 
     /**
+     * Generate WebSocket html document
+     */
+    String WEBSOCKET_HTML_TASK = "webSocketHtml";
+
+    /**
+     * Generate WebSocket ascii document
+     */
+    String WEBSOCKET_ADOC_TASK = "webSocketAdoc";
+
+    /**
      * Generate JavaDoc html document
      */
     String JAVADOC_HTML_TASK = "javadocHtml";
