@@ -19,7 +19,7 @@ plugins {
 }
 
 group 'com.ly.smart-doc'
-version '3.0.6'
+version '3.0.7'
 
 sourceCompatibility = 1.8
 
@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'com.ly.smart-doc', name: 'smart-doc', version: '3.0.6'
+    implementation group: 'com.ly.smart-doc', name: 'smart-doc', version: '3.0.7'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
@@ -100,11 +100,13 @@ publishing {
 }
 
 signing {
+    // Sign all publications by default
     sign publishing.publications
-}
 
-if (project.hasProperty('skipSigning') || project.gradle.startParameter.taskNames.any { it.contentEquals("publishToMavenLocal") }) {
-    signing {
-        required { false }
+    // Skip signing when certain tasks are executed
+    required {
+        !project.hasProperty('skipSigning') &&
+                !project.gradle.startParameter.taskNames.any { it.contentEquals("publishToMavenLocal") } &&
+                !project.gradle.startParameter.taskNames.any { it.contentEquals("publishPlugins") }
     }
 }

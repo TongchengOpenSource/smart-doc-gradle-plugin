@@ -182,7 +182,7 @@ gradle publish
 发布到https://plugins.gradle.org/
 
 ```groovy
-gradlew publishPlugins
+gradle publishPlugins
 ```
 
 ## Releases
